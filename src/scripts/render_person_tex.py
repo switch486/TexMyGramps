@@ -122,13 +122,14 @@ def load_timeline_data(page_dir: Path, person: dict) -> dict:
     return {}
 
 
-def format_timeline_event(event: dict) -> tuple[str, str, str, str, str]:
+def format_timeline_event(event: dict) -> tuple[str, str, str, str, str, str]:
     """Extract date and description from a timeline event."""
     date_text = ""
     place = ""
     description = ""
     age = ""
     person_name = ""
+    symbol = ""
     
     # Format date: YYYY.MM.DD when all details present, YYYY if only year
     if "date" in event:
@@ -154,6 +155,7 @@ def format_timeline_event(event: dict) -> tuple[str, str, str, str, str]:
     # Add description if available
     if "label" in event:
         description = translate_text_with_brackets(clean_string(event["label"]))
+        symbol = translate_symbol_by_prefix(clean_string(event["label"]))
 
     # Add age if available
     if "age" in event:
@@ -172,7 +174,7 @@ def format_timeline_event(event: dict) -> tuple[str, str, str, str, str]:
             if given_name or surname:
                 person_name = f"{given_name} {surname}".strip()
     
-    return latex_escape(date_text), latex_escape(place), latex_escape(age), latex_escape(description), latex_escape(person_name)    
+    return symbol, latex_escape(date_text), latex_escape(place), latex_escape(age), latex_escape(description), latex_escape(person_name)    
 
 def translate_text_with_brackets(text):
     match = re.match(r"^(.*?)\s*\((.*?)\)$", text)
@@ -182,9 +184,27 @@ def translate_text_with_brackets(text):
     main, inner = match.groups()
     return f"{tr(main.strip())} ({tr(inner.strip())})"
 
+def translate_symbol_by_prefix(text):
+    match = re.match(r"^(.*?)\s*\((.*?)\)$", text)
+    if not match:
+        return tr(text)
+
+    main, inner = match.groups()
+    return trSymbol(main.strip())
+
 def translate_age(text):
     number, unit = text.split(" ", 1)
     return f"{number} {tr(unit)}"
+
+def trSymbol(event_type: str) -> str:
+    """Convert event symbol to Polish."""
+    symbol_map = {
+        "Birth": "\\birthsymbol",
+        "Death": "\\deathsymbol", 
+        "Marriage": "\\char\"26AD",
+    }
+    return symbol_map.get(event_type, event_type)
+
 
 #TODO - translation to be made for all of the stuff in the timeline events, not just the event type. Also, need to handle translation of event types in the main person data (not just timeline events). This will require a more comprehensive mapping of event types and attributes to Polish equivalents.
 def tr(event_type: str) -> str:
@@ -382,8 +402,8 @@ def render_tex(
         occupation_line = f"    \\textit{{{occupations_tex}}}\\\\[0.3em]\n"
 
     timeline_events = "\n".join(
-        f"{a} & {b} & {c} & {d} & {e} \\\\"
-        for a, b, c, d, e in timeline_events
+        f"{a} & {b} & {c} & {d} & {e} & {f}\\\\"
+        for a, b, c, d, e, f in timeline_events
     )
 
     return f"""% Auto-generated person page
@@ -412,8 +432,8 @@ def render_tex(
 \\end{{tabular}}
 \\vspace{{1.5em}}
 
-\\begin{{tabular}}{{@{{}}l l l l l}}
-\\textbf{{Data}} & \\textbf{{Miejsce}} & \\textbf{{Wiek}} & \\textbf{{Opis}} & \\textbf{{Osoba}}\\\\
+\\begin{{tabular}}{{@{{}}l l l l l l}}
+& \\textbf{{Data}} & \\textbf{{Miejsce}} & \\textbf{{Wiek}} & \\textbf{{Opis}} & \\textbf{{Osoba}}\\\\
 \\hline
     {timeline_events}
 \\end{{tabular}}
