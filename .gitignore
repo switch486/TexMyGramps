@@ -1,0 +1,10 @@
+# Ignore generated page outputs and page-specific assets
+src/pages/*/output/
+src/pages/*/assets/
+
+# Ignore temporary API token files
+src/scripts/gramps_api_token.env
+
+# Optional: ignore Synology/Docker local artifacts
+# /out/
+# /data/

@@ -1,0 +1,10 @@
+- zawody
+- fotka
+- mapka z eventami??
+- sciezka do zstepnych zeby mozna bylo polaczyc
+- rodzina - people/handle/timeline!! << TEST IT
+-- małzenstwo
+-- dzieci
+--- z datami narodzin i smierci
+--- z fotkami
+- akty do Eventow
