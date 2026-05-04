@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 PAGES_DIR="$ROOT_DIR/pages"
 CONFIG_FILE="$ROOT_DIR/scripts/gramps_api.env"
+LOCAL_CONFIG_FILE="$ROOT_DIR/scripts/gramps_api.local.env"
 TOKEN_FILE="$ROOT_DIR/scripts/gramps_api_token.env"
 
 if [ ! -f "$CONFIG_FILE" ]; then
@@ -12,6 +13,12 @@ if [ ! -f "$CONFIG_FILE" ]; then
 fi
 
 source "$CONFIG_FILE"
+
+# Load local credentials if available (overrides values in main config)
+if [ -f "$LOCAL_CONFIG_FILE" ]; then
+  source "$LOCAL_CONFIG_FILE"
+fi
+
 if [ -f "$TOKEN_FILE" ]; then
   source "$TOKEN_FILE"
 fi

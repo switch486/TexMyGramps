@@ -262,6 +262,36 @@ def enrich_person_birth_death(person: dict, config: dict, headers: dict, timeout
         person["death_location"] = death_location
 
 
+def fetch_person_timeline(person_handle: str, headers: dict, timeout: int) -> dict:
+    """Fetch timeline data for a person from the API."""
+    if not person_handle:
+        return {}
+    try:
+        path_template = f"people/{person_handle}/timeline"
+        url = build_url(os.environ["GRAMPS_API_BASE_URL"], path_template)
+        return fetch_json(url, headers, timeout)
+    except Exception as e:
+        print(f"Warning: failed to fetch timeline for {person_handle}: {e}")
+        return {}
+
+
+def enrich_person_timeline(person: dict, headers: dict, timeout: int, assets_dir: Path):
+    """Fetch and save timeline data for a person."""
+    if not isinstance(person, dict):
+        return
+    
+    handle = extract_handle(person)
+    timeline_data = fetch_person_timeline(handle, headers, timeout)
+    
+    if timeline_data:
+        # Save timeline data for inspection
+        timeline_path = assets_dir / "timeline" / f"{handle}.json"
+        persist_json(timeline_data, timeline_path)
+        # Store reference to timeline in person object
+        person["timeline_handle"] = handle
+
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Load GRAMPS person data and related resources via API")
     parser.add_argument("--person-id", required=True, help="Gramps numerical person ID to resolve")
@@ -288,6 +318,7 @@ def main() -> None:
 
     person = find_single_person(args.person_id, person_search_path, query_param, headers, timeout)
     enrich_person_birth_death(person, config, headers, timeout, assets_dir)
+    enrich_person_timeline(person, headers, timeout, assets_dir)
     person_handle = save_record(person, assets_dir / "people")
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)

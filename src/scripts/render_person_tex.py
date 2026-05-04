@@ -69,37 +69,6 @@ def build_location_chain(place_data: dict, places_dir: Path) -> str:
     return location_text
 
 
-def name_parts(person: dict) -> tuple[str, str]:
-    """Build a location chain by following place references via placeref_list."""
-    if not isinstance(place_data, dict):
-        return ""
-    
-    # Extract current location name
-    location_text = ""
-    name_obj = place_data.get("name")
-    if isinstance(name_obj, dict):
-        location_text = name_obj.get("value", "")
-    if not location_text:
-        location_text = place_data.get("title") or place_data.get("name") or ""
-    
-    # Check for place references in placeref_list
-    placeref_list = place_data.get("placeref_list")
-    if isinstance(placeref_list, list) and placeref_list:
-        for placeref in placeref_list:
-            if isinstance(placeref, dict):
-                parent_handle = placeref.get("ref")
-                if parent_handle:
-                    parent_path = places_dir / f"{parent_handle}.json"
-                    if parent_path.exists():
-                        try:
-                            parent_data = json.loads(parent_path.read_text(encoding="utf-8"))
-                            parent_location = build_location_chain(parent_data, places_dir)
-                            if parent_location:
-                                return f"{location_text}, {parent_location}" if location_text else parent_location
-                        except (ValueError, OSError):
-                            pass
-    
-    return location_text
 
 
 def name_parts(person: dict) -> tuple[str, str]:
@@ -123,6 +92,165 @@ def name_parts(person: dict) -> tuple[str, str]:
     if not given and primary.get("display_as"):
         given = str(primary.get("display_as"))
     return clean_string(given).strip(), clean_string(surname).strip()
+
+
+def extract_occupations(person: dict) -> str:
+    """Extract occupations from attribute_list and join them with commas."""
+    occupations = []
+    attribute_list = person.get("attribute_list", []) or []
+    if isinstance(attribute_list, list):
+        for attr in attribute_list:
+            if isinstance(attr, dict) and attr.get("type") == "Occupation":
+                value = attr.get("value", "").strip()
+                if value:
+                    occupations.append(value)
+    return ", ".join(occupations)
+
+
+def load_timeline_data(page_dir: Path, person: dict) -> dict:
+    """Load timeline data from JSON file if available."""
+    timeline_handle = person.get("timeline_handle")
+    if not timeline_handle:
+        return {}
+    
+    timeline_path = page_dir / "assets" / "timeline" / f"{timeline_handle}.json"
+    if timeline_path.exists():
+        try:
+            return json.loads(timeline_path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            pass
+    return {}
+
+
+def format_timeline_event(event: dict) -> tuple[str, str]:
+    """Extract date and description from a timeline event."""
+    date_text = ""
+    description = ""
+    
+    # Format date: YYYY.MM.DD when all details present, YYYY if only year
+    if "date" in event:
+        date_obj = event["date"]
+        if isinstance(date_obj, str):
+            date_str = date_obj.strip()
+            # Handle YYYY-MM-DD -> YYYY.MM.DD
+            if re.fullmatch(r"\d{4}-\d{1,2}-\d{1,2}", date_str):
+                year, month, day = date_str.split("-")
+                date_text = f"{year}.{int(month):02d}.{int(day):02d}"
+            # Handle YYYY -> YYYY
+            elif re.fullmatch(r"\d{4}", date_str):
+                date_text = date_str
+            else:
+                date_text = date_str
+    
+    # Build description with place and person details
+    desc_parts = []
+    
+    # Add place if available
+    if "place" in event and isinstance(event["place"], dict):
+        place_name = event["place"].get("display_name", "").strip()
+        if place_name:
+            desc_parts.append(place_name)
+    
+    # Add person details if not self
+    if "person" in event and isinstance(event["person"], dict):
+        relationship = event["person"].get("relationship", "")
+        if relationship != "self":
+            # Add event type in Polish
+            event_type = event.get("type", "").strip()
+            polish_type = get_polish_event_type(event_type)
+            if polish_type:
+                desc_parts.append(polish_type)
+            
+            # Add person name
+            given_name = event["person"].get("name_given", "").strip()
+            surname = event["person"].get("name_surname", "").strip()
+            if surname:
+                # Clean brackets from surname
+                surname = clean_string(surname)
+            if given_name or surname:
+                person_name = f"{given_name} {surname}".strip()
+                desc_parts.append(person_name)
+    
+    # Add original description if present
+    orig_desc = event.get("description", "").strip()
+    if orig_desc:
+        desc_parts.append(orig_desc)
+    
+    description = " -- ".join(desc_parts)
+    
+    return date_text, description
+
+
+def get_polish_event_type(event_type: str) -> str:
+    """Convert event type to Polish."""
+    type_map = {
+        "Birth": "Narodziny",
+        "Death": "Śmierć", 
+        "Marriage": "Ślub",
+        "Baptism": "Chrzest",
+        "Burial": "Pochówek",
+        "Divorce": "Rozwód",
+        "Residence": "Zamieszkanie",
+        "Occupation": "Zawód",
+        "Graduation": "Ukończenie szkoły",
+        "Confirmation": "Bierzmowanie",
+        "Engagement": "Zaręczyny",
+        "Adoption": "Adopcja",
+        "Immigration": "Imigracja",
+        "Emigration": "Emigracja",
+        "Census": "Spis ludności",
+        "Military Service": "Służba wojskowa",
+        "Retirement": "Emerytura",
+        "Will": "Testament",
+        "Probate": "Sprawdzanie testamentu",
+        "Naturalization": "Naturalizacja",
+        "Christening": "Chrzest",
+        "Funeral": "Pogrzeb",
+        "Ordination": "Święcenia",
+        "Bar Mitzvah": "Bar micwa",
+        "Bat Mitzvah": "Bat micwa",
+        "Circumcision": "Obrzezanie",
+        "First Communion": "Pierwsza Komunia",
+        "Graduation": "Ukończenie szkoły",
+        "Medical Information": "Informacje medyczne",
+        "Nobility Title": "Tytuł szlachecki",
+        "Number of Children": "Liczba dzieci",
+        "Number of Marriages": "Liczba małżeństw",
+        "Property": "Własność",
+        "Religion": "Religia",
+        "Social Security Number": "Numer ubezpieczenia społecznego",
+        "Travel": "Podróż",
+        "Unknown": "Nieznane",
+        "Custom": "Niestandardowe"
+    }
+    return type_map.get(event_type, event_type)
+
+
+def build_timeline_section(timeline_data: dict) -> list[tuple[str, str]]:
+    """Build a list of (date, description) tuples from timeline data, sorted chronologically."""
+    events = []
+    
+    # Handle different possible timeline data structures
+    events_list = []
+    if isinstance(timeline_data, dict):
+        if "events" in timeline_data and isinstance(timeline_data["events"], list):
+            events_list = timeline_data["events"]
+        elif "timeline" in timeline_data and isinstance(timeline_data["timeline"], list):
+            events_list = timeline_data["timeline"]
+        elif isinstance(timeline_data, list):
+            events_list = timeline_data
+    elif isinstance(timeline_data, list):
+        events_list = timeline_data
+    
+    # Extract date and description from each event
+    for event in events_list:
+        if not isinstance(event, dict):
+            continue
+        date_text, description = format_timeline_event(event)
+        if date_text or description:
+            events.append((date_text, description))
+    
+    return events
 
 
 def normalize_date_string(date_text: str) -> str:
@@ -220,15 +348,36 @@ def format_event_line(date_text: str, location_text: str) -> str:
 def render_tex(
     first_name: str,
     surname: str,
+    occupations: str,
     birth_date: str,
     birth_location: str,
     death_date: str,
     death_location: str,
+    timeline_events: list,
 ) -> str:
     title = latex_escape(first_name)
     surname_tex = latex_escape(surname)
+    occupations_tex = latex_escape(occupations)
     birth_tex = latex_escape(format_event_line(birth_date, birth_location))
     death_tex = latex_escape(format_event_line(death_date, death_location))
+
+    occupation_line = ""
+    if occupations_tex:
+        occupation_line = f"    \\textit{{{occupations_tex}}}\\\\[0.3em]\n"
+
+    # Build timeline section
+    timeline_section = ""
+    if timeline_events:
+        timeline_section = "\\vspace{1em}\n\\noindent\\textbf{Oś czasu:}\\\\\n"
+        for date_text, description in timeline_events:
+            date_escaped = latex_escape(date_text) if date_text else ""
+            desc_escaped = latex_escape(description) if description else ""
+            if date_escaped and desc_escaped:
+                timeline_section += f"\\hspace{{0.5em}} \\textbf{{{date_escaped}}} -- {desc_escaped}\\\\\n"
+            elif date_escaped:
+                timeline_section += f"\\hspace{{0.5em}} \\textbf{{{date_escaped}}}\\\\\n"
+            elif desc_escaped:
+                timeline_section += f"\\hspace{{0.5em}} {desc_escaped}\\\\\n"
 
     return f"""% Auto-generated person page
 \\documentclass[12pt]{{article}}
@@ -245,18 +394,18 @@ def render_tex(
   \\begin{{minipage}}[t]{{\\linewidth}}
     \\vspace{{0pt}}
     \\Huge \\textbf{{{title}}}\\\\[0.3em]
-    \\LARGE \\textbf{{{surname_tex}}}
-  \\end{{minipage}} \\\\ 
+    \\LARGE \\textbf{{{surname_tex}}}\\\\[0.3em]
+    \\Tiny {occupation_line}  \\end{{minipage}} \\\\ 
 \\end{{tabular}}
 
 \\vspace{{1.5em}}
 \\noindent
-\\begin{{tabular}}{{@{{}}l l}}
-  \\birthsymbol & \\textbf{{Data Narodzin:}} \\quad {birth_tex} \\\\ 
-  \\deathsymbol & \\textbf{{Data Śmierci: }} \\quad {death_tex} \\\\ 
+\\begin{{tabular}}{{@{{}}l l l}}
+  \\birthsymbol & \\textbf{{Data Narodzin:}} & {birth_tex} \\\\ 
+  \\deathsymbol & \\textbf{{Data Śmierci: }} & {death_tex} \\\\ 
 \\end{{tabular}}
 
-\\end{{document}}
+{timeline_section}\\end{{document}}
 """
 
 
@@ -286,16 +435,23 @@ def main() -> None:
     if not first_name and not surname:
         first_name = person.get("gramps_id", "Person")
 
+    occupations = extract_occupations(person)
     birth_date, birth_location, death_date, death_location = infer_birth_death_dates(page_dir, person)
+    
+    # Extract timeline events
+    timeline_data = load_timeline_data(page_dir, person)
+    timeline_events = build_timeline_section(timeline_data)
 
     output_path.write_text(
         render_tex(
             first_name,
             surname,
+            occupations,
             birth_date,
             birth_location,
             death_date,
             death_location,
+            timeline_events,
         ),
         encoding="utf-8",
     )

@@ -2,8 +2,9 @@
 src/pages/*/output/
 src/pages/*/assets/
 
-# Ignore temporary API token files
+# Ignore temporary API token files and local credentials
 src/scripts/gramps_api_token.env
+src/scripts/gramps_api.local.env
 
 # Optional: ignore Synology/Docker local artifacts
 # /out/

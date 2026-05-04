@@ -3,6 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 CONFIG_FILE="$SCRIPT_DIR/gramps_api.env"
+LOCAL_CONFIG_FILE="$SCRIPT_DIR/gramps_api.local.env"
 OUTPUT_FILE="${1:-$SCRIPT_DIR/gramps_api_token.env}"
 
 if [ ! -f "$CONFIG_FILE" ]; then
@@ -12,8 +13,13 @@ fi
 
 source "$CONFIG_FILE"
 
+# Load local credentials if available (overrides values in main config)
+if [ -f "$LOCAL_CONFIG_FILE" ]; then
+  source "$LOCAL_CONFIG_FILE"
+fi
+
 if [ -z "${GRAMPS_API_BASE_URL:-}" ]; then
-  echo "ERROR: GRAMPS_API_BASE_URL is not set in $CONFIG_FILE"
+  echo "ERROR: GRAMPS_API_BASE_URL is not set. Configure it in $LOCAL_CONFIG_FILE or $CONFIG_FILE"
   exit 1
 fi
 
