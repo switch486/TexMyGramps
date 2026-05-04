@@ -153,11 +153,11 @@ def format_timeline_event(event: dict) -> tuple[str, str, str, str, str]:
 
     # Add description if available
     if "label" in event:
-        description = clean_string(event["label"])
+        description = translate_text_with_brackets(clean_string(event["label"]))
 
     # Add age if available
     if "age" in event:
-        age = str(event["age"])
+        age = translate_age(str(event["age"]))
 
     # Add person details if not self
     if "person" in event and isinstance(event["person"], dict):
@@ -174,10 +174,32 @@ def format_timeline_event(event: dict) -> tuple[str, str, str, str, str]:
     
     return latex_escape(date_text), latex_escape(place), latex_escape(age), latex_escape(description), latex_escape(person_name)    
 
+def translate_text_with_brackets(text):
+    match = re.match(r"^(.*?)\s*\((.*?)\)$", text)
+    if not match:
+        return tr(text)
+
+    main, inner = match.groups()
+    return f"{tr(main.strip())} ({tr(inner.strip())})"
+
+def translate_age(text):
+    number, unit = text.split(" ", 1)
+    return f"{number} {tr(unit)}"
+
 #TODO - translation to be made for all of the stuff in the timeline events, not just the event type. Also, need to handle translation of event types in the main person data (not just timeline events). This will require a more comprehensive mapping of event types and attributes to Polish equivalents.
-def get_polish_event_type(event_type: str) -> str:
+def tr(event_type: str) -> str:
     """Convert event type to Polish."""
     type_map = {
+        "Son": "Syn",
+        "Daughter": "Córka",
+        "Mother": "Matka",
+        "Sister": "Siostra",
+        "Brother": "Brat",
+        "Father": "Ojciec",
+
+        "days": "dni",
+        "years": "lat",
+
         "Birth": "Narodziny",
         "Death": "Śmierć", 
         "Marriage": "Ślub",
@@ -383,14 +405,16 @@ def render_tex(
 \\small {occupation_line}  \\end{{minipage}} \\\\ 
 \\end{{tabular}}
 
-\\vspace{{1.5em}}
 \\noindent
 \\begin{{tabular}}{{@{{}}l l l}}
   \\birthsymbol & \\textbf{{Data Narodzin:}} & {birth_tex} \\\\ 
   \\deathsymbol & \\textbf{{Data Śmierci: }} & {death_tex} \\\\ 
 \\end{{tabular}}
+\\vspace{{1.5em}}
 
 \\begin{{tabular}}{{@{{}}l l l l l}}
+\\textbf{{Data}} & \\textbf{{Miejsce}} & \\textbf{{Wiek}} & \\textbf{{Opis}} & \\textbf{{Osoba}}\\\\
+\\hline
     {timeline_events}
 \\end{{tabular}}
 \\end{{document}}
