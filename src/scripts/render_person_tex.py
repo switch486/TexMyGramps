@@ -122,10 +122,13 @@ def load_timeline_data(page_dir: Path, person: dict) -> dict:
     return {}
 
 
-def format_timeline_event(event: dict) -> tuple[str, str]:
+def format_timeline_event(event: dict) -> tuple[str, str, str, str, str]:
     """Extract date and description from a timeline event."""
     date_text = ""
+    place = ""
     description = ""
+    age = ""
+    person_name = ""
     
     # Format date: YYYY.MM.DD when all details present, YYYY if only year
     if "date" in event:
@@ -142,25 +145,24 @@ def format_timeline_event(event: dict) -> tuple[str, str]:
             else:
                 date_text = date_str
     
-    # Build description with place and person details
-    desc_parts = []
-    
     # Add place if available
     if "place" in event and isinstance(event["place"], dict):
         place_name = event["place"].get("display_name", "").strip()
         if place_name:
-            desc_parts.append(place_name)
-    
+            place = clean_string(place_name)
+
+    # Add description if available
+    if "label" in event:
+        description = clean_string(event["label"])
+
+    # Add age if available
+    if "age" in event:
+        age = str(event["age"])
+
     # Add person details if not self
     if "person" in event and isinstance(event["person"], dict):
         relationship = event["person"].get("relationship", "")
         if relationship != "self":
-            # Add event type in Polish
-            event_type = event.get("type", "").strip()
-            polish_type = get_polish_event_type(event_type)
-            if polish_type:
-                desc_parts.append(polish_type)
-            
             # Add person name
             given_name = event["person"].get("name_given", "").strip()
             surname = event["person"].get("name_surname", "").strip()
@@ -169,18 +171,10 @@ def format_timeline_event(event: dict) -> tuple[str, str]:
                 surname = clean_string(surname)
             if given_name or surname:
                 person_name = f"{given_name} {surname}".strip()
-                desc_parts.append(person_name)
     
-    # Add original description if present
-    orig_desc = event.get("description", "").strip()
-    if orig_desc:
-        desc_parts.append(orig_desc)
-    
-    description = " -- ".join(desc_parts)
-    
-    return date_text, description
+    return latex_escape(date_text), latex_escape(place), latex_escape(age), latex_escape(description), latex_escape(person_name)    
 
-
+#TODO - translation to be made for all of the stuff in the timeline events, not just the event type. Also, need to handle translation of event types in the main person data (not just timeline events). This will require a more comprehensive mapping of event types and attributes to Polish equivalents.
 def get_polish_event_type(event_type: str) -> str:
     """Convert event type to Polish."""
     type_map = {
@@ -226,8 +220,8 @@ def get_polish_event_type(event_type: str) -> str:
     return type_map.get(event_type, event_type)
 
 
-def build_timeline_section(timeline_data: dict) -> list[tuple[str, str]]:
-    """Build a list of (date, description) tuples from timeline data, sorted chronologically."""
+def build_timeline_section(timeline_data: dict) -> list[tuple[str, str, str, str, str]]:
+    """Build a list of (date, place, age, description, person_name) tuples from timeline data, sorted chronologically."""
     events = []
     
     # Handle different possible timeline data structures
@@ -246,9 +240,9 @@ def build_timeline_section(timeline_data: dict) -> list[tuple[str, str]]:
     for event in events_list:
         if not isinstance(event, dict):
             continue
-        date_text, description = format_timeline_event(event)
-        if date_text or description:
-            events.append((date_text, description))
+        tupple = format_timeline_event(event)
+        if tupple:
+            events.append(tupple)
     
     return events
 
@@ -365,19 +359,10 @@ def render_tex(
     if occupations_tex:
         occupation_line = f"    \\textit{{{occupations_tex}}}\\\\[0.3em]\n"
 
-    # Build timeline section
-    timeline_section = ""
-    if timeline_events:
-        timeline_section = "\\vspace{1em}\n\\noindent\\textbf{Oś czasu:}\\\\\n"
-        for date_text, description in timeline_events:
-            date_escaped = latex_escape(date_text) if date_text else ""
-            desc_escaped = latex_escape(description) if description else ""
-            if date_escaped and desc_escaped:
-                timeline_section += f"\\hspace{{0.5em}} \\textbf{{{date_escaped}}} -- {desc_escaped}\\\\\n"
-            elif date_escaped:
-                timeline_section += f"\\hspace{{0.5em}} \\textbf{{{date_escaped}}}\\\\\n"
-            elif desc_escaped:
-                timeline_section += f"\\hspace{{0.5em}} {desc_escaped}\\\\\n"
+    timeline_events = "\n".join(
+        f"{a} & {b} & {c} & {d} & {e} \\\\"
+        for a, b, c, d, e in timeline_events
+    )
 
     return f"""% Auto-generated person page
 \\documentclass[12pt]{{article}}
@@ -395,7 +380,7 @@ def render_tex(
     \\vspace{{0pt}}
     \\Huge \\textbf{{{title}}}\\\\[0.3em]
     \\LARGE \\textbf{{{surname_tex}}}\\\\[0.3em]
-    \\Tiny {occupation_line}  \\end{{minipage}} \\\\ 
+\\small {occupation_line}  \\end{{minipage}} \\\\ 
 \\end{{tabular}}
 
 \\vspace{{1.5em}}
@@ -405,7 +390,10 @@ def render_tex(
   \\deathsymbol & \\textbf{{Data Śmierci: }} & {death_tex} \\\\ 
 \\end{{tabular}}
 
-{timeline_section}\\end{{document}}
+\\begin{{tabular}}{{@{{}}l l l l l}}
+    {timeline_events}
+\\end{{tabular}}
+\\end{{document}}
 """
 
 
