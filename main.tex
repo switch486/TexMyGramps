@@ -1,0 +1,17 @@
+\documentclass{article}
+\usepackage{subfiles}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\newcommand{\birthsymbol}{\ensuremath{\star}}
+\newcommand{\deathsymbol}{\ensuremath{\dagger}}
+
+\begin{document}
+% TITLEPAGE
+\tableofcontents
+
+\subfile{src/pages/pageXY/output/page.tex}
+\subfile{src/pages/pageJW/output/page.tex}
+
+\end{document}

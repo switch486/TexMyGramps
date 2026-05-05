@@ -391,7 +391,7 @@ def render_tex(
     death_location: str,
     timeline_events: list,
 ) -> str:
-    title = latex_escape(first_name)
+    first_name = latex_escape(first_name)
     surname_tex = latex_escape(surname)
     occupations_tex = latex_escape(occupations)
     birth_tex = latex_escape(format_event_line(birth_date, birth_location))
@@ -416,11 +416,13 @@ def render_tex(
 \\newcommand{{\\deathsymbol}}{{\\ensuremath{{\\dagger}}}}
 \\begin{{document}}
 \\thispagestyle{{empty}}
+\\newpage
+\\addcontentsline{{toc}}{{chapter}}{{{first_name} {surname_tex}}}
 \\begin{{tabular}}{{@{{}}p{{0.38\\textwidth}} p{{0.58\\textwidth}}}}
   \\fbox{{\\parbox[c][4cm][c]{{\\linewidth}}{{\\centering \\textbf{{Photo}}\\newline (skipped)}}}} &
   \\begin{{minipage}}[t]{{\\linewidth}}
     \\vspace{{0pt}}
-    \\Huge \\textbf{{{title}}}\\\\[0.3em]
+    \\Huge \\textbf{{{first_name}}}\\\\[0.3em]
     \\LARGE \\textbf{{{surname_tex}}}\\\\[0.3em]
 \\small {occupation_line}  \\end{{minipage}} \\\\ 
 \\end{{tabular}}

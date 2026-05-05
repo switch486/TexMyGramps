@@ -14,6 +14,11 @@
 -- tabela zeby sie miescila na stronie
 - TBD - Timeline vs tabela z dziecmi i rodzicami!
 - drzewo z przodkami do kupy zebranymi
+- TOC jako drzewo!!
+- skrypt na generowanie main
+- skrypt na ciagniecie wszystkiego
+-- cleanup calosci
+-- gitignore na main.pdf
 
 
 
