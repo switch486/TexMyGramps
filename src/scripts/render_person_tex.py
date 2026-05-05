@@ -187,7 +187,7 @@ def translate_text_with_brackets(text):
 def translate_symbol_by_prefix(text):
     match = re.match(r"^(.*?)\s*\((.*?)\)$", text)
     if not match:
-        return tr(text)
+        return trSymbol(text)
 
     main, inner = match.groups()
     return trSymbol(main.strip())
@@ -407,7 +407,7 @@ def render_tex(
     )
 
     return f"""% Auto-generated person page
-\\documentclass[12pt]{{article}}
+\\documentclass[10pt, a4paper]{{book}}
 \\usepackage[margin=1in]{{geometry}}
 \\usepackage{{array}}
 \\usepackage{{xcolor}}

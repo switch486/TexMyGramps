@@ -1,10 +1,29 @@
 - fotka
-- mapka z eventami??
+- mapka z eventami?? - Mapbox?
 - sciezka do zstepnych zeby mozna bylo polaczyc
-- rodzina - people/handle/timeline!! << TEST IT
+- rodzice kolo imienia
+- rodzina
 -- małzenstwo
 -- dzieci
 --- z datami narodzin i smierci
 --- z fotkami
 - akty do Eventow
+-- struktura do zaczytywania - ID eventu, ID Grafiki, ID notatki
+-- struktura source.txt do refaktoryzacji
 - make it more beautiful
+-- tabela zeby sie miescila na stronie
+- TBD - Timeline vs tabela z dziecmi i rodzicami!
+- drzewo z przodkami do kupy zebranymi
+
+
+
+
+TODO - loading
+- zaczytywanie Grafiki po ID
+- zaczytywanie notatek po ID
+- zaczytywanie eventów po ID
+- zaczytywanie rodzicow z osoby
+- zaczytywanie relacji miedzy osobami na zasadzie ludzi miedzy
+
+MAINTENANCE 
+- nazwiska poprawic - birth i married names
