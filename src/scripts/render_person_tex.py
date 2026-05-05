@@ -406,6 +406,9 @@ def render_tex(
         for a, b, c, d, e, f in timeline_events
     )
 
+## TODO - label setting based on the position of ancestor in the tree in reference to the root
+## TODO - label name encodes the position, label value contains name and surname - calculation TODO
+
     return f"""% Auto-generated person page
 \\documentclass[10pt, a4paper]{{book}}
 \\usepackage[margin=1in]{{geometry}}

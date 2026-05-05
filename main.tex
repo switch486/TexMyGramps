@@ -4,12 +4,55 @@
 \usepackage{array}
 \usepackage{xcolor}
 \usepackage{ragged2e}
+\usepackage{forest}
 \newcommand{\birthsymbol}{\ensuremath{\star}}
 \newcommand{\deathsymbol}{\ensuremath{\dagger}}
 
+\forestset{
+  ancestor tree/.style={
+    for tree={
+      grow=east,
+      parent anchor=east,
+      child anchor=west,
+      l sep=12mm,
+      s sep=8mm,
+      align=left
+    }
+  }
+}
+
 \begin{document}
 % TITLEPAGE
-\tableofcontents
+
+
+
+\begin{forest}
+ancestor tree
+[
+  A\\
+  M\\
+  P\\
+  Z\\{\small p.~1}
+    [
+      Henry\\{\small p.~5}
+        [
+          John W\\{\small p.~12}
+        ]
+        [
+          Janine\\{\small p.~14}
+        ]
+    ]
+    [
+      Milene\\{\small p.~7}
+        [
+          Roy\\{\small p.~18}
+        ]
+        [
+          Ellen\\{\small p.~20}
+        ]
+    ]
+]
+\end{forest}
 
 \subfile{src/pages/pageXY/output/page.tex}
 \subfile{src/pages/pageJW/output/page.tex}
