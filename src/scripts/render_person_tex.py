@@ -374,7 +374,6 @@ def infer_birth_death_dates(page_dir: Path, person: dict) -> tuple[str, str, str
 
     return birth_date, birth_location, death_date, death_location
 
-
 def format_event_line(date_text: str, location_text: str) -> str:
     if date_text and location_text:
         return f"{date_text}, {location_text}"
@@ -417,10 +416,17 @@ def render_tex(
 \\usepackage{{ragged2e}}
 \\newcommand{{\\birthsymbol}}{{\\ensuremath{{\\star}}}}
 \\newcommand{{\\deathsymbol}}{{\\ensuremath{{\\dagger}}}}
+
+\\providecommand{{\\TocTreeLocation}}{{1}}
+
 \\begin{{document}}
 \\thispagestyle{{empty}}
 \\newpage
-\\addcontentsline{{toc}}{{chapter}}{{{first_name} {surname_tex}}}
+
+\\newcommand\\value_\\ref{{\\TocTreeLocation}}{{{first_name} {surname_tex}}}
+\\section{{{first_name} {surname_tex}}}
+\\label{{\\TocTreeLocation}}
+
 \\begin{{tabular}}{{@{{}}p{{0.38\\textwidth}} p{{0.58\\textwidth}}}}
   \\fbox{{\\parbox[c][4cm][c]{{\\linewidth}}{{\\centering \\textbf{{Photo}}\\newline (skipped)}}}} &
   \\begin{{minipage}}[t]{{\\linewidth}}

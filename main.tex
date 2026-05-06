@@ -5,56 +5,24 @@
 \usepackage{xcolor}
 \usepackage{ragged2e}
 \usepackage{forest}
+\usepackage{hyperref}
 \newcommand{\birthsymbol}{\ensuremath{\star}}
 \newcommand{\deathsymbol}{\ensuremath{\dagger}}
 
-\forestset{
-  ancestor tree/.style={
-    for tree={
-      grow=east,
-      parent anchor=east,
-      child anchor=west,
-      l sep=12mm,
-      s sep=8mm,
-      align=left
-    }
-  }
+\newwrite\mytoc
+\immediate\openout\mytoc=mytoc.dat
+
+\newcommand{\recordchapter}[2]{%
+  % #1 = root name
+  % #2 = leaf name
+  \immediate\write\mytoc{#1|#2|\thepage}%
 }
 
 \begin{document}
 % TITLEPAGE
+\input{generated_tree.tex}
 
-
-
-\begin{forest}
-ancestor tree
-[
-  A\\
-  M\\
-  P\\
-  Z\\{\small p.~1}
-    [
-      Henry\\{\small p.~5}
-        [
-          John W\\{\small p.~12}
-        ]
-        [
-          Janine\\{\small p.~14}
-        ]
-    ]
-    [
-      Milene\\{\small p.~7}
-        [
-          Roy\\{\small p.~18}
-        ]
-        [
-          Ellen\\{\small p.~20}
-        ]
-    ]
-]
-\end{forest}
-
-\subfile{src/pages/pageXY/output/page.tex}
 \subfile{src/pages/pageJW/output/page.tex}
+\subfile{src/pages/pageXY/output/page.tex}
 
 \end{document}

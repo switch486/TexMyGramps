@@ -13,11 +13,11 @@
 - make it more beautiful
 -- tabela zeby sie miescila na stronie
 - TBD - Timeline vs tabela z dziecmi i rodzicami!
-- TOC jako drzewo!!
 - skrypt na generowanie main
 - skrypt na ciagniecie wszystkiego
 -- cleanup calosci
 -- gitignore na main.pdf
+- TODO - poprawic TOC zeby bylo fajniej
 
 
 
