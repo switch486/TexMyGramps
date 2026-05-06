@@ -1,7 +1,18 @@
 \begin{forest}
-for tree={grow'=0}
-[Adam
-[Marcin \dotfill 2]
-[Tomasz \dotfill 3]
+for tree={
+    grow=east,
+    parent anchor=east,
+    child anchor=west,
+    align=center,
+    l sep=15pt,
+    s sep=10pt,
+    edge path={
+        \noexpand\path[\forestoption{edge}]
+        (!u.parent anchor) -- +(5pt,0pt) |- (.child anchor)\forestoption{edge label};
+    }
+}
+[Adam Smith
+[Marcin Jones \newline \small{ str.2}]
+[Tomasz Król \newline \small{ str.3}]
 ]
 \end{forest}

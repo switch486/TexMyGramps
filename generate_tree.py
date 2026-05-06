@@ -101,7 +101,7 @@ def render_node(node):
     label = escape_latex(node.name)
 
     if node.page:
-        label = f"{label} \\dotfill {node.page}"
+        label = f"{label} \\newline \\small{{ str.{node.page}}}"
 
     if not node.children:
         return f"[{label}]"
@@ -117,8 +117,19 @@ def generate_forest(root):
     logger.info("Generating LaTeX forest output")
 
     return "\n".join([
-        r"\begin{forest}",
-        r"for tree={grow'=0}",  # left → right
+"""\\begin{forest}
+for tree={
+    grow=east,
+    parent anchor=east,
+    child anchor=west,
+    align=center,
+    l sep=15pt,
+    s sep=10pt,
+    edge path={
+        \\noexpand\\path[\\forestoption{edge}]
+        (!u.parent anchor) -- +(5pt,0pt) |- (.child anchor)\\forestoption{edge label};
+    }
+}""",
         render_node(root),
         r"\end{forest}"
     ])
