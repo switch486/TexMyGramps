@@ -137,6 +137,14 @@ def load_parent_data(page_dir: Path, person: dict, handle: str) -> dict:
             pass
     return {}
 
+def get_person_full_name(person_data: dict) -> str:
+    """Extract full name from person data."""
+    if not isinstance(person_data, dict):
+        return ""
+    first_name, surname = name_parts(person_data)
+    full_name = f"{first_name} {surname}".strip()
+    return full_name if full_name else "Unknown"
+
 
 def format_timeline_event(event: dict) -> tuple[str, str, str, str, str, str]:
     """Extract date and description from a timeline event."""
@@ -405,16 +413,14 @@ def render_tex(
     death_date: str,
     death_location: str,
     timeline_events: list,
+    father_full_name: str,
+    mother_full_name: str
 ) -> str:
     first_name = latex_escape(first_name)
     surname_tex = latex_escape(surname)
     occupations_tex = latex_escape(occupations)
     birth_tex = latex_escape(format_event_line(birth_date, birth_location))
     death_tex = latex_escape(format_event_line(death_date, death_location))
-
-    occupation_line = ""
-    if occupations_tex:
-        occupation_line = f"    \\textit{{{occupations_tex}}}\\\\[0.3em]\n"
 
     timeline_events = "\n".join(
         f"{a} & {b} & {c} & {d} & {e} & {f}\\\\"
@@ -442,18 +448,22 @@ def render_tex(
 \\recordchapter{{{root}}}{{{leaf}}}
 
 \\begin{{tabular}}{{@{{}}p{{0.38\\textwidth}} p{{0.58\\textwidth}}}}
-  \\fbox{{\\parbox[c][4cm][c]{{\\linewidth}}{{\\centering \\textbf{{Photo}}\\newline (skipped)}}}} &
+  \\fbox{{\\parbox[c][6cm][c]{{\\linewidth}}{{\\centering \\textbf{{Photo}}\\newline (skipped)}}}} &
   \\begin{{minipage}}[t]{{\\linewidth}}
     \\vspace{{0pt}}
     \\Huge \\textbf{{{first_name}}}\\\\[0.3em]
     \\LARGE \\textbf{{{surname_tex}}}\\\\[0.3em]
-\\small {occupation_line}  \\end{{minipage}} \\\\ 
+\\small \\textit{{{occupations_tex}}}\\\\[0.3em]
+\\normalsize Matka: {{{mother_full_name}}}\\\\
+Ojciec: {{{father_full_name}}}
+  \\end{{minipage}} \\\\ 
 \\end{{tabular}}
 
 \\noindent
 \\begin{{tabular}}{{@{{}}l l l}}
   \\birthsymbol & \\textbf{{Data Narodzin:}} & {birth_tex} \\\\ 
   \\deathsymbol & \\textbf{{Data Śmierci: }} & {death_tex} \\\\ 
+
 \\end{{tabular}}
 \\vspace{{1.5em}}
 
@@ -477,7 +487,7 @@ def main() -> None:
     if args.data_file:
         data_path = Path(args.data_file).resolve()
     else:
-        data_path = page_dir / "output" / "data.json"
+        data_path = page_dir / "assets" / "data.json"
     if not data_path.exists():
         raise SystemExit(f"ERROR: person data not found: {data_path}")
 
@@ -489,8 +499,6 @@ def main() -> None:
         raise SystemExit(f"ERROR: could not load JSON data: {exc}")
 
     first_name, surname = name_parts(person)
-    if not first_name and not surname:
-        first_name = person.get("gramps_id", "Person")
 
     occupations = extract_occupations(person)
     birth_date, birth_location, death_date, death_location = infer_birth_death_dates(page_dir, person)
@@ -500,10 +508,10 @@ def main() -> None:
     timeline_events = build_timeline_section(timeline_data)
 
     # Load Parents Data
-    father_data = load_parent_data(page_dir, person, "father_handle")
-    mother_data = load_parent_data(page_dir, person, "mother_handle")
-
-    # primary_name.first_name TODO
+    parent_data = load_parent_data(page_dir, person, "father_handle")
+    father_full_name = get_person_full_name(parent_data)
+    parent_data = load_parent_data(page_dir, person, "mother_handle")
+    mother_full_name = get_person_full_name(parent_data)
 
     output_path.write_text(
         render_tex(
@@ -515,6 +523,8 @@ def main() -> None:
             death_date,
             death_location,
             timeline_events,
+            father_full_name,
+            mother_full_name
         ),
         encoding="utf-8",
     )

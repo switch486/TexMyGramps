@@ -391,7 +391,6 @@ def main() -> None:
     enrich_person_birth_death(person, config, headers, timeout, assets_dir)
     enrich_person_timeline(person, headers, timeout, assets_dir)
     enrich_person_parent_family(person, headers, timeout, assets_dir)
-    # TODO enrich person parents
     person_handle = save_record(person, assets_dir / "people")
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
