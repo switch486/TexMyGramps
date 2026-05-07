@@ -61,8 +61,8 @@ if [ -z "$PERSON_ID" ]; then
 fi
 
 OUTPUT_DIR="$PAGE_DIR/output"
-DATA_FILE="$OUTPUT_DIR/data.json"
 ASSETS_DIR="$PAGE_DIR/assets"
+DATA_FILE="$ASSETS_DIR/data.json"
 rm -rf "$ASSETS_DIR"
 mkdir -p "$ASSETS_DIR"
 mkdir -p "$OUTPUT_DIR"
