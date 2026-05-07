@@ -18,6 +18,9 @@
 -- cleanup calosci
 -- gitignore na main.pdf
 - TODO - poprawic TOC zeby bylo fajniej
+- zmiana struktury plikow - co gdzie
+- zmiana nazewnictwa plikow - jakie komendy
+- pakiet do tlumaczenia na inne jezyki wbudowany?
 
 
 

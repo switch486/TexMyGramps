@@ -122,6 +122,22 @@ def load_timeline_data(page_dir: Path, person: dict) -> dict:
     return {}
 
 
+
+def load_parent_data(page_dir: Path, person: dict, handle: str) -> dict:
+    """Load parent data from JSON file if available."""
+    person_handle = person.get(handle)
+    if not person_handle:
+        return {}
+    
+    person_path = page_dir / "assets" / "people" / f"{person_handle}.json"
+    if person_path.exists():
+        try:
+            return json.loads(person_path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            pass
+    return {}
+
+
 def format_timeline_event(event: dict) -> tuple[str, str, str, str, str, str]:
     """Extract date and description from a timeline event."""
     date_text = ""
@@ -405,8 +421,8 @@ def render_tex(
         for a, b, c, d, e, f in timeline_events
     )
 
-## TODO - label setting based on the position of ancestor in the tree in reference to the root
-## TODO - label name encodes the position, label value contains name and surname - calculation TODO
+    leaf = first_name + " " + surname_tex
+    root = "root"
 
     return f"""% Auto-generated person page
 \\documentclass[10pt, a4paper]{{book}}
@@ -417,15 +433,13 @@ def render_tex(
 \\newcommand{{\\birthsymbol}}{{\\ensuremath{{\\star}}}}
 \\newcommand{{\\deathsymbol}}{{\\ensuremath{{\\dagger}}}}
 
-\\providecommand{{\\TocTreeLocation}}{{1}}
+\\providecommand{{\\recordchapter}}{{2}}
 
 \\begin{{document}}
 \\thispagestyle{{empty}}
 \\newpage
 
-\\newcommand\\value_\\ref{{\\TocTreeLocation}}{{{first_name} {surname_tex}}}
-\\section{{{first_name} {surname_tex}}}
-\\label{{\\TocTreeLocation}}
+\\recordchapter{{{root}}}{{{leaf}}}
 
 \\begin{{tabular}}{{@{{}}p{{0.38\\textwidth}} p{{0.58\\textwidth}}}}
   \\fbox{{\\parbox[c][4cm][c]{{\\linewidth}}{{\\centering \\textbf{{Photo}}\\newline (skipped)}}}} &
@@ -484,6 +498,12 @@ def main() -> None:
     # Extract timeline events
     timeline_data = load_timeline_data(page_dir, person)
     timeline_events = build_timeline_section(timeline_data)
+
+    # Load Parents Data
+    father_data = load_parent_data(page_dir, person, "father_handle")
+    mother_data = load_parent_data(page_dir, person, "mother_handle")
+
+    # primary_name.first_name TODO
 
     output_path.write_text(
         render_tex(

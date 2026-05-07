@@ -63,6 +63,15 @@ def extract_handle(record: dict) -> str:
     raise SystemExit("ERROR: record has no identifiable handle or id")
 
 
+def extract_family_handle(record: dict) -> str:
+    if record.get("parent_family_list"):
+        value = record.get("parent_family_list")
+        if value:
+            # TODO - error handling TODO
+            return str(value[0])
+    raise SystemExit("ERROR: record has no identifiable handle or id")
+
+
 def clean_string(value: str) -> str:
     """Remove all trailing characters from string beginning with '['."""
     if not isinstance(value, str):
@@ -79,6 +88,21 @@ def find_single_person(person_id: str, search_path: str, query_param: str, heade
     if isinstance(data, list):
         if not data:
             raise SystemExit(f"ERROR: no person found for {query_param}={person_id}")
+        return data[0]
+    if isinstance(data, dict):
+        if "people" in data and isinstance(data["people"], list) and data["people"]:
+            return data["people"][0]
+        return data
+    raise SystemExit("ERROR: unexpected person search response")
+
+
+def find_single_person_by_handle(person_handle: str, headers: dict, timeout: int):
+    path_template = f"people/{person_handle}"
+    url = build_url(os.environ["GRAMPS_API_BASE_URL"], path_template)
+    data = fetch_json(url, headers, timeout)
+    if isinstance(data, list):
+        if not data:
+            raise SystemExit(f"ERROR: no person found for person_handle={person_handle}")
         return data[0]
     if isinstance(data, dict):
         if "people" in data and isinstance(data["people"], list) and data["people"]:
@@ -273,6 +297,18 @@ def fetch_person_timeline(person_handle: str, headers: dict, timeout: int) -> di
     except Exception as e:
         print(f"Warning: failed to fetch timeline for {person_handle}: {e}")
         return {}
+    
+def fetch_person_parent_family(family_handle: str, headers: dict, timeout: int) -> dict:
+    """Fetch family data for a family_handle from the API."""
+    if not family_handle:
+        return {}
+    try:
+        path_template = f"families/{family_handle}"
+        url = build_url(os.environ["GRAMPS_API_BASE_URL"], path_template)
+        return fetch_json(url, headers, timeout)
+    except Exception as e:
+        print(f"Warning: failed to fetch timeline for {family_handle}: {e}")
+        return {}
 
 
 def enrich_person_timeline(person: dict, headers: dict, timeout: int, assets_dir: Path):
@@ -290,6 +326,41 @@ def enrich_person_timeline(person: dict, headers: dict, timeout: int, assets_dir
         # Store reference to timeline in person object
         person["timeline_handle"] = handle
 
+def enrich_person_parent_family(person: dict, headers: dict, timeout: int, assets_dir: Path):
+    """Fetch and save the parent family data for a person."""
+    if not isinstance(person, dict):
+        return
+    
+    family_handle = extract_family_handle(person)
+    family_data = fetch_person_parent_family(family_handle, headers, timeout)
+    
+    if family_data:
+        # Save family_data data for inspection
+        family_path = assets_dir / "family" / f"{family_handle}.json"
+        persist_json(family_data, family_path)
+
+        # get Father
+        fetch_parent(person, headers, timeout, assets_dir, family_data, "father_handle")
+
+        # get Mother
+        fetch_parent(person, headers, timeout, assets_dir, family_data, "mother_handle")
+
+        # Store reference to family in person object
+        person["family_handle"] = family_handle
+
+
+def fetch_parent(person, headers, timeout, assets_dir, family_data, parent_handle_property):
+    parent_handle = family_data.get(parent_handle_property)
+    if not parent_handle:
+        return {}
+    try :
+        parent_data = find_single_person_by_handle(parent_handle, headers, timeout)
+        parent_path = assets_dir / "people" / f"{parent_handle}.json"
+        persist_json(parent_data, parent_path)
+        person[parent_handle_property] = parent_handle
+    except Exception as e:
+        print(f"Warning: failed to fetch parent data for {parent_handle}: {e}")
+        return {}   
 
 
 def main() -> None:
@@ -319,6 +390,8 @@ def main() -> None:
     person = find_single_person(args.person_id, person_search_path, query_param, headers, timeout)
     enrich_person_birth_death(person, config, headers, timeout, assets_dir)
     enrich_person_timeline(person, headers, timeout, assets_dir)
+    enrich_person_parent_family(person, headers, timeout, assets_dir)
+    # TODO enrich person parents
     person_handle = save_record(person, assets_dir / "people")
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
