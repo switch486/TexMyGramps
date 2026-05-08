@@ -429,6 +429,8 @@ def render_tex(
         for a, b, c, d, e, f in timeline_events
     )
 
+    image_if_exists = f"\\includegraphics[width=\\linewidth,height=5.8cm,keepaspectratio]{{{path_to_file}}}%" if path_to_file else ""
+
     leaf = first_name + " " + surname_tex
     root = "root"
 
@@ -453,8 +455,8 @@ def render_tex(
 \\begin{{tabular}}{{@{{}}p{{0.38\\textwidth}} p{{0.58\\textwidth}}}}
   \\fbox{{%
     \\parbox[c][6cm][c]{{\\linewidth}}{{%
-      \\centering
-      \\includegraphics[width=\\linewidth,height=5.8cm,keepaspectratio]{{{path_to_file}}}
+      \\centering      
+        {{{image_if_exists}}}
     }}%
   }} &
   \\begin{{minipage}}[t]{{\\linewidth}}

@@ -448,8 +448,9 @@ def main() -> None:
     enrich_person_parent_family(person, headers, timeout, assets_dir)
     person_handle = save_record(person, assets_dir / "people")
 
-    mediaDetails = load_media_details(task.get("personPicture_mediaObjectID"), headers, timeout, assets_dir)
-    person["titlePagePhoto_link"] = load_picture_details(extract_handle(mediaDetails), headers, timeout, assets_dir)
+    if task.get("personPicture_mediaObjectID"):
+        mediaDetails = load_media_details(task.get("personPicture_mediaObjectID"), headers, timeout, assets_dir)
+        person["titlePagePhoto_link"] = load_picture_details(extract_handle(mediaDetails), headers, timeout, assets_dir)
     person["additional_page_details"] = load_additional_page_details(timeout, headers, assets_dir, task)
 
     output_path = Path(args.output)
