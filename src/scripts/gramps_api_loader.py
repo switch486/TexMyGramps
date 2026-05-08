@@ -448,6 +448,15 @@ def main() -> None:
     enrich_person_parent_family(person, headers, timeout, assets_dir)
     person_handle = save_record(person, assets_dir / "people")
 
+    if task.get("descendant"):
+        descendant_task = task.get("descendant")
+        if descendant_task.get("personGrampsID"):
+            descendant = find_single_person(descendant_task.get("personGrampsID"), person_search_path, query_param, headers, timeout)
+            descendant_handle = save_record(descendant, assets_dir / "people")
+            person["descendant_handle"] = descendant_handle
+        else :
+            person["descendant_display_name"] = descendant_task.get("personString")
+
     if task.get("personPicture_mediaObjectID"):
         mediaDetails = load_media_details(task.get("personPicture_mediaObjectID"), headers, timeout, assets_dir)
         person["titlePagePhoto_link"] = load_picture_details(extract_handle(mediaDetails), headers, timeout, assets_dir)

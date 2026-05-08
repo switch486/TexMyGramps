@@ -1,5 +1,8 @@
 {
   "personGrampsID": "I0439",
+  "descendant": {
+    "personString": "root"
+  },
   "detailPages": [
     {
       "mediaObjectID": "O0311"

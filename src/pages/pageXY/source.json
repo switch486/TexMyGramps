@@ -1,6 +1,9 @@
 {
   "personGrampsID": "I0121",
   "personPicture_mediaObjectID": "O0139",
+  "descendant": {
+    "personGrampsID": "I0061"
+  },
   "detailPages": [
     {
       "mediaObjectID": "O0185",

@@ -123,8 +123,8 @@ def load_timeline_data(page_dir: Path, person: dict) -> dict:
 
 
 
-def load_parent_data(page_dir: Path, person: dict, handle: str) -> dict:
-    """Load parent data from JSON file if available."""
+def load_person_data(page_dir: Path, person: dict, handle: str) -> dict:
+    """Load person data from JSON file if available."""
     person_handle = person.get(handle)
     if not person_handle:
         return {}
@@ -416,6 +416,7 @@ def render_tex(
     father_full_name: str,
     mother_full_name: str,
     path_to_file:str,
+    descendant_full_name: str,
     formatted_additional_page_details: str = ""
 ) -> str:
     first_name = latex_escape(first_name)
@@ -429,10 +430,10 @@ def render_tex(
         for a, b, c, d, e, f in timeline_events
     )
 
-    image_if_exists = f"\\includegraphics[width=\\linewidth,height=5.8cm,keepaspectratio]{{{path_to_file}}}%" if path_to_file else ""
+    image_if_exists = f"\\includegraphics[width=\\linewidth,height=5.8cm,keepaspectratio]{{{path_to_file}}}" if path_to_file else ""
 
     leaf = first_name + " " + surname_tex
-    root = "root"
+    root = descendant_full_name
 
     return f"""% Auto-generated person page
 \\documentclass[10pt, a4paper]{{book}}
@@ -551,10 +552,18 @@ def main() -> None:
     timeline_events = build_timeline_section(timeline_data)
 
     # Load Parents Data
-    parent_data = load_parent_data(page_dir, person, "father_handle")
+    parent_data = load_person_data(page_dir, person, "father_handle")
     father_full_name = get_person_full_name(parent_data)
-    parent_data = load_parent_data(page_dir, person, "mother_handle")
+    parent_data = load_person_data(page_dir, person, "mother_handle")
     mother_full_name = get_person_full_name(parent_data)
+
+    descendant_full_name = ""
+    if person.get("descendant_handle"):
+        descendant_data = load_person_data(page_dir, person, "descendant_handle")
+        descendant_full_name = get_person_full_name(descendant_data)
+    else :
+        descendant_full_name = person.get("descendant_display_name")
+
     path_to_file = person.get("titlePagePhoto_link", "")
     formatted_additional_page_details = format_additional_page_details(person.get("additional_page_details", []))
 
@@ -571,6 +580,7 @@ def main() -> None:
             father_full_name,
             mother_full_name,
             path_to_file,
+            descendant_full_name,
             formatted_additional_page_details
         ),
         encoding="utf-8",
