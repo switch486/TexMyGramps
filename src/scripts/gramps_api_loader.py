@@ -365,7 +365,7 @@ def fetch_parent(person, headers, timeout, assets_dir, family_data, parent_handl
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Load GRAMPS person data and related resources via API")
-    parser.add_argument("--person-id", required=True, help="Gramps numerical person ID to resolve")
+    parser.add_argument("--source-file", required=True, help="Path to the source JSON file containing the work IDs")
     parser.add_argument("--output", required=True, help="Primary output JSON file path")
     parser.add_argument("--assets-dir", required=True, help="Directory to store downloaded assets and JSON files")
     args = parser.parse_args()
@@ -387,7 +387,10 @@ def main() -> None:
     assets_dir = Path(args.assets_dir)
     assets_dir.mkdir(parents=True, exist_ok=True)
 
-    person = find_single_person(args.person_id, person_search_path, query_param, headers, timeout)
+    with open(args.source_file, "r") as f:
+        task = json.load(f)
+
+    person = find_single_person(task.get("personGrampsID"), person_search_path, query_param, headers, timeout)
     enrich_person_birth_death(person, config, headers, timeout, assets_dir)
     enrich_person_timeline(person, headers, timeout, assets_dir)
     enrich_person_parent_family(person, headers, timeout, assets_dir)

@@ -46,18 +46,12 @@ if [ ! -d "$PAGE_DIR" ]; then
   exit 1
 fi
 
-SOURCE_FILE="$PAGE_DIR/source.txt"
+SOURCE_FILE="$PAGE_DIR/source.json"
 if [ -z "$PERSON_ID" ]; then
   if [ ! -f "$SOURCE_FILE" ]; then
     echo "ERROR: source ID file not found: $SOURCE_FILE"
     exit 1
   fi
-  PERSON_ID="$(tr -d '[:space:]' < "$SOURCE_FILE")"
-fi
-
-if [ -z "$PERSON_ID" ]; then
-  echo "ERROR: person ID is empty"
-  exit 1
 fi
 
 OUTPUT_DIR="$PAGE_DIR/output"
@@ -81,7 +75,7 @@ export GRAMPS_API_BASE_URL \
   GRAMPS_API_TIMEOUT
 
 python3 "$ROOT_DIR/scripts/gramps_api_loader.py" \
-  --person-id "$PERSON_ID" \
+  --source-file "$SOURCE_FILE" \
   --output "$DATA_FILE" \
   --assets-dir "$ASSETS_DIR"
 
