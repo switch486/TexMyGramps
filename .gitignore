@@ -1,6 +1,7 @@
 # Ignore generated page outputs and page-specific assets
 src/pages/*/output/
 src/pages/*/assets/
+masterFiles/output/
 
 # Ignore temporary API token files and local credentials
 src/scripts/gramps_api_token.env
