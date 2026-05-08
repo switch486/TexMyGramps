@@ -3,14 +3,9 @@ import argparse
 import json
 import os
 import re
+import requests
 from pathlib import Path
 from urllib.parse import quote_plus, urlencode
-
-try:
-    import requests
-except ImportError:
-    raise SystemExit("ERROR: requests is required. Install it with pip install requests.")
-
 
 def get_env(key: str, default: str = None) -> str:
     if key in os.environ:
@@ -28,7 +23,6 @@ def required_env(key: str) -> str:
 def build_url(base_url: str, path_template: str, path_vars: dict = None, query: dict = None) -> str:
     base = base_url.rstrip("/")
     path = path_template.strip("/")
-    print(f"PATH: {base}/{path}  ")
     if path_vars:
         escaped = {k: quote_plus(str(v)) for k, v in path_vars.items()}
         try:
@@ -364,7 +358,6 @@ def fetch_parent(person, headers, timeout, assets_dir, family_data, parent_handl
         return {}   
 
 def load_media_details(media_ID: str, headers: dict, timeout: int, assets_dir: Path) -> dict:
-    print(f"Media: {media_ID}")
     if not media_ID:
         return {}
     try:
@@ -407,7 +400,6 @@ def persist_picture(obj, dest_path: Path):
     print(f"Saved Picture: {dest_path}")
     
 def load_note_details(note_ID: str, headers: dict, timeout: int, assets_dir: Path) -> dict:
-    print(f"Note: {note_ID}")
     if not note_ID:
         return {}
     try:
@@ -457,6 +449,9 @@ def main() -> None:
     enrich_person_timeline(person, headers, timeout, assets_dir)
     enrich_person_parent_family(person, headers, timeout, assets_dir)
     person_handle = save_record(person, assets_dir / "people")
+
+    mediaDetails = load_media_details(task.get("personPicture_mediaObjectID"), headers, timeout, assets_dir)
+    person["titlePagePhoto_link"] = load_picture_details(extract_handle(mediaDetails), headers, timeout, assets_dir)
 
     # loop over the detailPages in the tasks and collect the gramps IDs for the Media Objects and the Notes
     additional_page_details = []

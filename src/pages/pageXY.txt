@@ -20,6 +20,7 @@ pages/
 # ============================================================================
 {
   "personGrampsID": "I0100",
+  "personPicture_mediaObjectID": "O0189",
   "detailPages": [
     {
       "mediaObjectID": "O0268",
@@ -41,6 +42,9 @@ pages/
   "type": "object",
   "properties": {
     "personGrampsID": {
+      "type": "string"
+    },
+    "personPicture_mediaObjectID": {
       "type": "string"
     },
     "detailPages": {

@@ -414,7 +414,8 @@ def render_tex(
     death_location: str,
     timeline_events: list,
     father_full_name: str,
-    mother_full_name: str
+    mother_full_name: str,
+    path_to_file:str
 ) -> str:
     first_name = latex_escape(first_name)
     surname_tex = latex_escape(surname)
@@ -436,6 +437,7 @@ def render_tex(
 \\usepackage{{array}}
 \\usepackage{{xcolor}}
 \\usepackage{{ragged2e}}
+\\usepackage{{graphicx}}
 \\newcommand{{\\birthsymbol}}{{\\ensuremath{{\\star}}}}
 \\newcommand{{\\deathsymbol}}{{\\ensuremath{{\\dagger}}}}
 
@@ -448,12 +450,17 @@ def render_tex(
 \\recordchapter{{{root}}}{{{leaf}}}
 
 \\begin{{tabular}}{{@{{}}p{{0.38\\textwidth}} p{{0.58\\textwidth}}}}
-  \\fbox{{\\parbox[c][6cm][c]{{\\linewidth}}{{\\centering \\textbf{{Photo}}\\newline (skipped)}}}} &
+  \\fbox{{%
+    \\parbox[c][6cm][c]{{\\linewidth}}{{%
+      \\centering
+      \\includegraphics[width=\\linewidth,height=5.8cm,keepaspectratio]{{{path_to_file}}}
+    }}%
+  }} &
   \\begin{{minipage}}[t]{{\\linewidth}}
     \\vspace{{0pt}}
     \\Huge \\textbf{{{first_name}}}\\\\[0.3em]
     \\LARGE \\textbf{{{surname_tex}}}\\\\[0.3em]
-\\small \\textit{{{occupations_tex}}}\\\\[0.3em]
+    \\small \\textit{{{occupations_tex}}}\\\\[0.3em]
 
 \\begin{{tabular}}{{@{{}}l l}}
 Ojciec: & {{{father_full_name}}} \\\\ 
@@ -515,6 +522,8 @@ def main() -> None:
     father_full_name = get_person_full_name(parent_data)
     parent_data = load_parent_data(page_dir, person, "mother_handle")
     mother_full_name = get_person_full_name(parent_data)
+    path_to_file = person.get("titlePagePhoto_link", "")
+
 
     output_path.write_text(
         render_tex(
@@ -527,7 +536,8 @@ def main() -> None:
             death_location,
             timeline_events,
             father_full_name,
-            mother_full_name
+            mother_full_name,
+            path_to_file
         ),
         encoding="utf-8",
     )

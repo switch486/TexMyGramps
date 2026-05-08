@@ -1,12 +1,14 @@
-- fotka
 - mapka z eventami?? - Mapbox?
 - sciezka do zstepnych zeby mozna bylo polaczyc
+
+Variant:
 - rodzina
 -- małzenstwo
 -- dzieci
 --- z datami narodzin i smierci
 --- z fotkami
-- struktura do zaczytywania - ID Grafiki, ID notatki
+
+
 - make it more beautiful
 -- tabela zeby sie miescila na stronie
 - TBD - Timeline vs tabela z dziecmi i rodzicami!
@@ -23,9 +25,6 @@ REFAKTOR
 - load + render do poprawki
 
 TODO - loading
-- zaczytywanie Grafiki po ID
-- zaczytywanie notatek po ID
-- zaczytywanie eventów po ID
 - zaczytywanie relacji miedzy osobami na zasadzie ludzi miedzy
 
 MAINTENANCE 
