@@ -3,8 +3,8 @@
 from collections import defaultdict
 import logging
 
-INPUT_FILE = "mytoc.dat"
-OUTPUT_FILE = "generated_tree.tex"
+INPUT_FILE = "output/mytoc.dat"
+OUTPUT_FILE = "output/generated_tree.tex"
 
 # ---------------- LOGGING ----------------
 logging.basicConfig(

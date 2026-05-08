@@ -1,3 +1,5 @@
+- MASTERFILES REFACTOR TODO!!
+
 - mapka z eventami?? - Mapbox?
 - sciezka do zstepnych zeby mozna bylo polaczyc
 
