@@ -415,7 +415,8 @@ def render_tex(
     timeline_events: list,
     father_full_name: str,
     mother_full_name: str,
-    path_to_file:str
+    path_to_file:str,
+    formatted_additional_page_details: str = ""
 ) -> str:
     first_name = latex_escape(first_name)
     surname_tex = latex_escape(surname)
@@ -482,8 +483,38 @@ Matka: & {{{mother_full_name}}} \\\\
 \\hline
     {timeline_events}
 \\end{{tabular}}
+
+{formatted_additional_page_details}
+
 \\end{{document}}
 """
+
+def format_additional_page_details(details: list) -> str:
+    if not isinstance(details, list) or not details:
+        return ""
+    formatted_details = ""
+    
+    for detail in details:
+        media_desc = detail.get("mediaDetails", {}).get("desc", "")
+        note_desc = None
+        if detail.get("noteDetails", {}):
+            note_desc = detail.get("noteDetails", {}).get("text", "").get("string", "")
+        picture_link = detail.get("pictureDetails_link", "")
+        
+        formatted_details += f"""\\newpage
+        \\begin{{center}}
+        \\includegraphics[width=\\textwidth]{{{picture_link}}}
+        \\newline
+        {{{latex_escape(media_desc)}}}
+        \\newline """
+        if note_desc:
+            formatted_details += f"""
+            \\fbox{{
+            \\parbox{{\\linewidth}}{{{latex_escape(note_desc)}}}}}
+            """
+        formatted_details += f"  \\end{{center}} "
+
+    return f"\\vspace{{1.5em}}\n{formatted_details}\n"
 
 
 def main() -> None:
@@ -523,7 +554,7 @@ def main() -> None:
     parent_data = load_parent_data(page_dir, person, "mother_handle")
     mother_full_name = get_person_full_name(parent_data)
     path_to_file = person.get("titlePagePhoto_link", "")
-
+    formatted_additional_page_details = format_additional_page_details(person.get("additional_page_details", []))
 
     output_path.write_text(
         render_tex(
@@ -537,7 +568,8 @@ def main() -> None:
             timeline_events,
             father_full_name,
             mother_full_name,
-            path_to_file
+            path_to_file,
+            formatted_additional_page_details
         ),
         encoding="utf-8",
     )

@@ -357,9 +357,7 @@ def fetch_parent(person, headers, timeout, assets_dir, family_data, parent_handl
         print(f"Warning: failed to fetch parent data for {parent_handle}: {e}")
         return {}   
 
-def load_media_details(media_ID: str, headers: dict, timeout: int, assets_dir: Path) -> dict:
-    if not media_ID:
-        return {}
+def load_media_details(media_ID: str, headers, timeout, assets_dir):
     try:
         query_param = get_env("GRAMPS_API_MEDIA_QUERY_PARAM", "gramps_id")
         search_path = get_env("GRAMPS_API_MEDIA_SEARCH_PATH", "media")
@@ -452,7 +450,15 @@ def main() -> None:
 
     mediaDetails = load_media_details(task.get("personPicture_mediaObjectID"), headers, timeout, assets_dir)
     person["titlePagePhoto_link"] = load_picture_details(extract_handle(mediaDetails), headers, timeout, assets_dir)
+    person["additional_page_details"] = load_additional_page_details(timeout, headers, assets_dir, task)
 
+    output_path = Path(args.output)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    persist_json(person, output_path)
+
+    print(f"Loaded person {person_handle} into {assets_dir}")
+
+def load_additional_page_details(timeout, headers, assets_dir, task):
     # loop over the detailPages in the tasks and collect the gramps IDs for the Media Objects and the Notes
     additional_page_details = []
     for pair in task.get("detailPages", []):
@@ -461,20 +467,16 @@ def main() -> None:
 
         mediaDetails = load_media_details(mediaID, headers, timeout, assets_dir)
         pictureDetails = load_picture_details(extract_handle(mediaDetails), headers, timeout, assets_dir)
+        output = {"mediaDetails": mediaDetails,
+             "pictureDetails_link": pictureDetails}
+
         if noteID:
             noteDetails = load_note_details(noteID, headers, timeout, assets_dir)
-        additional_page_details.append(
-            {"mediaDetails": mediaDetails, 
-             "noteDetails": noteDetails,
-             "pictureDetails": pictureDetails})
+            output["noteDetails"] = noteDetails
 
-    person["additional_page_details"] = additional_page_details
-
-    output_path = Path(args.output)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    persist_json(person, output_path)
-
-    print(f"Loaded person {person_handle} into {assets_dir}")
+        additional_page_details.append(output)
+             
+    return additional_page_details
 
 
 if __name__ == "__main__":
