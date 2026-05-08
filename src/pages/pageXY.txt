@@ -1,0 +1,67 @@
+# GIT convention to prepare the pages for the load / generation engine
+
+# ============================================================================
+# Directory Folder Structure
+# ============================================================================
+pages/
+├── pageXX/
+│   ├── assets/ # the JSON documents and images loaded from Gramps
+│   ├── output/ # the generated documents: tex and pdf
+│   └── source.json
+├── pageXY/
+│   ..
+└── pageXZ/
+    ..
+
+
+
+# ============================================================================
+# source.json example
+# ============================================================================
+{
+  "personGrampsID": "I0100",
+  "detailPages": [
+    {
+      "mediaObjectID": "O0268",
+      "noteID": "N0107"
+    },
+    {
+      "mediaObjectID": "O0269"
+    }
+  ]
+}
+
+
+# ============================================================================
+# source.json schema
+# ============================================================================
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Person Detail Pages",
+  "type": "object",
+  "properties": {
+    "personGrampsID": {
+      "type": "string"
+    },
+    "detailPages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "mediaObjectID": {
+            "type": "string"
+          },
+          "noteID": {
+            "type": "string"
+          }
+        },
+        "required": ["mediaObjectID"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["personGrampsID"],
+  "additionalProperties": false
+}
+
+
