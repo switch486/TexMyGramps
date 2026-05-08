@@ -19,8 +19,8 @@
 - zmiana nazewnictwa plikow - jakie komendy
 - pakiet do tlumaczenia na inne jezyki wbudowany?
 
-
-
+REFAKTOR
+- load + render do poprawki
 
 TODO - loading
 - zaczytywanie Grafiki po ID

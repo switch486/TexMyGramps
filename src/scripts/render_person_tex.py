@@ -457,7 +457,7 @@ def render_tex(
 
 \\begin{{tabular}}{{@{{}}l l}}
 Ojciec: & {{{father_full_name}}} \\\\ 
-Matka: & {{{mother_full_name}}} \\\\ 
+Matka: & {{{mother_full_name}}} \\\\
 \\end{{tabular}}
   \\end{{minipage}} \\\\ 
 \\end{{tabular}}

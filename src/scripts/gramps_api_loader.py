@@ -28,6 +28,7 @@ def required_env(key: str) -> str:
 def build_url(base_url: str, path_template: str, path_vars: dict = None, query: dict = None) -> str:
     base = base_url.rstrip("/")
     path = path_template.strip("/")
+    print(f"PATH: {base}/{path}  ")
     if path_vars:
         escaped = {k: quote_plus(str(v)) for k, v in path_vars.items()}
         try:
@@ -362,6 +363,67 @@ def fetch_parent(person, headers, timeout, assets_dir, family_data, parent_handl
         print(f"Warning: failed to fetch parent data for {parent_handle}: {e}")
         return {}   
 
+def load_media_details(media_ID: str, headers: dict, timeout: int, assets_dir: Path) -> dict:
+    print(f"Media: {media_ID}")
+    if not media_ID:
+        return {}
+    try:
+        query_param = get_env("GRAMPS_API_MEDIA_QUERY_PARAM", "gramps_id")
+        search_path = get_env("GRAMPS_API_MEDIA_SEARCH_PATH", "media")
+        url = build_url(os.environ["GRAMPS_API_BASE_URL"], search_path, query={query_param: media_ID})
+        media_list = fetch_json(url, headers, timeout)
+        if isinstance(media_list, list):
+            media_data = media_list[0]
+        else:
+            media_data = {}
+        save_record(media_data, assets_dir / "media")
+        return media_data if isinstance(media_data, dict) else {}
+    except Exception as e:
+        print(f"Warning: failed to fetch media details for {media_ID}: {e}")
+        return {}
+    
+def load_picture_details(handle: str, headers: dict, timeout: int, assets_dir: Path) -> dict:
+    if not handle:
+        return {}
+    try:
+        baseUrl = get_env("GRAMPS_API_BASE_URL")
+        path = get_env("GRAMPS_API_PICTURE_PATH", "media/{handle}/file")
+        url = build_url(baseUrl, path, path_vars={"handle": handle})
+        response = requests.get(url, headers=headers, timeout=timeout)
+        response.raise_for_status()
+
+        picture_path = assets_dir / f"pictures/{handle}.png"
+        persist_picture(response.content, picture_path)
+
+        return str(picture_path)
+    except Exception as e:
+        print(f"Warning: failed to fetch picture details for {handle}: {e}")
+        return {}
+
+def persist_picture(obj, dest_path: Path):
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(dest_path, 'wb') as f:
+        f.write(obj)  
+    print(f"Saved Picture: {dest_path}")
+    
+def load_note_details(note_ID: str, headers: dict, timeout: int, assets_dir: Path) -> dict:
+    print(f"Note: {note_ID}")
+    if not note_ID:
+        return {}
+    try:
+        query_param = get_env("GRAMPS_API_NOTE_QUERY_PARAM", "gramps_id")
+        search_path = get_env("GRAMPS_API_NOTE_SEARCH_PATH", "notes")
+        url = build_url(os.environ["GRAMPS_API_BASE_URL"], search_path, query={query_param: note_ID})
+        note_list = fetch_json(url, headers, timeout)
+        if isinstance(note_list, list):
+            note_data = note_list[0]
+        else:
+            note_data = {}
+        save_record(note_data, assets_dir / "notes")
+        return note_data if isinstance(note_data, dict) else {}
+    except Exception as e:
+        print(f"Warning: failed to fetch note details for {note_ID}: {e}")
+        return {}
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Load GRAMPS person data and related resources via API")
@@ -395,6 +457,24 @@ def main() -> None:
     enrich_person_timeline(person, headers, timeout, assets_dir)
     enrich_person_parent_family(person, headers, timeout, assets_dir)
     person_handle = save_record(person, assets_dir / "people")
+
+    # loop over the detailPages in the tasks and collect the gramps IDs for the Media Objects and the Notes
+    additional_page_details = []
+    for pair in task.get("detailPages", []):
+        mediaID = pair.get("mediaObjectID")
+        noteID = pair.get("noteID")
+
+        mediaDetails = load_media_details(mediaID, headers, timeout, assets_dir)
+        pictureDetails = load_picture_details(extract_handle(mediaDetails), headers, timeout, assets_dir)
+        if noteID:
+            noteDetails = load_note_details(noteID, headers, timeout, assets_dir)
+        additional_page_details.append(
+            {"mediaDetails": mediaDetails, 
+             "noteDetails": noteDetails,
+             "pictureDetails": pictureDetails})
+
+    person["additional_page_details"] = additional_page_details
+
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     persist_json(person, output_path)
