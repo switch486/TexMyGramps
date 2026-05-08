@@ -454,8 +454,11 @@ def render_tex(
     \\Huge \\textbf{{{first_name}}}\\\\[0.3em]
     \\LARGE \\textbf{{{surname_tex}}}\\\\[0.3em]
 \\small \\textit{{{occupations_tex}}}\\\\[0.3em]
-\\normalsize Matka: {{{mother_full_name}}}\\\\
-Ojciec: {{{father_full_name}}}
+
+\\begin{{tabular}}{{@{{}}l l}}
+Ojciec: & {{{father_full_name}}} \\\\ 
+Matka: & {{{mother_full_name}}} \\\\ 
+\\end{{tabular}}
   \\end{{minipage}} \\\\ 
 \\end{{tabular}}
 
