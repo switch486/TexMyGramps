@@ -1,5 +1,3 @@
-- MASTERFILES REFACTOR TODO!!
-
 - mapka z eventami?? - Mapbox?
 - sciezka do zstepnych zeby mozna bylo polaczyc
 
@@ -10,16 +8,12 @@ Variant:
 --- z datami narodzin i smierci
 --- z fotkami
 
-
 - make it more beautiful
+
 -- tabela zeby sie miescila na stronie
 - TBD - Timeline vs tabela z dziecmi i rodzicami!
-- skrypt na ciagniecie wszystkiego
 -- cleanup calosci
--- gitignore na main.pdf
 - TODO - poprawic TOC zeby bylo fajniej
-- zmiana struktury plikow - co gdzie
-- zmiana nazewnictwa plikow - jakie komendy
 - pakiet do tlumaczenia na inne jezyki wbudowany?
 
 REFAKTOR

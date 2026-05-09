@@ -10,13 +10,13 @@ def run(cmd):
 
 def main():
     # 1st pass (generate .dat with page numbers)
-    run("tectonic masterDocument/main.tex")
+    run("tectonic main.tex")
 
     # generate tree from mytoc.dat
-    run("python masterDocument/generate_tree.py")
+    run("python generate_tree.py")
 
     # 2nd pass (include generated tree)
-    run("tectonic masterDocument/main.tex")
+    run("tectonic main.tex")
 
 if __name__ == "__main__":
     main()

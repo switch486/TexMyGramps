@@ -2,6 +2,7 @@
 src/pages/*/output/
 src/pages/*/assets/
 masterDocument/output/
+logs/
 
 # Ignore temporary API token files and local credentials
 src/scripts/gramps_api_token.env
