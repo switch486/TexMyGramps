@@ -1,26 +1,23 @@
+PRIO:
+- nazwiska panienskie zaimplementowac
+- path to descendant w headerze strony
 - mapka z eventami?? - Mapbox?
-- sciezka do zstepnych zeby mozna bylo polaczyc
+- Dane Testowe dla kompletnej ksiazki
+- Translation
 
-Variant:
+STYLE:
+- poprawic TOC zeby bylo fajniej
+- tabela zeby sie miescila na stronie
+
+VARIANT:
 - rodzina
 -- małzenstwo
 -- dzieci
 --- z datami narodzin i smierci
 --- z fotkami
 
-- make it more beautiful
-
--- tabela zeby sie miescila na stronie
-- TBD - Timeline vs tabela z dziecmi i rodzicami!
--- cleanup calosci
-- TODO - poprawic TOC zeby bylo fajniej
-- pakiet do tlumaczenia na inne jezyki wbudowany?
-
 REFAKTOR
 - load + render do poprawki
 
-TODO - loading
-- zaczytywanie relacji miedzy osobami na zasadzie ludzi miedzy - do headera na gore zestawu stron
-
 MAINTENANCE 
-- nazwiska poprawic - birth i married names
+- nazwiska poprawic
