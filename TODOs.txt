@@ -1,5 +1,4 @@
 PRIO:
-- nazwiska panienskie zaimplementowac
 - path to descendant w headerze strony
 - mapka z eventami?? - Mapbox?
 - Dane Testowe dla kompletnej ksiazki

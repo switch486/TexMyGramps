@@ -21,6 +21,10 @@ pages/
 {
   "personGrampsID": "I0100",
   "personPicture_mediaObjectID": "O0189",
+  "descendant": {
+    "personGrampsID": "I0061", 
+    "personString": "John Doe"
+  },
   "detailPages": [
     {
       "mediaObjectID": "O0268",
@@ -46,6 +50,24 @@ pages/
     },
     "personPicture_mediaObjectID": {
       "type": "string"
+    },
+    "descendant": {
+      "type": "object",
+      "properties": {
+        "personString": {
+          "type": "string",
+          "description": "A string identifier for the descendant (used in pageJW style)"
+        },
+        "personGrampsID": {
+          "type": "string",
+          "description": "Gramps ID for the descendant (used in pageXY style)"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        { "required": ["personString"] },
+        { "required": ["personGrampsID"] }
+      ]
     },
     "detailPages": {
       "type": "array",

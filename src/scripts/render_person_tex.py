@@ -68,30 +68,47 @@ def build_location_chain(place_data: dict, places_dir: Path) -> str:
     
     return location_text
 
+def create_full_name(person: dict) -> str:
+    primary_name = person.get("primary_name") or {}
+    alternate_names = person.get("alternate_names") or []
+
+    primary_type, primary_given, primary_surname = name_parts(primary_name)
+
+    alternate_type = alternate_given = alternate_surname = ""
+    if isinstance(alternate_names, dict):
+        alternate_type, alternate_given, alternate_surname = name_parts(alternate_names)
+    elif isinstance(alternate_names, list) and alternate_names:
+        alternate_type, alternate_given, alternate_surname = name_parts(alternate_names[0])
+
+    if primary_type == "Married Name" and alternate_type == "Birth Name":
+        return f"{primary_given} {primary_surname} (z domu {alternate_surname})".strip()
+    elif alternate_type == "Married Name" and primary_type == "Birth Name":
+        return f"{alternate_given} {alternate_surname} (z domu {primary_surname})".strip()
+    return f"{primary_given} {primary_surname}".strip()
+    
+def name_parts(name_record: dict) -> tuple[str, str, str]:
+    given = name_record.get("first_name") or name_record.get("call") or ""
+    surname = ""
+    surname_list = name_record.get("surname_list") or []
+    if isinstance(surname_list, list) and surname_list:
+        parts = []
+        for surname_part in surname_list:
+            if not isinstance(surname_part, dict):
+                continue
+            prefix = surname_part.get("prefix", "")
+            surname_text = surname_part.get("surname", "")
+            if prefix and surname_text:
+                parts.append(f"{prefix} {surname_text}".strip())
+            elif surname_text:
+                parts.append(surname_text)
+        surname = " ".join(parts)
+    if not given and name_record.get("display_as"):
+        given = str(name_record.get("display_as"))
+    return name_record.get("type"), clean_string(given).strip(), clean_string(surname).strip()
 
 
 
-def name_parts(person: dict) -> tuple[str, str]:
-    primary = person.get("primary_name", {})
-    given = person.get("name_given") or primary.get("first_name") or primary.get("call") or ""
-    surname = person.get("name_surname") or ""
-    if not surname:
-        surname_list = primary.get("surname_list") or []
-        if isinstance(surname_list, list) and surname_list:
-            parts = []
-            for surname_part in surname_list:
-                if not isinstance(surname_part, dict):
-                    continue
-                prefix = surname_part.get("prefix", "")
-                surname_text = surname_part.get("surname", "")
-                if prefix and surname_text:
-                    parts.append(f"{prefix} {surname_text}".strip())
-                elif surname_text:
-                    parts.append(surname_text)
-            surname = " ".join(parts)
-    if not given and primary.get("display_as"):
-        given = str(primary.get("display_as"))
-    return clean_string(given).strip(), clean_string(surname).strip()
+
 
 
 def extract_occupations(person: dict) -> str:
@@ -137,13 +154,6 @@ def load_person_data(page_dir: Path, person: dict, handle: str) -> dict:
             pass
     return {}
 
-def get_person_full_name(person_data: dict) -> str:
-    """Extract full name from person data."""
-    if not isinstance(person_data, dict):
-        return ""
-    first_name, surname = name_parts(person_data)
-    full_name = f"{first_name} {surname}".strip()
-    return full_name if full_name else "Unknown"
 
 
 def format_timeline_event(event: dict) -> tuple[str, str, str, str, str, str]:
@@ -405,8 +415,7 @@ def format_event_line(date_text: str, location_text: str) -> str:
 
 
 def render_tex(
-    first_name: str,
-    surname: str,
+    full_name: str,
     occupations: str,
     birth_date: str,
     birth_location: str,
@@ -419,8 +428,8 @@ def render_tex(
     descendant_full_name: str,
     formatted_additional_page_details: str = ""
 ) -> str:
-    first_name = latex_escape(first_name)
-    surname_tex = latex_escape(surname)
+    full_name_tex = latex_escape(full_name)
+    descendant_full_name_tex = latex_escape(descendant_full_name)
     occupations_tex = latex_escape(occupations)
     birth_tex = latex_escape(format_event_line(birth_date, birth_location))
     death_tex = latex_escape(format_event_line(death_date, death_location))
@@ -432,8 +441,8 @@ def render_tex(
 
     image_if_exists = f"\\includegraphics[width=\\linewidth,height=5.8cm,keepaspectratio]{{{path_to_file}}}" if path_to_file else ""
 
-    leaf = first_name + " " + surname_tex
-    root = descendant_full_name
+    leaf = full_name_tex
+    root = descendant_full_name_tex
 
     return f"""% Auto-generated person page
 \\documentclass[10pt, a4paper]{{book}}
@@ -449,7 +458,6 @@ def render_tex(
 
 \\begin{{document}}
 \\thispagestyle{{empty}}
-\\newpage
 
 \\recordchapter{{{root}}}{{{leaf}}}
 
@@ -462,8 +470,7 @@ def render_tex(
   }} &
   \\begin{{minipage}}[t]{{\\linewidth}}
     \\vspace{{0pt}}
-    \\Huge \\textbf{{{first_name}}}\\\\[0.3em]
-    \\LARGE \\textbf{{{surname_tex}}}\\\\[0.3em]
+    \\Huge \\textbf{{{full_name_tex}}}\\\\[0.3em]
     \\small \\textit{{{occupations_tex}}}\\\\[0.3em]
 
 \\begin{{tabular}}{{@{{}}l l}}
@@ -542,7 +549,7 @@ def main() -> None:
     except (OSError, ValueError) as exc:
         raise SystemExit(f"ERROR: could not load JSON data: {exc}")
 
-    first_name, surname = name_parts(person)
+    full_name = create_full_name(person)
 
     occupations = extract_occupations(person)
     birth_date, birth_location, death_date, death_location = infer_birth_death_dates(page_dir, person)
@@ -553,14 +560,14 @@ def main() -> None:
 
     # Load Parents Data
     parent_data = load_person_data(page_dir, person, "father_handle")
-    father_full_name = get_person_full_name(parent_data)
+    father_full_name = create_full_name(parent_data)
     parent_data = load_person_data(page_dir, person, "mother_handle")
-    mother_full_name = get_person_full_name(parent_data)
+    mother_full_name = create_full_name(parent_data)
 
     descendant_full_name = ""
     if person.get("descendant_handle"):
         descendant_data = load_person_data(page_dir, person, "descendant_handle")
-        descendant_full_name = get_person_full_name(descendant_data)
+        descendant_full_name = create_full_name(descendant_data)
     else :
         descendant_full_name = person.get("descendant_display_name")
 
@@ -569,8 +576,7 @@ def main() -> None:
 
     output_path.write_text(
         render_tex(
-            first_name,
-            surname,
+            full_name,
             occupations,
             birth_date,
             birth_location,
