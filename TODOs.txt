@@ -1,7 +1,8 @@
 PRIO:
-- path to descendant w headerze strony
+- dane testowe - kompletny dokument!
+- podpisy pod fotkami - zeby na siebie nie najezdzaly
+- brak fotki wypelnic czyms
 - mapka z eventami?? - Mapbox?
-- Dane Testowe dla kompletnej ksiazki
 - Translation
 
 STYLE:

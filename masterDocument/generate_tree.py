@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 import logging
+import re
 
 INPUT_FILE = "output/mytoc.dat"
 OUTPUT_FILE = "output/generated_tree.tex"
@@ -46,6 +47,7 @@ class Node:
         self.name = name
         self.page = None
         self.children = {}
+        self.path_list = []
 
 
 def build_tree(entries):
@@ -91,6 +93,55 @@ def build_tree(entries):
             root.children[r] = nodes[r]
 
     return root
+
+
+def set_paths(node, current_path):
+    """Set the path list for each node from root."""
+    node.path_list = current_path + [node.name]
+    for child in node.children.values():
+        set_paths(child, node.path_list)
+
+
+def make_macro_name(full_name: str) -> str:
+    """Build a 4-letter macro name from the first given name and surname."""
+    if not isinstance(full_name, str):
+        return "aaab"
+
+    # remove any bracketed substrings starting with '(' or '['
+    cleaned = re.sub(r"\s*[\(\[].*$", "", full_name).strip()
+    parts = [p for p in cleaned.split() if p]
+
+    if len(parts) >= 2:
+        given = parts[0][:2]
+        surname = parts[-1][:2]
+    elif parts:
+        token = parts[0]
+        given = token[:2]
+        surname = token[2:4]
+    else:
+        given = "aa"
+        surname = "ab"
+
+    candidate = (given + surname).lower()
+    candidate = re.sub(r"[^a-z]", "", candidate)
+    candidate = candidate.ljust(4, "x")[:4]
+    return candidate
+
+
+def generate_headers(root):
+    """Generate headers for each page showing the path from root."""
+    headers = {}
+    
+    def traverse(node):
+        if node.page:
+            path_str = " -> ".join(escape_latex(name) for name in node.path_list)
+            macro_name = make_macro_name(node.name)
+            headers[macro_name] = path_str
+        for child in node.children.values():
+            traverse(child)
+    
+    traverse(root)
+    return headers
 
 
 def render_node(node):
@@ -153,12 +204,20 @@ def main():
     logger.info(f"Parsed {len(entries)} edges")
 
     root = build_tree(entries)
+    set_paths(root, [])
+    headers = generate_headers(root)
     forest_code = generate_forest(root)
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(forest_code)
 
+    headers_file = "output/tree_headers.tex"
+    with open(headers_file, "w", encoding="utf-8") as f:
+        for macro_name, header in headers.items():
+            f.write(f"\\def\\{macro_name}{{{header}}}\n")
+
     logger.info(f"Written output to {OUTPUT_FILE}")
+    logger.info(f"Written headers to {headers_file}")
 
 
 if __name__ == "__main__":

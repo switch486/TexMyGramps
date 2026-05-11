@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{book}
 \usepackage{subfiles}
 \usepackage[margin=1in]{geometry}
 \usepackage{array}
@@ -6,6 +6,10 @@
 \usepackage{ragged2e}
 \usepackage{forest}
 \usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{setspace}
 \newcommand{\birthsymbol}{\ensuremath{\star}}
 \newcommand{\deathsymbol}{\ensuremath{\dagger}}
 
@@ -19,19 +23,83 @@
 }
 
 \begin{document}
-% TITLEPAGE
-\input{output/generated_tree.tex}
 
+\begin{titlepage}
+    \centering
+
+    % Top spacing
+    \vspace*{2cm}
+
+    % Decorative line
+    \rule{\textwidth}{0.8pt}
+    \vspace{1.2cm}
+
+    % Main title
+    {\Huge\bfseries
+    Kronika Rodzinna\par}
+
+    \vspace{0.6cm}
+
+    % Subtitle
+    {\Large
+    Historia rodziny, wspomnienia, dokumenty\\
+    oraz dzieje wcześniejszych pokoleń\par}
+
+    \vspace{1.5cm}
+
+    % Decorative separator
+    {\large\textsc{Opracowanie i redakcja}}\par
+    \vspace{0.4cm}
+
+    {\LARGE Twój Stary\par}
+
+    \vfill
+
+    % Optional quote
+     \begin{minipage}{0.78\textwidth}
+        \centering
+        \itshape
+        „Rodzina jest pamięcią, która trwa dłużej niż jedno życie.”
+    \end{minipage}
+
+    \vfill
+
+    % Bottom section
+    \rule{\textwidth}{0.8pt}
+
+    \vspace{0.5cm}
+
+    {\large
+    \today\par}
+
+    \vspace{0.3cm}
+
+    {\small
+    Wydawnictwo Domowe}
+
+\end{titlepage}
+\newpage
+
+
+\chapter*{Spis treści}
+
+\IfFileExists{output/generated_tree.tex}{
+    \input{output/generated_tree.tex}
+}{}
+
+\IfFileExists{output/tree_headers.tex}{
+    \input{output/tree_headers.tex}
+}{}
 
 
 
 
 \newpage
-% Custom table header
+\frbx
 \subfile{../src/pages/pageJW/output/page.tex}
 
-
 \newpage
+\kako
 \subfile{../src/pages/pageXY/output/page.tex}
 
 \end{document}
