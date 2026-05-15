@@ -1,6 +1,8 @@
 # Ignore generated page outputs and page-specific assets
 src/pages/*/output/
 src/pages/*/assets/
+src/pages_dev/*/output/
+src/pages_dev/*/assets/
 masterDocument/output/
 logs/
 
