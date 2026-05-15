@@ -227,6 +227,8 @@ def translate_symbol_by_prefix(text):
     return trSymbol(main.strip())
 
 def translate_age(text):
+    if not text:
+        return ""
     number, unit = text.split(" ", 1)
     return f"{number} {tr(unit)}"
 
