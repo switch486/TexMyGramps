@@ -1,13 +1,13 @@
 PRIO:
-- dane testowe - kompletny dokument!
-- podpisy pod fotkami - zeby na siebie nie najezdzaly
-- brak fotki wypelnic czyms
 - mapka z eventami?? - Mapbox?
 - Translation
 
 STYLE:
 - poprawic TOC zeby bylo fajniej
 - tabela zeby sie miescila na stronie
+- podpisy pod fotkami - zeby na siebie nie najezdzaly
+- strzalki i odstepy pod headerami
+- brak fotki wypelnic czyms
 
 VARIANT:
 - rodzina
