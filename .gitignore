@@ -12,7 +12,3 @@ src/scripts/gramps_api.local.env
 
 # Ignore all dev related stuff specific for local pc
 devStartup*
-
-# Optional: ignore Synology/Docker local artifacts
-# /out/
-# /data/
