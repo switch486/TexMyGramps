@@ -1,0 +1,283 @@
+[
+  {
+    "age": "0 days",
+    "date": "1878",
+    "description": "",
+    "gramps_id": "E0333",
+    "handle": "a8f581e6-5e59-4a85-bb23-c43525f98b2f",
+    "label": "Birth",
+    "media": [
+      "1025111f3b6876d2b7b367486cbb"
+    ],
+    "person": {
+      "relationship": "self"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Komor\u00f3w",
+      "gramps_id": "P0026",
+      "handle": "1010f2cf6df2199bfea55a365140",
+      "lat": 50.35877384,
+      "long": 21.11683973,
+      "name": "Komor\u00f3w",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "12 years",
+    "date": "1890-03-27",
+    "description": "",
+    "gramps_id": "E0524",
+    "handle": "a78cb65d-be8a-4c82-bb8d-db8f949dfe68",
+    "label": "Death (Father)",
+    "media": [
+      "102a544022e2dd8aa31cecade6d"
+    ],
+    "person": {
+      "age": "40 years",
+      "birth": {
+        "date": "calculated 1850",
+        "place": "",
+        "summary": "Birth - Komasara [__Z], Jan",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1890-03-27",
+        "place": "Zbor\u00f3wek",
+        "summary": "Death - Komasara [__Z], Jan",
+        "type": "Death"
+      },
+      "gramps_id": "I0444",
+      "handle": "1010f2e1799010de4ca73626e830",
+      "name_given": "Jan",
+      "name_suffix": "",
+      "name_surname": "Komasara [__Z]",
+      "relationship": "father",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Zbor\u00f3wek",
+      "gramps_id": "P0027",
+      "handle": "1010fa10086957308c4b648a7ef8",
+      "lat": 50.3926864,
+      "long": 21.1053039,
+      "name": "Zbor\u00f3wek",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Death"
+  },
+  {
+    "age": "16 years",
+    "date": "1894",
+    "description": "",
+    "gramps_id": "E0427",
+    "handle": "07acab70-2d19-4de5-b9ed-5e58cc39982f",
+    "label": "Marriage",
+    "media": [
+      "101ed9add2d16c9138125a0e6de6",
+      "102218c0979a701d8c5e0ff493e2",
+      "102218c837064c83dbbc85a0df89"
+    ],
+    "person": {
+      "relationship": "self"
+    },
+    "place": {},
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "20 years",
+    "date": "1898",
+    "description": "",
+    "gramps_id": "E0330",
+    "handle": "91f6826c-58b0-4f80-a625-6c573b679ddb",
+    "label": "Birth (Daughter)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1898",
+        "place": "Szczebrzusz",
+        "summary": "Birth - St\u0105p\u00f3r, Marianna",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0441",
+      "handle": "bc84fc69-e008-44ca-9744-3bee5660bdfd",
+      "name_given": "Marianna",
+      "name_suffix": "",
+      "name_surname": "St\u0105p\u00f3r",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Szczebrzusz",
+      "gramps_id": "P0017",
+      "handle": "1010698abb462afd25d3673dbaf5",
+      "lat": 50.3667715,
+      "long": 21.1693614,
+      "name": "Szczebrzusz",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "22 years",
+    "date": "1900",
+    "description": "",
+    "gramps_id": "E0331",
+    "handle": "1d1abe33-0148-446b-8888-9c7bc9352821",
+    "label": "Birth (Daughter)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1900",
+        "place": "",
+        "summary": "Birth - St\u0105p\u00f3r, Anna",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0442",
+      "handle": "7944eb1a-166f-4d7c-974c-1f6e9739ac33",
+      "name_given": "Anna",
+      "name_suffix": "",
+      "name_surname": "St\u0105p\u00f3r",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {},
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "24 years",
+    "date": "1902-05-11",
+    "description": "",
+    "gramps_id": "E0239",
+    "handle": "f5712ec5-041f-45a1-994c-834b05cc5574",
+    "label": "Birth (Son)",
+    "media": [
+      "101b3b62591c2dd198a3e755f5d4"
+    ],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1902-05-11",
+        "place": "Szczebrzusz",
+        "summary": "Birth - St\u0105p\u00f3r [U__], Jan",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1981-02-26",
+        "place": "",
+        "summary": "Death - St\u0105p\u00f3r [U__], Jan",
+        "type": "Death"
+      },
+      "gramps_id": "I0127",
+      "handle": "d474a9e8-5de8-429e-a32c-b080092b4bef",
+      "name_given": "Jan",
+      "name_suffix": "",
+      "name_surname": "St\u0105p\u00f3r [U__]",
+      "relationship": "son",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Szczebrzusz",
+      "gramps_id": "P0017",
+      "handle": "1010698abb462afd25d3673dbaf5",
+      "lat": 50.3667715,
+      "long": 21.1693614,
+      "name": "Szczebrzusz",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "27 years",
+    "date": "1905",
+    "description": "",
+    "gramps_id": "E0329",
+    "handle": "e22f513b-5b0e-47c6-b82a-a777b7b030ea",
+    "label": "Birth (Daughter)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1905",
+        "place": "Szczebrzusz",
+        "summary": "Birth - St\u0105p\u00f3r, Agnieszka",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0440",
+      "handle": "f50a3b3f-aad7-4deb-aa08-c898babe0f37",
+      "name_given": "Agnieszka",
+      "name_suffix": "",
+      "name_surname": "St\u0105p\u00f3r",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Szczebrzusz",
+      "gramps_id": "P0017",
+      "handle": "1010698abb462afd25d3673dbaf5",
+      "lat": 50.3667715,
+      "long": 21.1693614,
+      "name": "Szczebrzusz",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "29 years",
+    "date": "1907-08-15",
+    "description": "",
+    "gramps_id": "E0498",
+    "handle": "282927dc-0725-4d61-b409-1cafea46d48d",
+    "label": "Death",
+    "media": [
+      "1024b70818b611d9d82c1a0c52b2"
+    ],
+    "person": {
+      "relationship": "self"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Gace S\u0142upieckie, Zbor\u00f3wek",
+      "gramps_id": "P0048",
+      "handle": "101ecfb0599b63322ffeed2bf0bc",
+      "lat": 50.3656382,
+      "long": 21.151061,
+      "name": "Gace S\u0142upieckie",
+      "parent_places": [
+        {
+          "alternate_names": [],
+          "gramps_id": "P0027",
+          "lat": 50.3926864,
+          "long": 21.1053039,
+          "name": "Zbor\u00f3wek",
+          "type": "Village"
+        }
+      ],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Death"
+  }
+]

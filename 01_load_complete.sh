@@ -27,7 +27,7 @@ SCRIPT_DIR="$ROOT_DIR/src/scripts"
 GEN_SCRIPT="./02_load_data.sh"
 
 LOG_DIR="$ROOT_DIR/logs"
-MASTER_LOG="$LOG_DIR/master_generate.log"
+MASTER_LOG="$LOG_DIR/master_load.log"
 FAILED_FILE="$LOG_DIR/failed_pages.log"
 
 mkdir -p "$LOG_DIR"
@@ -71,7 +71,7 @@ if [[ ! -d "$PAGES_DIR" ]]; then
 fi
 
 #
-# PRE-GENERATION STEP
+# PRE-LOAD STEP
 #
 
 log "----------------------------------------"
@@ -111,7 +111,7 @@ else
 fi
 
 #
-# PAGE GENERATION
+# PAGE LOAD
 #
 
 TOTAL=0

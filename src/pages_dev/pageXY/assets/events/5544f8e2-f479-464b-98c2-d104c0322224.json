@@ -1,0 +1,30 @@
+{
+  "attribute_list": [],
+  "change": 1757939571,
+  "citation_list": [],
+  "date": {
+    "calendar": 0,
+    "dateval": [
+      7,
+      2,
+      1979,
+      false
+    ],
+    "format": null,
+    "modifier": 0,
+    "newyear": 0,
+    "quality": 0,
+    "sortval": 2443912,
+    "text": "",
+    "year": 1979
+  },
+  "description": "",
+  "gramps_id": "E0048",
+  "handle": "5544f8e2-f479-464b-98c2-d104c0322224",
+  "media_list": [],
+  "note_list": [],
+  "place": "",
+  "private": false,
+  "tag_list": [],
+  "type": "Death"
+}

@@ -1,0 +1,132 @@
+{
+  "address_list": [],
+  "alternate_names": [
+    {
+      "call": "",
+      "citation_list": [],
+      "date": {
+        "calendar": 0,
+        "dateval": [
+          0,
+          0,
+          0,
+          false
+        ],
+        "format": null,
+        "modifier": 0,
+        "newyear": 0,
+        "quality": 0,
+        "sortval": 0,
+        "text": "",
+        "year": 0
+      },
+      "display_as": 0,
+      "famnick": "",
+      "first_name": "Katarzyna",
+      "group_as": "",
+      "nick": "",
+      "note_list": [],
+      "private": false,
+      "sort_as": 0,
+      "suffix": "",
+      "surname_list": [
+        {
+          "connector": "",
+          "origintype": "",
+          "prefix": "",
+          "primary": true,
+          "surname": "St\u0105p\u00f3r"
+        }
+      ],
+      "title": "",
+      "type": "Married Name"
+    }
+  ],
+  "attribute_list": [],
+  "birth_ref_index": 0,
+  "change": 1777402253,
+  "citation_list": [],
+  "death_ref_index": 1,
+  "event_ref_list": [
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "ref": "a8f581e6-5e59-4a85-bb23-c43525f98b2f",
+      "role": "Primary"
+    },
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "ref": "282927dc-0725-4d61-b409-1cafea46d48d",
+      "role": "Primary"
+    }
+  ],
+  "family_list": [
+    "1010c11fd05f4bd50ea58e64fdb0"
+  ],
+  "gender": 0,
+  "gramps_id": "I0439",
+  "handle": "1010c11c3fcc244b5490bbb614d6",
+  "lds_ord_list": [],
+  "media_list": [],
+  "note_list": [],
+  "parent_family_list": [
+    "1010f2e67fa6277b9f8c7c0dc9a2"
+  ],
+  "person_ref_list": [],
+  "primary_name": {
+    "call": "",
+    "citation_list": [],
+    "date": {
+      "calendar": 0,
+      "dateval": [
+        0,
+        0,
+        0,
+        false
+      ],
+      "format": null,
+      "modifier": 0,
+      "newyear": 0,
+      "quality": 0,
+      "sortval": 0,
+      "text": "",
+      "year": 0
+    },
+    "display_as": 0,
+    "famnick": "",
+    "first_name": "Katarzyna",
+    "group_as": "",
+    "nick": "",
+    "note_list": [],
+    "private": false,
+    "sort_as": 0,
+    "suffix": "",
+    "surname_list": [
+      {
+        "connector": "",
+        "origintype": "",
+        "prefix": "",
+        "primary": true,
+        "surname": "Komasara [uMZ]"
+      }
+    ],
+    "title": "",
+    "type": "Birth Name"
+  },
+  "private": false,
+  "tag_list": [],
+  "urls": [],
+  "birth_date": "1878",
+  "birth_location": "Komor\u00f3w",
+  "death_date": "1907.08.15",
+  "death_location": "Gace S\u0142upieckie, Zbor\u00f3wek",
+  "timeline_handle": "1010c11c3fcc244b5490bbb614d6",
+  "father_handle": "1010f2e1799010de4ca73626e830",
+  "mother_handle": "101ecfe68a245faef69728a972d2",
+  "family_handle": "1010f2e67fa6277b9f8c7c0dc9a2"
+}

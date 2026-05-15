@@ -9,6 +9,8 @@ def run(cmd):
         sys.exit(result.returncode)
 
 def main():
+    run("mkdir -p ./output")
+
     # 1st pass (generate .dat with page numbers)
     run("tectonic -o output/ main.tex")
 

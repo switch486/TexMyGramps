@@ -1,0 +1,42 @@
+{
+  "attribute_list": [],
+  "change": 1777402240,
+  "citation_list": [],
+  "date": {
+    "calendar": 0,
+    "dateval": [
+      15,
+      8,
+      1907,
+      false
+    ],
+    "format": null,
+    "modifier": 0,
+    "newyear": 0,
+    "quality": 0,
+    "sortval": 2417803,
+    "text": "",
+    "year": 1907
+  },
+  "description": "",
+  "gramps_id": "E0498",
+  "handle": "282927dc-0725-4d61-b409-1cafea46d48d",
+  "media_list": [
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "rect": [],
+      "ref": "1024b70818b611d9d82c1a0c52b2"
+    }
+  ],
+  "note_list": [
+    "c69b5fc4-bfee-44ee-b29c-06cc255fb555",
+    "cc205fa7-9233-4024-b794-e4ac6b9b5925"
+  ],
+  "place": "101ecfb0599b63322ffeed2bf0bc",
+  "private": false,
+  "tag_list": [],
+  "type": "Death"
+}

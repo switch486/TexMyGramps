@@ -13,7 +13,14 @@ pages/
 └── pageXZ/
     ..
 
-
+# ============================================================================
+# Folder Naming Structure
+# ============================================================================
+pageXY  - XY refers to an abbreviation of the name and surname of the person. 
+This is based on the first 2 letters of the given name and first 2 letters of the family name.
+Example: John Smith should be placed in the folder pagejosm, since other functionality
+- the table of contents is based on the set acronyms as shown above - is based on that
+this is a temporary - nonconfigurable solution for now.
 
 # ============================================================================
 # source.json example

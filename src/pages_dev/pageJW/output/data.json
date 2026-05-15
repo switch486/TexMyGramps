@@ -1,0 +1,100 @@
+{
+  "address_list": [],
+  "alternate_names": [],
+  "attribute_list": [],
+  "birth_ref_index": 1,
+  "change": 1773057933,
+  "citation_list": [],
+  "death_ref_index": 0,
+  "event_ref_list": [
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "ref": "d91718d1-4935-4b01-9950-608c0762e54d",
+      "role": "Primary"
+    },
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "ref": "5d3ed08a-ff73-4033-a1b5-7e354b338149",
+      "role": "Primary"
+    }
+  ],
+  "family_list": [
+    "ffd05a727d128df0f3b92179a9b",
+    "10108dd77d4f6fa15fdfd762144a"
+  ],
+  "gender": 1,
+  "gramps_id": "I0120",
+  "handle": "5fa9490e-8382-449d-94e6-6e018ec140ca",
+  "lds_ord_list": [],
+  "media_list": [
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "rect": [],
+      "ref": "10145635858f736798b631873f86"
+    }
+  ],
+  "note_list": [],
+  "parent_family_list": [
+    "100d632bf3482c56097a7e89353"
+  ],
+  "person_ref_list": [],
+  "primary_name": {
+    "call": "",
+    "citation_list": [],
+    "date": {
+      "calendar": 0,
+      "dateval": [
+        0,
+        0,
+        0,
+        false
+      ],
+      "format": null,
+      "modifier": 0,
+      "newyear": 0,
+      "quality": 0,
+      "sortval": 0,
+      "text": "",
+      "year": 0
+    },
+    "display_as": 0,
+    "famnick": "",
+    "first_name": "Marcin",
+    "group_as": "",
+    "nick": "",
+    "note_list": [],
+    "private": false,
+    "sort_as": 0,
+    "suffix": "",
+    "surname_list": [
+      {
+        "connector": "",
+        "origintype": "",
+        "prefix": "",
+        "primary": true,
+        "surname": "B\u0142och [_m_]"
+      }
+    ],
+    "title": "",
+    "type": "Birth Name"
+  },
+  "private": false,
+  "tag_list": [],
+  "urls": [],
+  "birth_date": "1883",
+  "birth_location": "B\u0119dk\u00f3w",
+  "death_date": "1958.07.21",
+  "timeline_handle": "5fa9490e-8382-449d-94e6-6e018ec140ca",
+  "father_handle": "100d62fd0bcaa1e329abac44adc",
+  "mother_handle": "100d632017037b9ca396d49ee4db",
+  "family_handle": "100d632bf3482c56097a7e89353"
+}

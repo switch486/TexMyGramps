@@ -1,0 +1,39 @@
+{
+  "alt_loc": [],
+  "alt_names": [],
+  "change": 1766497976,
+  "citation_list": [],
+  "code": "",
+  "gramps_id": "P0026",
+  "handle": "1010f2cf6df2199bfea55a365140",
+  "lat": "50.35877384358471",
+  "long": "21.116839730846827",
+  "media_list": [],
+  "name": {
+    "date": {
+      "calendar": 0,
+      "dateval": [
+        0,
+        0,
+        0,
+        false
+      ],
+      "format": null,
+      "modifier": 0,
+      "newyear": 0,
+      "quality": 0,
+      "sortval": 0,
+      "text": "",
+      "year": 0
+    },
+    "lang": "",
+    "value": "Komor\u00f3w"
+  },
+  "note_list": [],
+  "place_type": "Village",
+  "placeref_list": [],
+  "private": false,
+  "tag_list": [],
+  "title": "",
+  "urls": []
+}

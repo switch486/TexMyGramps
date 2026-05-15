@@ -1,0 +1,16 @@
+{
+  "personGrampsID": "I0198",
+  "personPicture_mediaObjectID": "O0219",
+  "descendant": {
+    "personString": "Stefania Krysztofik"
+  },
+  "detailPages": [
+    {
+      "mediaObjectID": "O0186"
+    },
+    {
+      "mediaObjectID": "O0187",
+      "noteID": "N0167"
+    }
+  ]
+}
