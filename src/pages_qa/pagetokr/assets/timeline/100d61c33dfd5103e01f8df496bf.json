@@ -1,0 +1,885 @@
+[
+  {
+    "age": "0 days",
+    "date": "1863-12-14",
+    "description": "",
+    "gramps_id": "E0138",
+    "handle": "3d7700f0-8017-4bfb-9f28-92e6aa8248a4",
+    "label": "Birth",
+    "media": [
+      "101c3a2ac2ec7bbde3f0dc5ba2f4"
+    ],
+    "person": {
+      "relationship": "self"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "P\u0142ochocin, Rokitno",
+      "gramps_id": "P0000",
+      "handle": "100d94a99d1b6f26d5da325ae32f",
+      "lat": 52.20796335,
+      "long": 20.72055817,
+      "name": "P\u0142ochocin",
+      "parent_places": [
+        {
+          "alternate_names": [],
+          "gramps_id": "P0003",
+          "lat": 52.18984996,
+          "long": 20.64855634,
+          "name": "Rokitno",
+          "type": "Village"
+        }
+      ],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "1 years",
+    "date": "1864-12-19",
+    "description": "",
+    "gramps_id": "E0103",
+    "handle": "130f8789-8502-456b-ade2-a297f0faf414",
+    "label": "Birth (Partner)",
+    "media": [
+      "101c3ace7d011acdea47d02bd649"
+    ],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1864-12-19",
+        "place": "Bia\u0142uty, Leszno",
+        "summary": "Birth - J\u0119drzejewska [uM_], J\u00f3zefa",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0199",
+      "handle": "100d61c6a0f328b9ecf8a0850ed1",
+      "name_given": "J\u00f3zefa",
+      "name_suffix": "",
+      "name_surname": "J\u0119drzejewska [uM_]",
+      "relationship": "partner",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Bia\u0142uty, Leszno",
+      "gramps_id": "P0067",
+      "handle": "10297992087313abd2c782a0f815",
+      "lat": 52.22426619,
+      "long": 20.60249811,
+      "name": "Bia\u0142uty",
+      "parent_places": [
+        {
+          "alternate_names": [],
+          "gramps_id": "P0036",
+          "lat": 52.2579481,
+          "long": 20.5914349,
+          "name": "Leszno",
+          "type": "Village"
+        }
+      ],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "22 years",
+    "date": "1886",
+    "description": "",
+    "gramps_id": "E0109",
+    "handle": "0ae5adc6-35b9-4a8d-ad06-62e5ac29b13b",
+    "label": "Birth (Daughter)",
+    "media": [
+      "101d623d52965210339c78293ab5"
+    ],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1886",
+        "place": "P\u0142ochocin, Rokitno",
+        "summary": "Birth - Krysztofik [Um_], Ewa",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1924-06-06",
+        "place": "",
+        "summary": "Death - Krysztofik [Um_], Ewa",
+        "type": "Death"
+      },
+      "gramps_id": "I0236",
+      "handle": "bffbbbe3-c2ed-415e-9abd-fc9aa9f8f581",
+      "name_given": "Ewa",
+      "name_suffix": "",
+      "name_surname": "Krysztofik [Um_]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "P\u0142ochocin, Rokitno",
+      "gramps_id": "P0000",
+      "handle": "100d94a99d1b6f26d5da325ae32f",
+      "lat": 52.20796335,
+      "long": 20.72055817,
+      "name": "P\u0142ochocin",
+      "parent_places": [
+        {
+          "alternate_names": [],
+          "gramps_id": "P0003",
+          "lat": 52.18984996,
+          "long": 20.64855634,
+          "name": "Rokitno",
+          "type": "Village"
+        }
+      ],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "22 years",
+    "date": "1886-02-02",
+    "description": "\u015alub Tomasza i J\u00f3zefy Krysztofik\u00f3w",
+    "gramps_id": "E0428",
+    "handle": "bb09c217-d9a2-4a94-9c12-4ef1ba92bcde",
+    "label": "Marriage",
+    "media": [
+      "101c3a65ae2d1299f8697c309fd6"
+    ],
+    "person": {
+      "relationship": "self"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "P\u0142ochocin, Rokitno",
+      "gramps_id": "P0000",
+      "handle": "100d94a99d1b6f26d5da325ae32f",
+      "lat": 52.20796335,
+      "long": 20.72055817,
+      "name": "P\u0142ochocin",
+      "parent_places": [
+        {
+          "alternate_names": [],
+          "gramps_id": "P0003",
+          "lat": 52.18984996,
+          "long": 20.64855634,
+          "name": "Rokitno",
+          "type": "Village"
+        }
+      ],
+      "type": "City"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "24 years",
+    "date": "1888",
+    "description": "",
+    "gramps_id": "E0110",
+    "handle": "989ba443-64be-4c04-ba45-33b8d042b8b4",
+    "label": "Birth (Son)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1888",
+        "place": "P\u0142ochocin, Rokitno",
+        "summary": "Birth - Krysztofik [_m_], Stanis\u0142aw",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0235",
+      "handle": "100d9423f0d471a0cdc69ef19b1e",
+      "name_given": "Stanis\u0142aw",
+      "name_suffix": "",
+      "name_surname": "Krysztofik [_m_]",
+      "relationship": "son",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "P\u0142ochocin, Rokitno",
+      "gramps_id": "P0000",
+      "handle": "100d94a99d1b6f26d5da325ae32f",
+      "lat": 52.20796335,
+      "long": 20.72055817,
+      "name": "P\u0142ochocin",
+      "parent_places": [
+        {
+          "alternate_names": [],
+          "gramps_id": "P0003",
+          "lat": 52.18984996,
+          "long": 20.64855634,
+          "name": "Rokitno",
+          "type": "Village"
+        }
+      ],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "27 years",
+    "date": "1891-08-29",
+    "description": "",
+    "gramps_id": "E0111",
+    "handle": "139ea130-6f26-4661-8d4c-caa8c5eb306e",
+    "label": "Birth (Daughter)",
+    "media": [
+      "101f638a32ea484dd0c40c5fc20b"
+    ],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1891-08-29",
+        "place": "Warszawa",
+        "summary": "Birth - Puchalska [UM_], Janina Marianna",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0041",
+      "handle": "ffc9dc126327f126a898c7da1be",
+      "name_given": "Janina Marianna",
+      "name_suffix": "",
+      "name_surname": "Puchalska [UM_]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Warszawa",
+      "gramps_id": "P0053",
+      "handle": "101f63b2fa305299c5c1748a353d",
+      "lat": 52.2319581,
+      "long": 21.0067249,
+      "name": "Warszawa",
+      "parent_places": [],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "28 years",
+    "date": "1892",
+    "description": "",
+    "gramps_id": "E0140",
+    "handle": "616ba3dc-e455-4efe-93d6-4530b81eb25f",
+    "label": "Death (Mother)",
+    "media": [],
+    "person": {
+      "age": "49 years",
+      "birth": {
+        "date": "1843",
+        "place": "",
+        "summary": "Birth - Jarzemczyk [_m_], Marianna",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1892",
+        "place": "Rokitno",
+        "summary": "Death - Jarzemczyk [_m_], Marianna",
+        "type": "Death"
+      },
+      "gramps_id": "I0209",
+      "handle": "100d66c60df5116e2ae466a4fa3a",
+      "name_given": "Marianna",
+      "name_suffix": "",
+      "name_surname": "Jarzemczyk [_m_]",
+      "relationship": "mother",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Death"
+  },
+  {
+    "age": "29 years",
+    "date": "1893",
+    "description": "",
+    "gramps_id": "E0509",
+    "handle": "c6ca77ac-6832-4de2-b224-ea8c6bab136b",
+    "label": "Birth (Daughter)",
+    "media": [
+      "10264d1fb61b7a2031f94b1790a4"
+    ],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1893",
+        "place": "Nadarzyn",
+        "summary": "Birth - Krysztofik [U__], Anna",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0674",
+      "handle": "2c50bf86-f734-4434-a426-2f0da08ec4ed",
+      "name_given": "Anna",
+      "name_suffix": "",
+      "name_surname": "Krysztofik [U__]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Nadarzyn",
+      "gramps_id": "P0001",
+      "handle": "100d94fed4fd3f318ccd0e231a57",
+      "lat": 52.09357021,
+      "long": 20.80693242,
+      "name": "Nadarzyn",
+      "parent_places": [],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "33 years",
+    "date": "1897",
+    "description": "",
+    "gramps_id": "E0112",
+    "handle": "0cb5df9a-741f-4c30-8b41-c2410b1d2db8",
+    "label": "Birth (Daughter)",
+    "media": [
+      "10264cf8605317e89c94eeea2880"
+    ],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1897",
+        "place": "Nadarzyn",
+        "summary": "Birth - Krzysztofik [U__], Genowefa",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0237",
+      "handle": "40569f1f-8bb1-4068-9206-a478b75b6516",
+      "name_given": "Genowefa",
+      "name_suffix": "",
+      "name_surname": "Krzysztofik [U__]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Nadarzyn",
+      "gramps_id": "P0001",
+      "handle": "100d94fed4fd3f318ccd0e231a57",
+      "lat": 52.09357021,
+      "long": 20.80693242,
+      "name": "Nadarzyn",
+      "parent_places": [],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "35 years",
+    "date": "1899-04-01",
+    "description": "",
+    "gramps_id": "E0113",
+    "handle": "c1cabc11-f61f-4105-b6cd-8c00be3b5727",
+    "label": "Birth (Daughter)",
+    "media": [
+      "101f3a3680694e7fd41f07ea700d"
+    ],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1899-04-01",
+        "place": "Rusiec, Nadarzyn",
+        "summary": "Birth - Krzystofik [U_z], Stefania",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1918-06-04",
+        "place": "Go\u0142aszew, Rokitno",
+        "summary": "Death - Krzystofik [U_z], Stefania",
+        "type": "Death"
+      },
+      "gramps_id": "I0238",
+      "handle": "a55f0b36-2fb6-43e0-a925-8a2d55e3a301",
+      "name_given": "Stefania",
+      "name_suffix": "",
+      "name_surname": "Krzystofik [U_z]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rusiec, Nadarzyn",
+      "gramps_id": "P0064",
+      "handle": "10243b39e20426a579b921b752f3",
+      "lat": 52.0692577,
+      "long": 20.799382,
+      "name": "Rusiec",
+      "parent_places": [
+        {
+          "alternate_names": [],
+          "gramps_id": "P0001",
+          "lat": 52.09357021,
+          "long": 20.80693242,
+          "name": "Nadarzyn",
+          "type": "City"
+        }
+      ],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "37 years",
+    "date": "1901",
+    "description": "",
+    "gramps_id": "E0115",
+    "handle": "750f954b-0aae-4364-a26c-6a492ddf4dbc",
+    "label": "Birth (Son)",
+    "media": [
+      "10264cd5d21a2efc222c98ff6858"
+    ],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1901",
+        "place": "Nadarzyn",
+        "summary": "Birth - Krysztofik [U__], W\u0142adys\u0142aw",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0239",
+      "handle": "732c7d3e-abbe-4f82-8ec7-783fee1ce7eb",
+      "name_given": "W\u0142adys\u0142aw",
+      "name_suffix": "",
+      "name_surname": "Krysztofik [U__]",
+      "relationship": "son",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Nadarzyn",
+      "gramps_id": "P0001",
+      "handle": "100d94fed4fd3f318ccd0e231a57",
+      "lat": 52.09357021,
+      "long": 20.80693242,
+      "name": "Nadarzyn",
+      "parent_places": [],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "39 years",
+    "date": "1903",
+    "description": "",
+    "gramps_id": "E0463",
+    "handle": "270f99eb-126d-4422-a2f0-1494f7de949d",
+    "label": "Birth (Son)",
+    "media": [
+      "101d62792e0c6bb759ee1297581d"
+    ],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1903",
+        "place": "Nadarzyn",
+        "summary": "Birth - Krysztofik [U__], J\u00f3zef",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0637",
+      "handle": "2399a0e9-691b-48f7-bc41-949cad299385",
+      "name_given": "J\u00f3zef",
+      "name_suffix": "",
+      "name_surname": "Krysztofik [U__]",
+      "relationship": "son",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Nadarzyn",
+      "gramps_id": "P0001",
+      "handle": "100d94fed4fd3f318ccd0e231a57",
+      "lat": 52.09357021,
+      "long": 20.80693242,
+      "name": "Nadarzyn",
+      "parent_places": [],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "40 years",
+    "date": "1904",
+    "description": "",
+    "gramps_id": "E0117",
+    "handle": "a5bda43a-852d-4ada-b29c-a8b2575a4075",
+    "label": "Birth (Daughter)",
+    "media": [
+      "10293bb18d997818b47a794cddf6"
+    ],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1904",
+        "place": "Nadarzyn",
+        "summary": "Birth - Krysztofik [U__], Marianna",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0241",
+      "handle": "f32194e1-77c5-4845-98db-7ea3f07b824f",
+      "name_given": "Marianna",
+      "name_suffix": "",
+      "name_surname": "Krysztofik [U__]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Nadarzyn",
+      "gramps_id": "P0001",
+      "handle": "100d94fed4fd3f318ccd0e231a57",
+      "lat": 52.09357021,
+      "long": 20.80693242,
+      "name": "Nadarzyn",
+      "parent_places": [],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "43 years",
+    "date": "1907",
+    "description": "",
+    "gramps_id": "E0118",
+    "handle": "0dd758f0-0bf8-4afa-bd73-895d0969a0df",
+    "label": "Birth (Son)",
+    "media": [
+      "10293bc067da22406215978a588c"
+    ],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1907",
+        "place": "Nadarzyn",
+        "summary": "Birth - Krysztofik [U__], Wac\u0142aw",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0242",
+      "handle": "2e8bdbe8-52d1-412f-8e0b-f99db05ba135",
+      "name_given": "Wac\u0142aw",
+      "name_suffix": "",
+      "name_surname": "Krysztofik [U__]",
+      "relationship": "son",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Nadarzyn",
+      "gramps_id": "P0001",
+      "handle": "100d94fed4fd3f318ccd0e231a57",
+      "lat": 52.09357021,
+      "long": 20.80693242,
+      "name": "Nadarzyn",
+      "parent_places": [],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "44 years",
+    "date": "1908",
+    "description": "",
+    "gramps_id": "E0436",
+    "handle": "10fdfc18-e803-43ba-845d-5c866b25a730",
+    "label": "Marriage (Son)",
+    "media": [
+      "101d61fe01292640092c0108fbc6"
+    ],
+    "person": {
+      "age": "20 years",
+      "birth": {
+        "date": "1888",
+        "place": "P\u0142ochocin, Rokitno",
+        "summary": "Birth - Krysztofik [_m_], Stanis\u0142aw",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0235",
+      "handle": "100d9423f0d471a0cdc69ef19b1e",
+      "name_given": "Stanis\u0142aw",
+      "name_suffix": "",
+      "name_surname": "Krysztofik [_m_]",
+      "relationship": "son",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "45 years",
+    "date": "1909",
+    "description": "",
+    "gramps_id": "E0435",
+    "handle": "7d4a1a39-7f01-4988-a530-adeeca87801e",
+    "label": "Marriage (Daughter)",
+    "media": [
+      "101d61d839137b1d2aa0babe8228"
+    ],
+    "person": {
+      "age": "23 years",
+      "birth": {
+        "date": "1886",
+        "place": "P\u0142ochocin, Rokitno",
+        "summary": "Birth - Krysztofik [Um_], Ewa",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1924-06-06",
+        "place": "",
+        "summary": "Death - Krysztofik [Um_], Ewa",
+        "type": "Death"
+      },
+      "gramps_id": "I0236",
+      "handle": "bffbbbe3-c2ed-415e-9abd-fc9aa9f8f581",
+      "name_given": "Ewa",
+      "name_suffix": "",
+      "name_surname": "Krysztofik [Um_]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "48 years",
+    "date": "1912",
+    "description": "J\u00f3zef Puchalski + Janina Marianna Krysztofik",
+    "gramps_id": "E0104",
+    "handle": "100d7e1f0ed025f4aa376afab020",
+    "label": "Marriage (Daughter)",
+    "media": [
+      "101d616fa2fa28560c81c48e868b",
+      "101f6da076db5299c5c1748a353d",
+      "1023691e126b668caa45cdafe674"
+    ],
+    "person": {
+      "age": "20 years",
+      "birth": {
+        "date": "1891-08-29",
+        "place": "Warszawa",
+        "summary": "Birth - Puchalska [UM_], Janina Marianna",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0041",
+      "handle": "ffc9dc126327f126a898c7da1be",
+      "name_given": "Janina Marianna",
+      "name_suffix": "",
+      "name_surname": "Puchalska [UM_]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Krosna, Rokitno",
+      "gramps_id": "P0049",
+      "handle": "101f367b49535c9f361ed84b08e5",
+      "lat": 52.17159422,
+      "long": 20.71787596,
+      "name": "Krosna",
+      "parent_places": [
+        {
+          "alternate_names": [],
+          "gramps_id": "P0003",
+          "lat": 52.18984996,
+          "long": 20.64855634,
+          "name": "Rokitno",
+          "type": "Village"
+        }
+      ],
+      "type": "Village"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "54 years",
+    "date": "1918-06-04",
+    "description": "",
+    "gramps_id": "E0114",
+    "handle": "bc709df9-e6d8-4165-86fe-6de2383765c2",
+    "label": "Death (Daughter)",
+    "media": [
+      "101f3a0dafe674e4107f6520e3af"
+    ],
+    "person": {
+      "age": "19 years",
+      "birth": {
+        "date": "1899-04-01",
+        "place": "Rusiec, Nadarzyn",
+        "summary": "Birth - Krzystofik [U_z], Stefania",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1918-06-04",
+        "place": "Go\u0142aszew, Rokitno",
+        "summary": "Death - Krzystofik [U_z], Stefania",
+        "type": "Death"
+      },
+      "gramps_id": "I0238",
+      "handle": "a55f0b36-2fb6-43e0-a925-8a2d55e3a301",
+      "name_given": "Stefania",
+      "name_suffix": "",
+      "name_surname": "Krzystofik [U_z]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Go\u0142aszew, Rokitno",
+      "gramps_id": "P0051",
+      "handle": "101f3a141bfe63322ffeed2bf0bc",
+      "lat": 52.2079766,
+      "long": 20.7493392,
+      "name": "Go\u0142aszew",
+      "parent_places": [
+        {
+          "alternate_names": [],
+          "gramps_id": "P0003",
+          "lat": 52.18984996,
+          "long": 20.64855634,
+          "name": "Rokitno",
+          "type": "Village"
+        }
+      ],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Death"
+  },
+  {
+    "age": "60 years",
+    "date": "1924-06-06",
+    "description": "",
+    "gramps_id": "E0123",
+    "handle": "5c7e3e95-635c-4bf6-806c-974c0482ab39",
+    "label": "Death (Daughter)",
+    "media": [],
+    "person": {
+      "age": "38 years",
+      "birth": {
+        "date": "1886",
+        "place": "P\u0142ochocin, Rokitno",
+        "summary": "Birth - Krysztofik [Um_], Ewa",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1924-06-06",
+        "place": "",
+        "summary": "Death - Krysztofik [Um_], Ewa",
+        "type": "Death"
+      },
+      "gramps_id": "I0236",
+      "handle": "bffbbbe3-c2ed-415e-9abd-fc9aa9f8f581",
+      "name_given": "Ewa",
+      "name_suffix": "",
+      "name_surname": "Krysztofik [Um_]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {},
+    "role": "Primary",
+    "type": "Death"
+  },
+  {
+    "age": "61 years",
+    "date": "1925",
+    "description": "",
+    "gramps_id": "E0136",
+    "handle": "12026a57-25d4-42c0-b08b-4610c536e236",
+    "label": "Death (Sister)",
+    "media": [],
+    "person": {
+      "age": "",
+      "birth": {},
+      "death": {
+        "date": "1925",
+        "place": "",
+        "summary": "Death - Witkowska, Zofia",
+        "type": "Death"
+      },
+      "gramps_id": "I0250",
+      "handle": "100e325a57815d9e0691e2cfe773",
+      "name_given": "Zofia",
+      "name_suffix": "",
+      "name_surname": "Witkowska",
+      "relationship": "sister",
+      "sex": "F"
+    },
+    "place": {},
+    "role": "Primary",
+    "type": "Death"
+  },
+  {
+    "age": "69 years",
+    "date": "1933",
+    "description": "",
+    "gramps_id": "E0137",
+    "handle": "55a6bc80-9b13-4685-bbcd-cae452b7f13b",
+    "label": "Death",
+    "media": [],
+    "person": {
+      "relationship": "self"
+    },
+    "place": {},
+    "role": "Primary",
+    "type": "Death"
+  }
+]

@@ -1,0 +1,100 @@
+# GIT convention to prepare the pages for the load / generation engine
+
+# ============================================================================
+# Directory Folder Structure
+# ============================================================================
+pages/
+├── pageXX/
+│   ├── assets/ # the JSON documents and images loaded from Gramps
+│   ├── output/ # the generated documents: tex and pdf
+│   └── source.json
+├── pageXY/
+│   ..
+└── pageXZ/
+    ..
+
+# ============================================================================
+# Folder Naming Structure
+# ============================================================================
+pageXY  - XY refers to an abbreviation of the name and surname of the person. 
+This is based on the first 2 letters of the given name and first 2 letters of the family name.
+Example: John Smith should be placed in the folder pagejosm, since other functionality
+- the table of contents is based on the set acronyms as shown above - is based on that
+this is a temporary - nonconfigurable solution for now.
+
+# ============================================================================
+# source.json example
+# ============================================================================
+{
+  "personGrampsID": "I0100",
+  "personPicture_mediaObjectID": "O0189",
+  "descendant": {
+    "personGrampsID": "I0061", 
+    "personString": "John Doe"
+  },
+  "detailPages": [
+    {
+      "mediaObjectID": "O0268",
+      "noteID": "N0107"
+    },
+    {
+      "mediaObjectID": "O0269"
+    }
+  ]
+}
+
+
+# ============================================================================
+# source.json schema
+# ============================================================================
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Person Detail Pages",
+  "type": "object",
+  "properties": {
+    "personGrampsID": {
+      "type": "string"
+    },
+    "personPicture_mediaObjectID": {
+      "type": "string"
+    },
+    "descendant": {
+      "type": "object",
+      "properties": {
+        "personString": {
+          "type": "string",
+          "description": "A string identifier for the descendant (used in pageJW style)"
+        },
+        "personGrampsID": {
+          "type": "string",
+          "description": "Gramps ID for the descendant (used in pageXY style)"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        { "required": ["personString"] },
+        { "required": ["personGrampsID"] }
+      ]
+    },
+    "detailPages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "mediaObjectID": {
+            "type": "string"
+          },
+          "noteID": {
+            "type": "string"
+          }
+        },
+        "required": ["mediaObjectID"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["personGrampsID"],
+  "additionalProperties": false
+}
+
+

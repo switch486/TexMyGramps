@@ -1,0 +1,39 @@
+{
+  "alt_loc": [],
+  "alt_names": [],
+  "change": 1767781646,
+  "citation_list": [],
+  "code": "",
+  "gramps_id": "P0038",
+  "handle": "1013eff64b846b7d987862e3d606",
+  "lat": "52.1425551",
+  "long": "20.7170701",
+  "media_list": [],
+  "name": {
+    "date": {
+      "calendar": 0,
+      "dateval": [
+        0,
+        0,
+        0,
+        false
+      ],
+      "format": null,
+      "modifier": 0,
+      "newyear": 0,
+      "quality": 0,
+      "sortval": 0,
+      "text": "",
+      "year": 0
+    },
+    "lang": "",
+    "value": "Brwin\u00f3w"
+  },
+  "note_list": [],
+  "place_type": "Village",
+  "placeref_list": [],
+  "private": false,
+  "tag_list": [],
+  "title": "",
+  "urls": []
+}

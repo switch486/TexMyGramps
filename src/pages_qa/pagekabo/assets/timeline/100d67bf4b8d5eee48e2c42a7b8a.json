@@ -1,0 +1,486 @@
+[
+  {
+    "age": "0 days",
+    "date": "1820",
+    "description": "",
+    "gramps_id": "E0207",
+    "handle": "d2fbbd05-e13e-4e53-9de7-1bfeb27efee9",
+    "label": "Birth",
+    "media": [],
+    "person": {
+      "relationship": "self"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "3 years",
+    "date": "1823",
+    "description": "",
+    "gramps_id": "E0208",
+    "handle": "52826c49-b140-4e40-891e-5ffc4dac84b3",
+    "label": "Birth (Brother)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1823",
+        "place": "Rokitno",
+        "summary": "Birth - Boniecki, Jan",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "",
+        "place": "",
+        "summary": "Death - Boniecki, Jan",
+        "type": "Death"
+      },
+      "gramps_id": "I0321",
+      "handle": "dcecd3fc-f813-4734-9883-e7a5e892895f",
+      "name_given": "Jan",
+      "name_suffix": "",
+      "name_surname": "Boniecki",
+      "relationship": "brother",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "6 years",
+    "date": "1826",
+    "description": "",
+    "gramps_id": "E0210",
+    "handle": "9a6b0ce8-062c-46ae-a98d-6c1d8c0f3570",
+    "label": "Birth (Brother)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1826",
+        "place": "Rokitno",
+        "summary": "Birth - Boniecki, Antonii",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1826-04-28",
+        "place": "Rokitno",
+        "summary": "Death - Boniecki, Antonii",
+        "type": "Death"
+      },
+      "gramps_id": "I0322",
+      "handle": "be0880a0-fa73-4c5e-9979-c7bce7585edd",
+      "name_given": "Antonii",
+      "name_suffix": "",
+      "name_surname": "Boniecki",
+      "relationship": "brother",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "6 years",
+    "date": "1826",
+    "description": "",
+    "gramps_id": "E0212",
+    "handle": "d540e3dc-3087-4f20-990c-437b6e9f5b01",
+    "label": "Birth (Brother)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1826",
+        "place": "Rokitno",
+        "summary": "Birth - Boniecki, Kasper",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1857-11-18",
+        "place": "Rokitno",
+        "summary": "Death - Boniecki, Kasper",
+        "type": "Death"
+      },
+      "gramps_id": "I0323",
+      "handle": "9eb84b13-d704-4fc1-b87b-5a5c01ae31d8",
+      "name_given": "Kasper",
+      "name_suffix": "",
+      "name_surname": "Boniecki",
+      "relationship": "brother",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "6 years",
+    "date": "1826-04-28",
+    "description": "",
+    "gramps_id": "E0211",
+    "handle": "685031bc-8be8-475a-ba7f-eea275b54d59",
+    "label": "Death (Brother)",
+    "media": [],
+    "person": {
+      "age": "3 months",
+      "birth": {
+        "date": "1826",
+        "place": "Rokitno",
+        "summary": "Birth - Boniecki, Antonii",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1826-04-28",
+        "place": "Rokitno",
+        "summary": "Death - Boniecki, Antonii",
+        "type": "Death"
+      },
+      "gramps_id": "I0322",
+      "handle": "be0880a0-fa73-4c5e-9979-c7bce7585edd",
+      "name_given": "Antonii",
+      "name_suffix": "",
+      "name_surname": "Boniecki",
+      "relationship": "brother",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Death"
+  },
+  {
+    "age": "21 years",
+    "date": "1841-11-07",
+    "description": "",
+    "gramps_id": "E0205",
+    "handle": "28b2cb0b-1a73-48b2-b499-ec4b1fbc17d8",
+    "label": "Marriage",
+    "media": [
+      "101dc537dec1500595e6d8ee5d4"
+    ],
+    "person": {
+      "relationship": "self"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "23 years",
+    "date": "1843",
+    "description": "",
+    "gramps_id": "E0144",
+    "handle": "a36fe726-6aea-4a7d-8e51-23366e7ef5a6",
+    "label": "Birth (Daughter)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1843",
+        "place": "",
+        "summary": "Birth - Jarzemczyk [_m_], Marianna",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1892",
+        "place": "Rokitno",
+        "summary": "Death - Jarzemczyk [_m_], Marianna",
+        "type": "Death"
+      },
+      "gramps_id": "I0209",
+      "handle": "100d66c60df5116e2ae466a4fa3a",
+      "name_given": "Marianna",
+      "name_suffix": "",
+      "name_surname": "Jarzemczyk [_m_]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {},
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "33 years",
+    "date": "1853-02-09",
+    "description": "",
+    "gramps_id": "E0141",
+    "handle": "3c46393d-e399-4cbf-af1d-2675c50b7f04",
+    "label": "Birth (Son)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1853-02-09",
+        "place": "Rokitno",
+        "summary": "Birth - Jarzemczyk, Walenty",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "",
+        "place": "",
+        "summary": "Death - Jarzemczyk, Walenty",
+        "type": "Death"
+      },
+      "gramps_id": "I0251",
+      "handle": "3e36e895-ae70-4d42-942f-84cdf1e10811",
+      "name_given": "Walenty",
+      "name_suffix": "",
+      "name_surname": "Jarzemczyk",
+      "relationship": "son",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "37 years",
+    "date": "1857-11-18",
+    "description": "",
+    "gramps_id": "E0213",
+    "handle": "9fee8818-9f87-4a78-808b-b099cf23f6f9",
+    "label": "Death (Brother)",
+    "media": [],
+    "person": {
+      "age": "31 years",
+      "birth": {
+        "date": "1826",
+        "place": "Rokitno",
+        "summary": "Birth - Boniecki, Kasper",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1857-11-18",
+        "place": "Rokitno",
+        "summary": "Death - Boniecki, Kasper",
+        "type": "Death"
+      },
+      "gramps_id": "I0323",
+      "handle": "9eb84b13-d704-4fc1-b87b-5a5c01ae31d8",
+      "name_given": "Kasper",
+      "name_suffix": "",
+      "name_surname": "Boniecki",
+      "relationship": "brother",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Death"
+  },
+  {
+    "age": "42 years",
+    "date": "1862-11-10",
+    "description": "",
+    "gramps_id": "E0125",
+    "handle": "916b8eba-c5b5-459d-b95c-5a76a67c4d4c",
+    "label": "Marriage (Daughter)",
+    "media": [
+      "101daa79cf1710c8d5d951c38063"
+    ],
+    "person": {
+      "age": "19 years",
+      "birth": {
+        "date": "1843",
+        "place": "",
+        "summary": "Birth - Jarzemczyk [_m_], Marianna",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1892",
+        "place": "Rokitno",
+        "summary": "Death - Jarzemczyk [_m_], Marianna",
+        "type": "Death"
+      },
+      "gramps_id": "I0209",
+      "handle": "100d66c60df5116e2ae466a4fa3a",
+      "name_given": "Marianna",
+      "name_suffix": "",
+      "name_surname": "Jarzemczyk [_m_]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "62 years",
+    "date": "1882",
+    "description": "",
+    "gramps_id": "E0187",
+    "handle": "eda50556-39de-48f5-9cdc-f89609ba0482",
+    "label": "Marriage (Son)",
+    "media": [],
+    "person": {
+      "age": "28 years",
+      "birth": {
+        "date": "1853-02-09",
+        "place": "Rokitno",
+        "summary": "Birth - Jarzemczyk, Walenty",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "",
+        "place": "",
+        "summary": "Death - Jarzemczyk, Walenty",
+        "type": "Death"
+      },
+      "gramps_id": "I0251",
+      "handle": "3e36e895-ae70-4d42-942f-84cdf1e10811",
+      "name_given": "Walenty",
+      "name_suffix": "",
+      "name_surname": "Jarzemczyk",
+      "relationship": "son",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "\u017bbik\u00f3w",
+      "gramps_id": "P0012",
+      "handle": "100fecda9d4a710a856bb9ca588f",
+      "lat": 52.18056604,
+      "long": 20.7856822,
+      "name": "\u017bbik\u00f3w",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "72 years",
+    "date": "1892",
+    "description": "",
+    "gramps_id": "E0140",
+    "handle": "616ba3dc-e455-4efe-93d6-4530b81eb25f",
+    "label": "Death (Daughter)",
+    "media": [],
+    "person": {
+      "age": "49 years",
+      "birth": {
+        "date": "1843",
+        "place": "",
+        "summary": "Birth - Jarzemczyk [_m_], Marianna",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1892",
+        "place": "Rokitno",
+        "summary": "Death - Jarzemczyk [_m_], Marianna",
+        "type": "Death"
+      },
+      "gramps_id": "I0209",
+      "handle": "100d66c60df5116e2ae466a4fa3a",
+      "name_given": "Marianna",
+      "name_suffix": "",
+      "name_surname": "Jarzemczyk [_m_]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Death"
+  }
+]

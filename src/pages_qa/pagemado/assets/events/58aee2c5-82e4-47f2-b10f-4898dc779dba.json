@@ -1,0 +1,41 @@
+{
+  "attribute_list": [],
+  "change": 1771848196,
+  "citation_list": [],
+  "date": {
+    "calendar": 0,
+    "dateval": [
+      4,
+      1,
+      1855,
+      false
+    ],
+    "format": null,
+    "modifier": 0,
+    "newyear": 0,
+    "quality": 0,
+    "sortval": 2398588,
+    "text": "",
+    "year": 1855
+  },
+  "description": "Wdowiec w momencie \u015amierci",
+  "gramps_id": "E0133",
+  "handle": "58aee2c5-82e4-47f2-b10f-4898dc779dba",
+  "media_list": [
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "rect": [],
+      "ref": "101d67d22b9935bccb581092dfa4"
+    }
+  ],
+  "note_list": [
+    "24b5069d-e97d-4209-8d8b-2e057ee03524"
+  ],
+  "place": "100d97b678e06301b5b606754cec",
+  "private": false,
+  "tag_list": [],
+  "type": "Death"
+}

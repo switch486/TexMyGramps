@@ -1,0 +1,27 @@
+{
+  "attribute_list": [],
+  "change": 1764976582,
+  "child_ref_list": [
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "100d6757b8b2664cf717de3ff560"
+    }
+  ],
+  "citation_list": [],
+  "complete": 0,
+  "event_ref_list": [],
+  "father_handle": "100d67f97dc350004a3b28d24a16",
+  "gramps_id": "F0073",
+  "handle": "100d68057b125f350cc9a92535f4",
+  "lds_ord_list": [],
+  "media_list": [],
+  "mother_handle": "100d67fc266d5809a7ac21a9cd84",
+  "note_list": [],
+  "private": false,
+  "tag_list": [],
+  "type": "Unknown"
+}

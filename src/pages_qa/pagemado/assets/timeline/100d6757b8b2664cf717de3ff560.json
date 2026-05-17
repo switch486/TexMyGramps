@@ -1,0 +1,29 @@
+[
+  {
+    "age": "",
+    "date": "1855-01-04",
+    "description": "Wdowiec w momencie \u015amierci",
+    "gramps_id": "E0133",
+    "handle": "58aee2c5-82e4-47f2-b10f-4898dc779dba",
+    "label": "Death",
+    "media": [
+      "101d67d22b9935bccb581092dfa4"
+    ],
+    "person": {
+      "relationship": "self"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Death"
+  }
+]

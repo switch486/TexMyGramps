@@ -1,0 +1,30 @@
+{
+  "attribute_list": [],
+  "change": 1766062759,
+  "citation_list": [],
+  "date": {
+    "calendar": 0,
+    "dateval": [
+      27,
+      1,
+      1799,
+      false
+    ],
+    "format": null,
+    "modifier": 0,
+    "newyear": 0,
+    "quality": 0,
+    "sortval": 2378158,
+    "text": "",
+    "year": 1799
+  },
+  "description": "",
+  "gramps_id": "E0198",
+  "handle": "41f2649b-6964-43d0-be52-a647a62a0bda",
+  "media_list": [],
+  "note_list": [],
+  "place": "100fef45630a6b4144559cd19bf0",
+  "private": false,
+  "tag_list": [],
+  "type": "Birth"
+}

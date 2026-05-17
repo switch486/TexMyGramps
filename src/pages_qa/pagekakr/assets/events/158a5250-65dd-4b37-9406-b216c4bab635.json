@@ -1,0 +1,41 @@
+{
+  "attribute_list": [],
+  "change": 1772631167,
+  "citation_list": [],
+  "date": {
+    "calendar": 0,
+    "dateval": [
+      2,
+      1,
+      1842,
+      false
+    ],
+    "format": null,
+    "modifier": 0,
+    "newyear": 0,
+    "quality": 0,
+    "sortval": 2393838,
+    "text": "",
+    "year": 1842
+  },
+  "description": "",
+  "gramps_id": "E0127",
+  "handle": "158a5250-65dd-4b37-9406-b216c4bab635",
+  "media_list": [
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "rect": [],
+      "ref": "101d678b6ad02a1696d8dc02070"
+    }
+  ],
+  "note_list": [
+    "f186660f-4c0d-44c1-b9b4-46e277f68d9d"
+  ],
+  "place": "101f3a7195f92f8401ef11f3b675",
+  "private": false,
+  "tag_list": [],
+  "type": "Birth"
+}

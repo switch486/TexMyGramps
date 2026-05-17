@@ -1,0 +1,391 @@
+[
+  {
+    "age": "0 days",
+    "date": "1792",
+    "description": "",
+    "gramps_id": "E0216",
+    "handle": "2253b827-ca6c-4f5c-ad54-5d884e75d50a",
+    "label": "Birth (Mother)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1792",
+        "place": "B\u0142onie",
+        "summary": "Birth - Le\u015bnicka [_m_], Ma\u0142gorzata",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0317",
+      "handle": "100ff7086f0b25a7819e4ea93e42",
+      "name_given": "Ma\u0142gorzata",
+      "name_suffix": "",
+      "name_surname": "Le\u015bnicka [_m_]",
+      "relationship": "mother",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "B\u0142onie",
+      "gramps_id": "P0002",
+      "handle": "100d95e63ac87b7f4f361b15b192",
+      "lat": 52.19857958,
+      "long": 20.6155014,
+      "name": "B\u0142onie",
+      "parent_places": [],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "",
+    "date": "1818-04-30",
+    "description": "",
+    "gramps_id": "E0214",
+    "handle": "c395d010-1377-4c48-85e7-d8ed50e1e1f9",
+    "label": "Marriage (Father)",
+    "media": [
+      "101dc5a9f27755840143c2a55500"
+    ],
+    "person": {
+      "age": "",
+      "birth": {},
+      "death": {},
+      "gramps_id": "I0316",
+      "handle": "100ff705761533cdcebcf22b1c2",
+      "name_given": "Miko\u0142aj",
+      "name_suffix": "",
+      "name_surname": "Jaremczak [_m_]",
+      "relationship": "father",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "B\u0142onie",
+      "gramps_id": "P0002",
+      "handle": "100d95e63ac87b7f4f361b15b192",
+      "lat": 52.19857958,
+      "long": 20.6155014,
+      "name": "B\u0142onie",
+      "parent_places": [],
+      "type": "City"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "0 days",
+    "date": "1820",
+    "description": "",
+    "gramps_id": "E0207",
+    "handle": "d2fbbd05-e13e-4e53-9de7-1bfeb27efee9",
+    "label": "Birth (Partner)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1820",
+        "place": "Rokitno",
+        "summary": "Birth - Boniecka [_m_], Katarzyna",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0223",
+      "handle": "100d67bf4b8d5eee48e2c42a7b8a",
+      "name_given": "Katarzyna",
+      "name_suffix": "",
+      "name_surname": "Boniecka [_m_]",
+      "relationship": "partner",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "",
+    "date": "1838-11-25",
+    "description": "",
+    "gramps_id": "E0441",
+    "handle": "0bf9e2fe-6c21-489c-ba79-7e2f623a9fa5",
+    "label": "Marriage (Brother)",
+    "media": [
+      "101dc55da7d6174938aa850e8267"
+    ],
+    "person": {
+      "age": "",
+      "birth": {},
+      "death": {},
+      "gramps_id": "I0326",
+      "handle": "101016b09551230a6cc6565537ab",
+      "name_given": "Piotr",
+      "name_suffix": "",
+      "name_surname": "Jaremczak [_m_]",
+      "relationship": "brother",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "",
+    "date": "1841-11-07",
+    "description": "",
+    "gramps_id": "E0205",
+    "handle": "28b2cb0b-1a73-48b2-b499-ec4b1fbc17d8",
+    "label": "Marriage",
+    "media": [
+      "101dc537dec1500595e6d8ee5d4"
+    ],
+    "person": {
+      "relationship": "self"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "0 days",
+    "date": "1843",
+    "description": "",
+    "gramps_id": "E0144",
+    "handle": "a36fe726-6aea-4a7d-8e51-23366e7ef5a6",
+    "label": "Birth (Daughter)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1843",
+        "place": "",
+        "summary": "Birth - Jarzemczyk [_m_], Marianna",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1892",
+        "place": "Rokitno",
+        "summary": "Death - Jarzemczyk [_m_], Marianna",
+        "type": "Death"
+      },
+      "gramps_id": "I0209",
+      "handle": "100d66c60df5116e2ae466a4fa3a",
+      "name_given": "Marianna",
+      "name_suffix": "",
+      "name_surname": "Jarzemczyk [_m_]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {},
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "0 days",
+    "date": "1853-02-09",
+    "description": "",
+    "gramps_id": "E0141",
+    "handle": "3c46393d-e399-4cbf-af1d-2675c50b7f04",
+    "label": "Birth (Son)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1853-02-09",
+        "place": "Rokitno",
+        "summary": "Birth - Jarzemczyk, Walenty",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "",
+        "place": "",
+        "summary": "Death - Jarzemczyk, Walenty",
+        "type": "Death"
+      },
+      "gramps_id": "I0251",
+      "handle": "3e36e895-ae70-4d42-942f-84cdf1e10811",
+      "name_given": "Walenty",
+      "name_suffix": "",
+      "name_surname": "Jarzemczyk",
+      "relationship": "son",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "19 years",
+    "date": "1862-11-10",
+    "description": "",
+    "gramps_id": "E0125",
+    "handle": "916b8eba-c5b5-459d-b95c-5a76a67c4d4c",
+    "label": "Marriage (Daughter)",
+    "media": [
+      "101daa79cf1710c8d5d951c38063"
+    ],
+    "person": {
+      "age": "19 years",
+      "birth": {
+        "date": "1843",
+        "place": "",
+        "summary": "Birth - Jarzemczyk [_m_], Marianna",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1892",
+        "place": "Rokitno",
+        "summary": "Death - Jarzemczyk [_m_], Marianna",
+        "type": "Death"
+      },
+      "gramps_id": "I0209",
+      "handle": "100d66c60df5116e2ae466a4fa3a",
+      "name_given": "Marianna",
+      "name_suffix": "",
+      "name_surname": "Jarzemczyk [_m_]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "28 years",
+    "date": "1882",
+    "description": "",
+    "gramps_id": "E0187",
+    "handle": "eda50556-39de-48f5-9cdc-f89609ba0482",
+    "label": "Marriage (Son)",
+    "media": [],
+    "person": {
+      "age": "28 years",
+      "birth": {
+        "date": "1853-02-09",
+        "place": "Rokitno",
+        "summary": "Birth - Jarzemczyk, Walenty",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "",
+        "place": "",
+        "summary": "Death - Jarzemczyk, Walenty",
+        "type": "Death"
+      },
+      "gramps_id": "I0251",
+      "handle": "3e36e895-ae70-4d42-942f-84cdf1e10811",
+      "name_given": "Walenty",
+      "name_suffix": "",
+      "name_surname": "Jarzemczyk",
+      "relationship": "son",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "\u017bbik\u00f3w",
+      "gramps_id": "P0012",
+      "handle": "100fecda9d4a710a856bb9ca588f",
+      "lat": 52.18056604,
+      "long": 20.7856822,
+      "name": "\u017bbik\u00f3w",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "49 years",
+    "date": "1892",
+    "description": "",
+    "gramps_id": "E0140",
+    "handle": "616ba3dc-e455-4efe-93d6-4530b81eb25f",
+    "label": "Death (Daughter)",
+    "media": [],
+    "person": {
+      "age": "49 years",
+      "birth": {
+        "date": "1843",
+        "place": "",
+        "summary": "Birth - Jarzemczyk [_m_], Marianna",
+        "type": "Birth"
+      },
+      "death": {
+        "date": "1892",
+        "place": "Rokitno",
+        "summary": "Death - Jarzemczyk [_m_], Marianna",
+        "type": "Death"
+      },
+      "gramps_id": "I0209",
+      "handle": "100d66c60df5116e2ae466a4fa3a",
+      "name_given": "Marianna",
+      "name_suffix": "",
+      "name_surname": "Jarzemczyk [_m_]",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Rokitno",
+      "gramps_id": "P0003",
+      "handle": "100d97b678e06301b5b606754cec",
+      "lat": 52.18984996,
+      "long": 20.64855634,
+      "name": "Rokitno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Death"
+  }
+]

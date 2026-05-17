@@ -1,0 +1,68 @@
+{
+  "attribute_list": [],
+  "change": 1766072165,
+  "child_ref_list": [
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "100d969e29b6177a8a8a2449d926"
+    },
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "100ff4650fe4542e598fdb6007c0"
+    },
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "100ff488c4a7339a35b2b8b64b33"
+    },
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "100ff50755d840eda43510a332eb"
+    }
+  ],
+  "citation_list": [],
+  "complete": 0,
+  "event_ref_list": [],
+  "father_handle": "100fed764a2b46969fdc096f2c9",
+  "gramps_id": "F0094",
+  "handle": "100fed7bcdb1126d5fe545fbe5c0",
+  "lds_ord_list": [],
+  "media_list": [
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "rect": [],
+      "ref": "100ff476eb095b3f6dc2ec48f3d7"
+    },
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "rect": [],
+      "ref": "100ff502e1c954c88d7af582301c"
+    }
+  ],
+  "mother_handle": "100fed7856c62d643c6a04d0a54b",
+  "note_list": [],
+  "private": false,
+  "tag_list": [],
+  "type": "Unknown"
+}

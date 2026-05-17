@@ -1,0 +1,76 @@
+{
+  "address_list": [],
+  "alternate_names": [],
+  "attribute_list": [],
+  "birth_ref_index": 0,
+  "change": 1772010451,
+  "citation_list": [],
+  "death_ref_index": -1,
+  "event_ref_list": [
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "ref": "43ab4979-6cb9-4b8b-b067-303ec17cc673",
+      "role": "Primary"
+    }
+  ],
+  "family_list": [
+    "100ff715883d1f56e6e0f1d73610",
+    "101d9604152d30c8759171b4026d"
+  ],
+  "gender": 0,
+  "gramps_id": "I0319",
+  "handle": "100ff712a7dc51459195e652fb54",
+  "lds_ord_list": [],
+  "media_list": [],
+  "note_list": [],
+  "parent_family_list": [
+    "101d962f027c2ddd3485e4b1d953"
+  ],
+  "person_ref_list": [],
+  "primary_name": {
+    "call": "",
+    "citation_list": [],
+    "date": {
+      "calendar": 0,
+      "dateval": [
+        0,
+        0,
+        0,
+        false
+      ],
+      "format": null,
+      "modifier": 0,
+      "newyear": 0,
+      "quality": 0,
+      "sortval": 0,
+      "text": "",
+      "year": 0
+    },
+    "display_as": 0,
+    "famnick": "",
+    "first_name": "Marianna",
+    "group_as": "",
+    "nick": "",
+    "note_list": [],
+    "private": false,
+    "sort_as": 0,
+    "suffix": "",
+    "surname_list": [
+      {
+        "connector": "",
+        "origintype": "",
+        "prefix": "",
+        "primary": true,
+        "surname": "Biedrzycka [um_]"
+      }
+    ],
+    "title": "",
+    "type": "Birth Name"
+  },
+  "private": false,
+  "tag_list": [],
+  "urls": []
+}

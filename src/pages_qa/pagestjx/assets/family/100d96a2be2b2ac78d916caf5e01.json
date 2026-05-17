@@ -1,0 +1,92 @@
+{
+  "attribute_list": [],
+  "change": 1766060318,
+  "child_ref_list": [
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "dbb48004-2f33-4593-9681-7a494809561c"
+    },
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "100fed4c3128707a1d872c318f13"
+    },
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "100fed46077c49e5f05070f27a71"
+    },
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "100fed49196f25b135c6e8644695"
+    },
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "ac0876f5-52ca-4691-8565-eb730d993a61"
+    },
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "100d66cf381f50381022066f09d9"
+    },
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "3be461a3-46f2-40b7-b5e4-71bdc65460eb"
+    },
+    {
+      "citation_list": [],
+      "frel": "Birth",
+      "mrel": "Birth",
+      "note_list": [],
+      "private": false,
+      "ref": "100fed3e14be243b699967fcd5a7"
+    }
+  ],
+  "citation_list": [],
+  "complete": 0,
+  "event_ref_list": [],
+  "father_handle": "100d969b3fe73feef2a24aaeda43",
+  "gramps_id": "F0077",
+  "handle": "100d96a2be2b2ac78d916caf5e01",
+  "lds_ord_list": [],
+  "media_list": [
+    {
+      "attribute_list": [],
+      "citation_list": [],
+      "note_list": [],
+      "private": false,
+      "rect": [],
+      "ref": "100fed7022e559db3ff720261bec"
+    }
+  ],
+  "mother_handle": "100d969e29b6177a8a8a2449d926",
+  "note_list": [],
+  "private": false,
+  "tag_list": [],
+  "type": "Unknown"
+}

@@ -1,0 +1,30 @@
+{
+  "attribute_list": [],
+  "change": 1766060219,
+  "citation_list": [],
+  "date": {
+    "calendar": 0,
+    "dateval": [
+      13,
+      11,
+      1837,
+      false
+    ],
+    "format": null,
+    "modifier": 0,
+    "newyear": 0,
+    "quality": 0,
+    "sortval": 2392327,
+    "text": "",
+    "year": 1837
+  },
+  "description": "",
+  "gramps_id": "E0193",
+  "handle": "84273b13-f2a0-4648-b12d-2a884a05a72d",
+  "media_list": [],
+  "note_list": [],
+  "place": "100fed9d6cd413291f93f90f4204",
+  "private": false,
+  "tag_list": [],
+  "type": "Birth"
+}

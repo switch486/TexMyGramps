@@ -1,0 +1,59 @@
+{
+  "alt_loc": [],
+  "alt_names": [],
+  "change": 1772630894,
+  "citation_list": [],
+  "code": "",
+  "gramps_id": "P0000",
+  "handle": "100d94a99d1b6f26d5da325ae32f",
+  "lat": "52.20796334640021",
+  "long": "20.72055816650391",
+  "media_list": [],
+  "name": {
+    "date": {
+      "calendar": 0,
+      "dateval": [
+        0,
+        0,
+        0,
+        false
+      ],
+      "format": null,
+      "modifier": 0,
+      "newyear": 0,
+      "quality": 0,
+      "sortval": 0,
+      "text": "",
+      "year": 0
+    },
+    "lang": "",
+    "value": "P\u0142ochocin"
+  },
+  "note_list": [],
+  "place_type": "City",
+  "placeref_list": [
+    {
+      "date": {
+        "calendar": 0,
+        "dateval": [
+          0,
+          0,
+          0,
+          false
+        ],
+        "format": null,
+        "modifier": 0,
+        "newyear": 0,
+        "quality": 0,
+        "sortval": 0,
+        "text": "",
+        "year": 0
+      },
+      "ref": "100d97b678e06301b5b606754cec"
+    }
+  ],
+  "private": false,
+  "tag_list": [],
+  "title": "",
+  "urls": []
+}

@@ -1,0 +1,192 @@
+[
+  {
+    "age": "0 days",
+    "date": "1819-03-07",
+    "description": "",
+    "gramps_id": "E0150",
+    "handle": "eb4b10a0-c434-492e-a9ab-dc95d5bee753",
+    "label": "Birth (Partner)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1819-03-07",
+        "place": "",
+        "summary": "Birth - Grotkowska, J\u00f3zefa",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0246",
+      "handle": "100d96ab3e93372fdebda8950827",
+      "name_given": "J\u00f3zefa",
+      "name_suffix": "",
+      "name_surname": "Grotkowska",
+      "relationship": "partner",
+      "sex": "F"
+    },
+    "place": {},
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "",
+    "date": "1837-10-22",
+    "description": "",
+    "gramps_id": "E0145",
+    "handle": "40cea27f-3bce-4d15-94bd-a4e39f05bdc4",
+    "label": "Marriage",
+    "media": [],
+    "person": {
+      "relationship": "self"
+    },
+    "place": {},
+    "role": "Family",
+    "type": "Marriage"
+  },
+  {
+    "age": "0 days",
+    "date": "1839-08-22",
+    "description": "",
+    "gramps_id": "E0394",
+    "handle": "2759ed14-9489-4fcc-82ea-60bee1970fed",
+    "label": "Birth (Daughter)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1839-08-22",
+        "place": "Brwin\u00f3w",
+        "summary": "Birth - Bielecka, Bogumi\u0142a",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0211",
+      "handle": "100d66dd11d1143e10791b3167da",
+      "name_given": "Bogumi\u0142a",
+      "name_suffix": "",
+      "name_surname": "Bielecka",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Brwin\u00f3w",
+      "gramps_id": "P0038",
+      "handle": "1013eff64b846b7d987862e3d606",
+      "lat": 52.1425551,
+      "long": 20.7170701,
+      "name": "Brwin\u00f3w",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "0 days",
+    "date": "1842",
+    "description": "",
+    "gramps_id": "E0395",
+    "handle": "47ecb940-bfd4-45b4-a45e-ca9994b147e3",
+    "label": "Birth (Son)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1842",
+        "place": "B\u0142onie",
+        "summary": "Birth - Bielicki, \u0141ukasz",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0535",
+      "handle": "df8c1b70-3490-4bae-b6eb-2adbb23c6cff",
+      "name_given": "\u0141ukasz",
+      "name_suffix": "",
+      "name_surname": "Bielicki",
+      "relationship": "son",
+      "sex": "M"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "B\u0142onie",
+      "gramps_id": "P0002",
+      "handle": "100d95e63ac87b7f4f361b15b192",
+      "lat": 52.19857958,
+      "long": 20.6155014,
+      "name": "B\u0142onie",
+      "parent_places": [],
+      "type": "City"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "0 days",
+    "date": "1846",
+    "description": "",
+    "gramps_id": "E0396",
+    "handle": "10d43f35-f12f-4319-9538-0488d1c97521",
+    "label": "Birth (Daughter)",
+    "media": [],
+    "person": {
+      "age": "0 days",
+      "birth": {
+        "date": "1846",
+        "place": "Leszno",
+        "summary": "Birth - Bielicka, Rozalia",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0536",
+      "handle": "0dd461e8-fe4f-487c-9451-02bca6672c22",
+      "name_given": "Rozalia",
+      "name_suffix": "",
+      "name_surname": "Bielicka",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {
+      "alternate_names": [],
+      "display_name": "Leszno",
+      "gramps_id": "P0036",
+      "handle": "1013ea42c6f13a3b496e05dca423",
+      "lat": 52.2579481,
+      "long": 20.5914349,
+      "name": "Leszno",
+      "parent_places": [],
+      "type": "Village"
+    },
+    "role": "Primary",
+    "type": "Birth"
+  },
+  {
+    "age": "19 years",
+    "date": "1859",
+    "description": "",
+    "gramps_id": "E0121",
+    "handle": "ef968f57-abf6-466e-8438-981e6c0920f8",
+    "label": "Marriage (Daughter)",
+    "media": [],
+    "person": {
+      "age": "19 years",
+      "birth": {
+        "date": "1839-08-22",
+        "place": "Brwin\u00f3w",
+        "summary": "Birth - Bielecka, Bogumi\u0142a",
+        "type": "Birth"
+      },
+      "death": {},
+      "gramps_id": "I0211",
+      "handle": "100d66dd11d1143e10791b3167da",
+      "name_given": "Bogumi\u0142a",
+      "name_suffix": "",
+      "name_surname": "Bielecka",
+      "relationship": "daughter",
+      "sex": "F"
+    },
+    "place": {},
+    "role": "Family",
+    "type": "Marriage"
+  }
+]
