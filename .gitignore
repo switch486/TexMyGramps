@@ -1,8 +1,6 @@
 # Ignore generated page outputs and page-specific assets
-src/pages/*/output/
-src/pages/*/assets/
-src/pages_dev/*/output/
-src/pages_dev/*/assets/
+src/pages*/*/output/
+src/pages*/*/assets/
 masterDocument/output/
 logs/
 
@@ -12,3 +10,6 @@ src/scripts/gramps_api.local.env
 
 # Ignore all dev related stuff specific for local pc
 devStartup*
+
+# Ignore macOS specific files
+**/.DS_Store
