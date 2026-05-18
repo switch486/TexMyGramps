@@ -4,10 +4,15 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 PAGES_DIR="$ROOT_DIR/pages"
 PAGE_NAME="${1:-}"
+STAGE="${2:-}"
 
 if [ -z "$PAGE_NAME" ]; then
-  echo "Usage: $0 <page-name>"
+  echo "Usage: $0 <page-name> [stage]"
   exit 1
+fi
+
+if [ -n "$STAGE" ]; then
+  PAGES_DIR="$ROOT_DIR/pages_$STAGE"
 fi
 
 PAGE_DIR="$PAGES_DIR/$PAGE_NAME"

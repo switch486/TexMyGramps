@@ -468,6 +468,8 @@ def render_tex(
     \\parbox[c][6cm][c]{{\\linewidth}}{{%
       \\centering      
         {{{image_if_exists}}}
+
+        \\hspace*{{8cm}}% keeps width
     }}%
   }} &
   \\begin{{minipage}}[t]{{\\linewidth}}
@@ -516,8 +518,10 @@ def format_additional_page_details(details: list) -> str:
         formatted_details += f"""\\newpage
         \\begin{{center}}
         \\includegraphics[width=\\textwidth]{{{picture_link}}}
-        \\newline
+        \\newline \\newline
+        \\vspace{{0.5em}}
         {{{latex_escape(media_desc)}}}
+        \\vspace{{0.5em}}
         \\newline """
         if note_desc:
             formatted_details += f"""

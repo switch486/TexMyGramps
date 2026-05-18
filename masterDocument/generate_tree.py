@@ -215,7 +215,8 @@ def main():
     headers_file = "output/tree_headers.tex"
     with open(headers_file, "w", encoding="utf-8") as f:
         for macro_name, header in headers.items():
-            f.write(f"\\def\\{macro_name}{{{header}}}\n")
+            header_newline = header + " \\vspace{0.5em}"
+            f.write(f"\\def\\{macro_name}{{{header_newline}}}\n")
 
     logger.info(f"Written output to {OUTPUT_FILE}")
     logger.info(f"Written headers to {headers_file}")

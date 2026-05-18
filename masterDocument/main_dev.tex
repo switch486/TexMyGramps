@@ -95,11 +95,16 @@
 
 
 \newpage
-\frbx
-\subfile{../src/pages/pageJW/output/page.tex}
+\ifdefined\frbx
+    \frbx
+\fi
+\subfile{../src/pages_dev/pageJW/output/page.tex}
 
 \newpage
-\kako
-\subfile{../src/pages/pageXY/output/page.tex}
+
+\ifdefined\kako
+    \kako
+\fi
+\subfile{../src/pages_dev/pageXY/output/page.tex}
 
 \end{document}

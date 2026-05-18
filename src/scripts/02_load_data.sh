@@ -34,10 +34,15 @@ if [ -z "${GRAMPS_API_TOKEN:-}" ]; then
 fi
 
 PAGE_NAME="${1:-}"
-PERSON_ID="${2:-}"
+STAGE="${2:-}"
+PERSON_ID="${3:-}"
 if [ -z "$PAGE_NAME" ]; then
-  echo "Usage: $0 <page-name> [person-id]"
+  echo "Usage: $0 <page-name> [stage] [person-id]"
   exit 1
+fi
+
+if [ -n "$STAGE" ]; then
+  PAGES_DIR="$ROOT_DIR/pages_$STAGE"
 fi
 
 PAGE_DIR="$PAGES_DIR/$PAGE_NAME"

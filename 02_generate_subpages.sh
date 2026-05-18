@@ -22,7 +22,13 @@ set -u
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-PAGES_DIR="$ROOT_DIR/src/pages"
+STAGE="${1:-}"
+if [[ "$#" -gt 1 ]]; then
+    echo "Usage: $0 [stage]"
+    exit 1
+fi
+
+PAGES_DIR="$ROOT_DIR/src/pages${STAGE:+_$STAGE}"
 SCRIPT_DIR="$ROOT_DIR/src/scripts"
 GEN_SCRIPT="./03_render_page.sh"
 
@@ -80,7 +86,11 @@ while IFS= read -r -d '' dir; do
 
     PAGE_LOG="$LOG_DIR/${PAGE_NAME}.log"
 
-    COMMAND="$GEN_SCRIPT $PAGE_NAME"
+    if [[ -n "$STAGE" ]]; then
+        COMMAND="$GEN_SCRIPT $PAGE_NAME $STAGE"
+    else
+        COMMAND="$GEN_SCRIPT $PAGE_NAME"
+    fi
 
     log "----------------------------------------"
     log "START [$TOTAL] $PAGE_NAME"
