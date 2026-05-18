@@ -62,10 +62,8 @@ def extract_family_handle(record: dict) -> str:
     if record.get("parent_family_list"):
         value = record.get("parent_family_list")
         if value:
-            # TODO - error handling TODO
             return str(value[0])
-    raise SystemExit("ERROR: record has no identifiable handle or id")
-
+    return ""
 
 def clean_string(value: str) -> str:
     """Remove all trailing characters from string beginning with '['."""
