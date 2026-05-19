@@ -23,6 +23,9 @@ def latex_escape(value: str) -> str:
         value = str(value)
     return "".join(LATEX_SPECIAL_CHARS.get(ch, ch) for ch in value)
 
+def latex_escape_preserve_newline(value: str) -> str:
+    return latex_escape(value).replace("\n", r"\newline ")
+
 
 def clean_string(value: str) -> str:
     """Remove all trailing characters from string beginning with '['."""
@@ -526,7 +529,7 @@ def format_additional_page_details(details: list) -> str:
         if note_desc:
             formatted_details += f"""
             \\fbox{{
-            \\parbox{{\\linewidth}}{{{latex_escape(note_desc)}}}}}
+            \\parbox{{\\linewidth}}{{{latex_escape_preserve_newline(note_desc)}}}}}
             """
         formatted_details += f"  \\end{{center}} "
 
