@@ -134,7 +134,7 @@ def generate_headers(root):
     
     def traverse(node):
         if node.page:
-            path_str = " -> ".join(escape_latex(name) for name in node.path_list)
+            path_str = " $\\rightarrow$ ".join(escape_latex(name) for name in node.path_list)
             macro_name = make_macro_name(node.name)
             headers[macro_name] = path_str
         for child in node.children.values():

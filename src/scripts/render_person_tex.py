@@ -68,7 +68,7 @@ def build_location_chain(place_data: dict, places_dir: Path) -> str:
     
     return location_text
 
-def create_full_name(person: dict) -> str:
+def create_full_name(person: dict) -> tuple[str, str]:
     primary_name = person.get("primary_name") or {}
     alternate_names = person.get("alternate_names") or []
 
@@ -81,10 +81,10 @@ def create_full_name(person: dict) -> str:
         alternate_type, alternate_given, alternate_surname = name_parts(alternate_names[0])
 
     if primary_type == "Married Name" and alternate_type == "Birth Name":
-        return f"{primary_given} {primary_surname} (z domu {alternate_surname})".strip()
+        return f"{primary_given} {primary_surname}".strip(), f"(z domu {alternate_surname})".strip()
     elif alternate_type == "Married Name" and primary_type == "Birth Name":
-        return f"{alternate_given} {alternate_surname} (z domu {primary_surname})".strip()
-    return f"{primary_given} {primary_surname}".strip()
+        return f"{alternate_given} {alternate_surname}".strip(), f"(z domu {primary_surname})".strip()
+    return f"{primary_given} {primary_surname}".strip(), ""
     
 def name_parts(name_record: dict) -> tuple[str, str, str]:
     given = name_record.get("first_name") or name_record.get("call") or ""
@@ -555,7 +555,7 @@ def main() -> None:
     except (OSError, ValueError) as exc:
         raise SystemExit(f"ERROR: could not load JSON data: {exc}")
 
-    full_name = create_full_name(person)
+    full_name = create_full_name(person)[0]
 
     occupations = extract_occupations(person)
     birth_date, birth_location, death_date, death_location = infer_birth_death_dates(page_dir, person)
@@ -566,14 +566,16 @@ def main() -> None:
 
     # Load Parents Data
     parent_data = load_person_data(page_dir, person, "father_handle")
-    father_full_name = create_full_name(parent_data)
+    father_full_tuple = create_full_name(parent_data)
+    father_full_name = father_full_tuple[0] + " " + father_full_tuple[1]
     parent_data = load_person_data(page_dir, person, "mother_handle")
-    mother_full_name = create_full_name(parent_data)
+    mother_full_tuple = create_full_name(parent_data)
+    mother_full_name = mother_full_tuple[0] + " " + mother_full_tuple[1]
 
     descendant_full_name = ""
     if person.get("descendant_handle"):
         descendant_data = load_person_data(page_dir, person, "descendant_handle")
-        descendant_full_name = create_full_name(descendant_data)
+        descendant_full_name = create_full_name(descendant_data)[0]
     else :
         descendant_full_name = person.get("descendant_display_name")
 
