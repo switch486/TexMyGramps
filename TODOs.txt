@@ -1,12 +1,16 @@
 PRIO:
 - mapka z eventami?? - Mapbox?
+-- mapka per osoba?
+-- mapka per rodzina??
 - Translation
+- hrefy z TOC
 
 STYLE:
 - poprawic TOC zeby bylo fajniej
 - tabela zeby sie miescila na stronie
 - podpisy pod fotkami - zeby na siebie nie najezdzaly
-- strzalki i odstepy pod headerami
+- formatowanie fotek - marginesy
+- formatowanie notatek - marginesy
 - brak fotki wypelnic czyms
 
 VARIANT:
@@ -21,3 +25,4 @@ REFAKTOR
 
 MAINTENANCE 
 - nazwiska poprawic
+- eventy poprawic - miejsca

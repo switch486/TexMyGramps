@@ -152,7 +152,7 @@ def render_node(node):
     label = escape_latex(node.name)
 
     if node.page:
-        label = f"{label} \\\\ \\small{{ str.{node.page}}}"
+        label = f"{label} \\\\ \\small{{\\hyperlink{{page.{node.page}}}{{str.{node.page}}}}}"
 
     if not node.children:
         return f"[{label}]"
