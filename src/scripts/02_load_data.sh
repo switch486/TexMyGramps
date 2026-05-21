@@ -7,31 +7,18 @@ CONFIG_FILE="$ROOT_DIR/scripts/gramps_api.env"
 LOCAL_CONFIG_FILE="$ROOT_DIR/scripts/gramps_api.local.env"
 TOKEN_FILE="$ROOT_DIR/scripts/gramps_api_token.env"
 
-if [ ! -f "$CONFIG_FILE" ]; then
-  echo "ERROR: GRAMPS API config not found: $CONFIG_FILE"
-  exit 1
-fi
-
-source "$CONFIG_FILE"
-
-# Load local credentials if available (overrides values in main config)
-if [ -f "$LOCAL_CONFIG_FILE" ]; then
-  source "$LOCAL_CONFIG_FILE"
-fi
-
-if [ -f "$TOKEN_FILE" ]; then
-  source "$TOKEN_FILE"
-fi
-
-if [ -z "${GRAMPS_API_TOKEN:-}" ]; then
-  echo "No access token found; requesting a new token."
-  "$ROOT_DIR/scripts/get_access_token.sh" "$TOKEN_FILE"
-  if [ ! -f "$TOKEN_FILE" ]; then
-    echo "ERROR: failed to retrieve access token"
-    exit 1
-  fi
-  source "$TOKEN_FILE"
-fi
+# Load environment variables from .env files
+# Try multiple common filenames so we pick up MAPBOX_TOKEN and other config
+for env_file in "$CONFIG_FILE" "$LOCAL_CONFIG_FILE" "$TOKEN_FILE"; do
+    if [[ -f "$env_file" ]]; then
+        echo "[ENV] Loading environment from: $env_file"
+        set +u
+        set -a
+        source "$env_file"
+        set +a
+        set -u
+    fi
+done
 
 PAGE_NAME="${1:-}"
 STAGE="${2:-}"

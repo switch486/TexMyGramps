@@ -3,6 +3,23 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 PAGES_DIR="$ROOT_DIR/pages"
+CONFIG_FILE="$ROOT_DIR/scripts/gramps_api.env"
+LOCAL_CONFIG_FILE="$ROOT_DIR/scripts/gramps_api.local.env"
+TOKEN_FILE="$ROOT_DIR/scripts/gramps_api_token.env"
+
+# Load environment variables from .env files
+# Try multiple common filenames so we pick up MAPBOX_TOKEN and other config
+for env_file in "$CONFIG_FILE" "$LOCAL_CONFIG_FILE" "$TOKEN_FILE"; do
+    if [[ -f "$env_file" ]]; then
+        echo "[ENV] Loading environment from: $env_file"
+        set +u
+        set -a
+        source "$env_file"
+        set +a
+        set -u
+    fi
+done
+
 PAGE_NAME="${1:-}"
 STAGE="${2:-}"
 

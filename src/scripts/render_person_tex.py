@@ -3,6 +3,11 @@ import argparse
 import json
 from pathlib import Path
 import re
+import math
+import requests
+from typing import Optional
+import os
+import traceback
 
 LATEX_SPECIAL_CHARS = {
     "\\": r"\textbackslash{}",
@@ -327,6 +332,309 @@ def build_timeline_section(timeline_data: dict) -> list[tuple[str, str, str, str
     
     return events
 
+def _calculate_zoom(
+    min_lon: float,
+    min_lat: float,
+    max_lon: float,
+    max_lat: float,
+    width: int,
+    height: int,
+    padding: int = 40,
+) -> float:
+    """
+    Calculate optimal Mapbox zoom level to fit bbox into image.
+
+    Uses Web Mercator approximation.
+    """
+
+    WORLD_DIM = 256
+    ZOOM_MAX = 20
+
+    # Prevent invalid bbox
+    if min_lon == max_lon and min_lat == max_lat:
+        return 14
+
+    # Clamp latitude to Mercator limits
+    min_lat = max(min_lat, -85.0511)
+    max_lat = min(max_lat, 85.0511)
+
+    def lat_rad(lat):
+        sin_val = math.sin(lat * math.pi / 180)
+        rad_x2 = math.log((1 + sin_val) / (1 - sin_val)) / 2
+        return max(min(rad_x2, math.pi), -math.pi) / 2
+
+    def zoom(map_px, world_px, fraction):
+        if fraction == 0:
+            return ZOOM_MAX
+        return math.floor(math.log(map_px / world_px / fraction) / math.log(2))
+
+    lat_fraction = (lat_rad(max_lat) - lat_rad(min_lat)) / math.pi
+
+    lon_diff = max_lon - min_lon
+    if lon_diff < 0:
+        lon_diff += 360
+
+    lon_fraction = lon_diff / 360
+
+    usable_width = max(width - 2 * padding, 1)
+    usable_height = max(height - 2 * padding, 1)
+
+    lat_zoom = zoom(usable_height, WORLD_DIM, lat_fraction)
+    lon_zoom = zoom(usable_width, WORLD_DIM, lon_fraction)
+
+    return min(lat_zoom, lon_zoom, ZOOM_MAX)
+
+
+def generate_static_map_png(
+    map_data: dict,
+    mapbox_token: str,
+    output_path: Path,
+    width: int = 600,
+    height: int = 400,
+    zoom: int = None
+) -> Optional[Path]:
+    """Generate a static map image using Mapbox Static API.
+
+    Args:
+        map_data:
+            Dictionary containing map configuration
+
+        mapbox_token:
+            Mapbox access token
+
+        output_path:
+            Path to save PNG
+
+        width, height:
+            Image dimensions
+
+        zoom:
+            Explicit zoom level (optional)
+
+        points:
+            Optional list of markers:
+            [
+                {
+                    "lon": 13.4050,
+                    "lat": 52.5200,
+                    "color": "ff0000",   # optional
+                    "size": "s"          # optional: s/m/l
+                }
+            ]
+
+    Returns:
+        Path to generated PNG or None on failure
+    """
+
+    print("[MAP] Generating static map image...")
+
+    if not mapbox_token:
+        print("[MAP] ERROR: No Mapbox token provided")
+        return None
+
+    try:
+        min_lon, min_lat, max_lon, max_lat = map_data.get("bbox", [None] * 4)
+
+        center_lon = (min_lon + max_lon) / 2
+        center_lat = (min_lat + max_lat) / 2
+
+        # AUTO CALCULATED ZOOM
+        zoom = _calculate_zoom(
+            min_lon=min_lon,
+            min_lat=min_lat,
+            max_lon=max_lon,
+            max_lat=max_lat,
+            width=width,
+            height=height,
+        )
+
+        # Build marker overlays
+        overlays = ""
+
+        if isinstance(map_data["features"], list):
+            marker_strings = []
+
+            for feature in map_data.get("features", []):
+                p = feature.get("geometry", {}).get("coordinates", [None, None])
+                lon = p[0] if len(p) > 0 else None
+                lat = p[1] if len(p) > 1 else None
+
+                color = "ff0000"
+                size = "s"
+
+                marker = f"pin-{size}+{color}({lon},{lat})"
+                marker_strings.append(marker)
+
+            overlays = ",".join(marker_strings)
+
+        # Build map position
+        position = f"{center_lon},{center_lat},{zoom},0,0"
+
+        # Build URL
+        if overlays:
+            url = (
+                "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/"
+                f"{overlays}/"
+                f"{position}/"
+                f"{width}x{height}"
+                f"?access_token={mapbox_token}"
+            )
+        else:
+            url = (
+                "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/"
+                f"{position}/"
+                f"{width}x{height}"
+                f"?access_token={mapbox_token}"
+            )
+
+        print(f"[MAP] Fetching static map: {url}")
+
+        response = requests.get(
+            url,
+            timeout=10,
+        )
+
+        response.raise_for_status()
+
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_bytes(response.content)
+
+        print(f"[MAP] Static map saved to {output_path}")
+
+        return output_path
+
+    except Exception as e:
+        print(f"[MAP] ERROR: Failed to generate static map: {e}")
+        traceback.print_exc()
+        return None
+
+
+def write_timeline_map_json(page_dir: Path, person: dict, timeline_data: dict) -> Optional[Path]:
+    """Extract lat/long points from timeline_data and write a GeoJSON-like JSON file into assets/map.
+
+    Returns the path to the written JSON file or None if no coordinates found.
+    """
+    print("[MAP] Starting map JSON extraction...")
+    
+    if not isinstance(timeline_data, (dict, list)):
+        print(f"[MAP] ERROR: timeline_data is not dict or list, got {type(timeline_data)}")
+        return None
+
+    # Determine events list
+    events_list = []
+    if isinstance(timeline_data, dict):
+        if "events" in timeline_data and isinstance(timeline_data["events"], list):
+            events_list = timeline_data["events"]
+            print(f"[MAP] Found 'events' key in dict: {len(events_list)} events")
+        elif "timeline" in timeline_data and isinstance(timeline_data["timeline"], list):
+            events_list = timeline_data["timeline"]
+            print(f"[MAP] Found 'timeline' key in dict: {len(events_list)} events")
+        elif isinstance(timeline_data, list):
+            events_list = timeline_data
+            print(f"[MAP] Dict was actually a list: {len(events_list)} events")
+    elif isinstance(timeline_data, list):
+        events_list = timeline_data
+        print(f"[MAP] Timeline data is a list: {len(events_list)} events")
+
+    print(f"[MAP] Processing {len(events_list)} events for geo-coordinates...")
+    places_dir = page_dir / "assets" / "places"
+
+    features = []
+    lats = []
+    lons = []
+
+    for idx, event in enumerate(events_list):
+        if not isinstance(event, dict):
+            print(f"[MAP] Event {idx} is not a dict, skipping")
+            continue
+        place = event.get("place")
+        lat = None
+        lon = None
+        event_label = event.get("label") or f"Event {idx}"
+
+        # place may already be a dict with lat/long
+        if isinstance(place, dict):
+            lat = place.get("lat")
+            lon = place.get("long") or place.get("lng")
+            print(f"[MAP] Event {idx} ({event_label}): place is dict with lat={lat}, lon={lon}")
+        # or place may be a handle (string) referencing a file in assets/places
+        elif isinstance(place, str) and place:
+            place_path = places_dir / f"{place}.json"
+            if place_path.exists():
+                try:
+                    pdata = json.loads(place_path.read_text(encoding="utf-8"))
+                    if isinstance(pdata, dict):
+                        lat = pdata.get("lat")
+                        lon = pdata.get("long") or pdata.get("lng")
+                        print(f"[MAP] Event {idx} ({event_label}): loaded place {place} -> lat={lat}, lon={lon}")
+                except (OSError, ValueError) as e:
+                    print(f"[MAP] Event {idx} ({event_label}): failed to load place {place}: {e}")
+            else:
+                print(f"[MAP] Event {idx} ({event_label}): place file not found: {place_path}")
+        else:
+            print(f"[MAP] Event {idx} ({event_label}): no place info (type={type(place)})")
+
+        try:
+            if lat is not None and lon is not None:
+                lat = float(lat)
+                lon = float(lon)
+                lats.append(lat)
+                lons.append(lon)
+                prop = {
+                    "label": event.get("label") or "",
+                    "date": event.get("date") or "",
+                    "description": event.get("description") or "",
+                    "role": event.get("role") or "",
+                }
+                features.append({
+                    "type": "Feature",
+                    "geometry": {"type": "Point", "coordinates": [lon, lat]},
+                    "properties": prop,
+                })
+                print(f"[MAP] Event {idx} ({event_label}): added marker at ({lat}, {lon})")
+        except (TypeError, ValueError) as e:
+            print(f"[MAP] Event {idx} ({event_label}): coordinate conversion error: {e}")
+
+    print(f"[MAP] Extracted {len(features)} features with coordinates")
+    if not features:
+        print("[MAP] No features with coordinates found, returning None")
+        return None
+
+    min_lat = min(lats)
+    max_lat = max(lats)
+    min_lon = min(lons)
+    max_lon = max(lons)
+
+    print(f"[MAP] Bounds: lat [{min_lat}, {max_lat}], lon [{min_lon}, {max_lon}]")
+
+    # Expand bbox slightly so markers aren't at the edge. Use 5% padding or a small absolute fallback.
+    lat_span = max_lat - min_lat
+    lon_span = max_lon - min_lon
+    pad_lat = lat_span * 0.05 if lat_span > 0 else 0.05
+    pad_lon = lon_span * 0.05 if lon_span > 0 else 0.05
+
+    bbox = [min_lon - pad_lon, min_lat - pad_lat, max_lon + pad_lon, max_lat + pad_lat]
+    print(f"[MAP] Padded bbox: {bbox}")
+
+    out = {
+        "type": "FeatureCollection",
+        "features": features,
+        "bbox": bbox,
+    }
+
+    map_dir = page_dir / "assets" / "map"
+    map_dir.mkdir(parents=True, exist_ok=True)
+
+    timeline_handle = person.get("timeline_handle") or "timeline"
+    out_path = map_dir / f"{timeline_handle}.json"
+    try:
+        out_path.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"[MAP] Successfully wrote map JSON to {out_path}")
+        return out_path
+    except OSError as e:
+        print(f"[MAP] ERROR: failed to write map JSON: {e}")
+        return None
+
 
 def normalize_date_string(date_text: str) -> str:
     if not isinstance(date_text, str):
@@ -431,7 +739,8 @@ def render_tex(
     mother_full_name: str,
     path_to_file:str,
     descendant_full_name: str,
-    formatted_additional_page_details: str = ""
+    formatted_additional_page_details: str = "",
+    map_image_path: str = ""
 ) -> str:
     full_name_tex = latex_escape(full_name)
     descendant_full_name_tex = latex_escape(descendant_full_name)
@@ -445,9 +754,19 @@ def render_tex(
     )
 
     image_if_exists = f"\\includegraphics[width=\\linewidth,height=5.8cm,keepaspectratio]{{{path_to_file}}}" if path_to_file else ""
+    map_image_if_exists = f"\\includegraphics[width=\\linewidth,height=8cm,keepaspectratio]{{{map_image_path}}}" if map_image_path else ""
 
     leaf = full_name_tex
     root = descendant_full_name_tex
+
+    map_section = ""
+    if map_image_if_exists:
+        map_section = f"""\\newpage
+\\section*{{Mapa czasowa}}
+\\centering
+{map_image_if_exists}
+\\vspace{{1em}}
+"""
 
     return f"""% Auto-generated person page
 \\documentclass[10pt, a4paper]{{book}}
@@ -501,6 +820,8 @@ Matka: & {{{mother_full_name}}} \\\\
     {timeline_events}
 \\end{{tabular}}
 
+{map_section}
+
 {formatted_additional_page_details}
 
 \\end{{document}}
@@ -537,6 +858,7 @@ def format_additional_page_details(details: list) -> str:
 
 
 def main() -> None:
+  
     parser = argparse.ArgumentParser(description="Render a simple LaTeX page from a person JSON file.")
     parser.add_argument("--page-dir", required=True, help="Page directory containing output/data.json and optional assets/events")
     parser.add_argument("--data-file", help="Person JSON data file path")
@@ -566,6 +888,32 @@ def main() -> None:
     # Extract timeline events
     timeline_data = load_timeline_data(page_dir, person)
     timeline_events = build_timeline_section(timeline_data)
+    
+    # Write map JSON and generate static image for timeline points (if any)
+    map_image_path = None
+    try:
+        map_json_path = write_timeline_map_json(page_dir, person, timeline_data)
+        if map_json_path:
+            print(f"Wrote timeline map JSON: {map_json_path}")
+            
+            # Try to generate static map image
+            try:
+                map_data = json.loads(map_json_path.read_text(encoding="utf-8"))
+                if map_data:
+                    # Try to get Mapbox token from environment
+                    mapbox_token = os.environ.get("MAPBOX_TOKEN")
+                    if mapbox_token:
+                        print(f"[MAP] Found MAPBOX_TOKEN in environment (length: {len(mapbox_token)})")
+                        map_png_path = page_dir / "assets" / "map" / f"{person.get('timeline_handle', 'timeline')}.png"
+                        generated_map = generate_static_map_png(map_data, mapbox_token, map_png_path)
+                        if generated_map:
+                            map_image_path = generated_map
+                    else:
+                        print("[MAP] WARNING: MAPBOX_TOKEN not found in environment")
+            except Exception as e:
+                print(f"[MAP] Warning: Could not generate static map image: {e}")
+    except Exception as e:
+        print(f"[MAP] Warning: Failed to process timeline map: {e}")
 
     # Load Parents Data
     parent_data = load_person_data(page_dir, person, "father_handle")
@@ -598,7 +946,8 @@ def main() -> None:
             mother_full_name,
             path_to_file,
             descendant_full_name,
-            formatted_additional_page_details
+            formatted_additional_page_details,
+            map_image_path=str(map_image_path) if map_image_path else ""
         ),
         encoding="utf-8",
     )
