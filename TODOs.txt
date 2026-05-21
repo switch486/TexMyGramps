@@ -1,6 +1,6 @@
 PRIO:
 - add map to main file
---  with a fancy legend
+-- with a fancy legend
 -- sized for the whole page somehow
 -- sort uniqie pins
 -- remove shadow under pin

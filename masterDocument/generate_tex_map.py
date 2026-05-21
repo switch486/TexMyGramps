@@ -67,7 +67,7 @@ def generate_static_map_png(
     output_path: Path,
     mapbox_token: str,
     width: int = 600,
-    height: int = 400,
+    height: int = 900,
     zoom: int = None
 ) -> Optional[Path]:
     """Generate a static map image using Mapbox Static API.
@@ -131,18 +131,29 @@ def generate_static_map_png(
         if isinstance(map_data["features"], list):
             marker_strings = []
 
-            for feature in map_data.get("features", []):
-                p = feature.get("geometry", {}).get("coordinates", [None, None])
-                lon = p[0] if len(p) > 0 else None
-                lat = p[1] if len(p) > 1 else None
+        seen_coords = set()
 
-                color = "ff0000"
-                size = "s"
+        for feature in map_data.get("features", []):
+            p = feature.get("geometry", {}).get("coordinates", [None, None])
+            lon = p[0] if len(p) > 0 else None
+            lat = p[1] if len(p) > 1 else None
 
-                marker = f"pin-{size}+{color}({lon},{lat})"
-                marker_strings.append(marker)
+            # skip invalid coordinates
+            if lat is None or lon is None:
+                continue
 
-            overlays = ",".join(marker_strings)
+            coord_key = (lat, lon)
+            if coord_key in seen_coords:
+                continue
+            seen_coords.add(coord_key)
+
+            color = "ff0000"
+            size = "s"
+
+            marker = f"pin-{size}+{color}({lon},{lat})"
+            marker_strings.append(marker)
+
+        overlays = ",".join(marker_strings)
 
         # Build map position
         position = f"{center_lon},{center_lat},{zoom},0,0"
