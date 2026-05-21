@@ -1,7 +1,11 @@
 PRIO:
-- mapka z eventami?? - Mapbox?
--- mapka per osoba?
--- mapka per rodzina??
+- add map to main file
+--  with a fancy legend
+-- sized for the whole page somehow
+-- sort uniqie pins
+-- remove shadow under pin
+- TODO - refactor token handling
+- TODO - refactor path processing
 - Translation
 - hrefy z TOC
 

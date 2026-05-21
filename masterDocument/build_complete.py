@@ -19,6 +19,9 @@ def main():
 
     run("mkdir -p ./output")
 
+    # 0th pass - loop over the files and gather the map points for all persons, and generate the map images
+    run(f"python generate_tex_map.py {stage}")
+
     # 1st pass (generate .dat with page numbers)
     run(f"tectonic -o output/ {main_file}")
 

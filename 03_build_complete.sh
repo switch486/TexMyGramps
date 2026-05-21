@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Load environment variables from .env files
 # Try multiple common filenames so we pick up MAPBOX_TOKEN and other config
 for env_file in "$ROOT_DIR/src/scripts/gramps_api.local.env" "$ROOT_DIR/src/scripts/gramps_api_token.env"; do
