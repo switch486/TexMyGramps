@@ -1,16 +1,17 @@
 PRIO:
-- add map to main file
+- fix map
+-- scale so it is a good fit
 -- with a fancy legend
 -- sized for the whole page somehow
--- sort uniqie pins
--- remove shadow under pin
+-- include year in the map points
+-- paint the dots with the color based on the Year - some gradient
+-- create a legend for the tex page with the color
+-- sort the color list so that the pins will appear starting with the oldest
 - TODO - refactor token handling
 - TODO - refactor path processing
 - Translation
-- hrefy z TOC
 
 STYLE:
-- poprawic TOC zeby bylo fajniej
 - tabela zeby sie miescila na stronie
 - podpisy pod fotkami - zeby na siebie nie najezdzaly
 - formatowanie fotek - marginesy

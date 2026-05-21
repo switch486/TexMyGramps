@@ -66,8 +66,8 @@ def generate_static_map_png(
     map_data: dict,
     output_path: Path,
     mapbox_token: str,
-    width: int = 600,
-    height: int = 900,
+    width: int = 700,
+    height: int = 1000,
     zoom: int = None
 ) -> Optional[Path]:
     """Generate a static map image using Mapbox Static API.

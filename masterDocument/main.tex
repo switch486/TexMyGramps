@@ -91,7 +91,11 @@
     \input{output/tree_headers.tex}
 }{}
 
-%TODO - add map here
+\IfFileExists{output/merged_map.png}{
+    \begin{center}
+        \includegraphics[width=\textwidth]{output/merged_map.png}
+    \end{center}
+}{}
 
 \newpage
 \ifdefined\kast
