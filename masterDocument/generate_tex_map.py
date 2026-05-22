@@ -5,6 +5,7 @@ import argparse
 import os
 import requests
 import math
+from datetime import datetime
 import traceback
 from pathlib import Path
 from typing import Optional
@@ -131,7 +132,7 @@ def generate_static_map_png(
         if isinstance(map_data["features"], list):
             marker_strings = []
 
-        seen_coords = set()
+        latest_by_coords = {}
 
         for feature in map_data.get("features", []):
             p = feature.get("geometry", {}).get("coordinates", [None, None])
@@ -143,11 +144,62 @@ def generate_static_map_png(
                 continue
 
             coord_key = (lat, lon)
-            if coord_key in seen_coords:
-                continue
-            seen_coords.add(coord_key)
 
-            color = "ff0000"
+            date_str = (
+                feature.get("properties", {}).get("date", "") or ""
+            ).strip()
+
+            parsed_date = parse_feature_date(date_str)
+
+            existing = latest_by_coords.get(coord_key)
+
+            # keep newest dated feature
+            if existing is None:
+                latest_by_coords[coord_key] = {
+                    "feature": feature,
+                    "date": parsed_date,
+                    "date_str": date_str,
+                }
+            else:
+                existing_date = existing["date"]
+
+                # replace only if new date is newer
+                if parsed_date and (
+                    existing_date is None or parsed_date > existing_date
+                ):
+                    latest_by_coords[coord_key] = {
+                        "feature": feature,
+                        "date": parsed_date,
+                        "date_str": date_str,
+                    }
+
+        # determine gradient range
+        valid_dates = [
+            item["date"]
+            for item in latest_by_coords.values()
+            if item["date"] is not None
+        ]
+
+        min_date = min(valid_dates) if valid_dates else None
+        max_date = max(valid_dates) if valid_dates else None
+
+        marker_strings = []
+
+        for (lat, lon), item in latest_by_coords.items():
+            parsed_date = item["date"]
+
+            # empty/invalid date -> light blue
+            if parsed_date is None:
+                color = "87ceeb"
+            else:
+                color = interpolate_color(
+                    parsed_date,
+                    min_date,
+                    max_date,
+                    start_rgb=(0, 0, 0),   # black
+                    end_rgb=(255, 0, 0),       # red
+                )
+
             size = "s"
 
             marker = f"pin-{size}+{color}({lon},{lat})"
@@ -196,7 +248,43 @@ def generate_static_map_png(
         traceback.print_exc()
         return None
 
+def parse_feature_date(date_str):
+    """
+    Supports:
+    - yyyy
+    - yyyy-mm-dd
+    - empty/invalid -> None
+    """
+    if not date_str:
+        return None
 
+    for fmt in ("%Y-%m-%d", "%Y"):
+        try:
+            return datetime.strptime(date_str, fmt)
+        except ValueError:
+            pass
+
+    return None
+
+
+def interpolate_color(value, min_value, max_value, start_rgb, end_rgb):
+    """
+    Returns hex color string between start_rgb and end_rgb.
+    """
+
+    if min_value == max_value:
+        ratio = 1.0
+    else:
+        ratio = (
+            (value - min_value).total_seconds()
+            / (max_value - min_value).total_seconds()
+        )
+
+    r = int(start_rgb[0] + ratio * (end_rgb[0] - start_rgb[0]))
+    g = int(start_rgb[1] + ratio * (end_rgb[1] - start_rgb[1]))
+    b = int(start_rgb[2] + ratio * (end_rgb[2] - start_rgb[2]))
+
+    return f"{r:02x}{g:02x}{b:02x}"
 
 
 def load_merged_map(outputFilepath):
