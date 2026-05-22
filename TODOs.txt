@@ -1,4 +1,5 @@
 PRIO:
+- toc phantom nodes for children?
 - fix map
 -- scale so it is a good fit
 -- with a fancy legend
@@ -9,13 +10,13 @@ PRIO:
 -- sort the color list so that the pins will appear starting with the oldest
 - TODO - refactor token handling
 - TODO - refactor path processing
+- cleanup readme
 - Translation
 
 STYLE:
 - tabela zeby sie miescila na stronie
 - podpisy pod fotkami - zeby na siebie nie najezdzaly
 - formatowanie fotek - marginesy
-- formatowanie notatek - marginesy
 - brak fotki wypelnic czyms
 
 VARIANT:

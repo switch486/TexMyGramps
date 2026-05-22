@@ -548,6 +548,8 @@ def format_event_line(date_text: str, location_text: str) -> str:
         return f"{date_text}, {location_text}"
     return date_text or location_text or ""
 
+def extract_year_from_date(date: str) -> str:
+    return date.split(".")[0] if date else ""
 
 def render_tex(
     full_name: str,
@@ -569,6 +571,8 @@ def render_tex(
     occupations_tex = latex_escape(occupations)
     birth_tex = latex_escape(format_event_line(birth_date, birth_location))
     death_tex = latex_escape(format_event_line(death_date, death_location))
+    birth_date_formatted = (f"\\birthsymbol {latex_escape(year)}" if (year := extract_year_from_date(birth_date)) else "")
+    death_date_formatted = (f"\\deathsymbol {latex_escape(year)}" if (year := extract_year_from_date(death_date)) else "")
 
     timeline_events = "\n".join(
         f"{a} & {b} & {c} & {d} & {e} & {f}\\\\"
@@ -605,7 +609,7 @@ def render_tex(
 \\begin{{document}}
 \\thispagestyle{{empty}}
 
-\\recordchapter{{{root}}}{{{leaf}}}
+\\recordchapter{{{root}}}{{{leaf}}}{{{birth_date_formatted}}}{{{death_date_formatted}}}
 
 \\begin{{tabular}}{{@{{}}p{{0.38\\textwidth}} p{{0.58\\textwidth}}}}
   \\fbox{{%

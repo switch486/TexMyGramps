@@ -18,15 +18,15 @@ logger = logging.getLogger(__name__)
 def parse_line(line):
     """
     expected format:
-    parent|child|page
+    parent|child|birth|death|page
     """
     parts = line.strip().split("|")
-    if len(parts) != 3:
+    if len(parts) != 5:
         logger.warning(f"Skipping malformed line: {line.strip()}")
         return None
 
-    parent, child, page = parts
-    return parent.strip(), child.strip(), page.strip()
+    parent, child, birth, death, page = parts
+    return parent.strip(), child.strip(), birth.strip(), death.strip(), page.strip()
 
 
 def escape_latex(s):
@@ -43,8 +43,10 @@ def escape_latex(s):
 
 
 class Node:
-    def __init__(self, name):
+    def __init__(self, name, birth="", death=""):
         self.name = name
+        self.birth = birth
+        self.death = death
         self.page = None
         self.children = {}
         self.path_list = []
@@ -67,7 +69,7 @@ def build_tree(entries):
         return nodes[name]
 
     # build graph
-    for parent, child, page in entries:
+    for parent, child, birth, death, page in entries:
         p = get_node(parent)
         c = get_node(child)
 
@@ -75,6 +77,8 @@ def build_tree(entries):
 
         # assign page to child (last write wins if duplicates exist)
         c.page = page
+        c.birth = birth
+        c.death = death
 
         children_set.add(child)
 
@@ -152,7 +156,7 @@ def render_node(node):
     label = escape_latex(node.name)
 
     if node.page:
-        label = f"{label} \\\\ \\small{{\\hyperlink{{page.{node.page}}}{{str.{node.page}}}}}"
+        label = f"{label} \\\\ \\small{{{node.birth} -- {node.death} \\hyperlink{{page.{node.page}}}{{str.{node.page}}}}}"
 
     if not node.children:
         return f"[{label}]"

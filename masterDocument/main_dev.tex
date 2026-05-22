@@ -16,10 +16,12 @@
 \newwrite\mytoc
 \immediate\openout\mytoc=mytoc.dat
 
-\newcommand{\recordchapter}[2]{%
+\newcommand{\recordchapter}[4]{%
   % #1 = root name
   % #2 = leaf name
-  \immediate\write\mytoc{#1|#2|\thepage}%
+  % #3 = birth date
+  % #4 = death date
+  \immediate\write\mytoc{#1|#2|#3|#4|\thepage}%
 }
 
 \begin{document}
@@ -93,7 +95,7 @@
 
 \IfFileExists{output/merged_map.png}{
     \begin{center}
-        \includegraphics[width=\textwidth]{output/merged_map.png}
+        \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{output/merged_map.png}
     \end{center}
 }{}
 
