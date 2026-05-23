@@ -10,6 +10,12 @@ import traceback
 from pathlib import Path
 from typing import Optional
 
+MASTER_DOCUMENT = "masterDocument"
+OUTPUT_DIR = "output"
+INPUT_FILE = "merged_map.json"
+OUTPUT_IMAGE = "merged_map.png"
+OUTPUT_TEX = "merged_map.tex"
+
 def _calculate_zoom(
     min_lon: float,
     min_lat: float,
@@ -345,8 +351,8 @@ def generate_tex_map_with_legend(map_data: dict, map_png_path: Path, output_tex_
         tex_content = f"""% Auto-generated map page with legend
 \\newpage
 \\begin{{center}}
-Chronologiczna mapa zdarzeń zawartych w kronice.
-\\vspace{{1.5em}}
+\\centerline{{ \\textbf{{Chronologiczna mapa zdarzeń zawartych w kronice.}}}}
+
     \\includegraphics[width=\\textwidth, height=0.90\\textheight, keepaspectratio]{{output/{rel_map_path}}}
 \\end{{center}}
 
@@ -367,7 +373,7 @@ Chronologiczna mapa zdarzeń zawartych w kronice.
         return None
 
 
-def load_merged_map(outputFilepath):
+def load_merged_map(root_dir: Path, outputFilepath: Path):
     
     # Try to generate static map image and LaTeX page
     try:
@@ -378,10 +384,9 @@ def load_merged_map(outputFilepath):
             if mapbox_token:
                 print(f"[MAP] Found MAPBOX_TOKEN in environment (length: {len(mapbox_token)})")
 
-                root_dir = Path(__file__).resolve().parent.parent
-                map_png_path = root_dir / "masterDocument" / "output" / "merged_map.png"
-                map_tex_path = root_dir / "masterDocument" / "output" / "merged_map.tex"
-                
+                map_png_path = root_dir / MASTER_DOCUMENT / OUTPUT_DIR / OUTPUT_IMAGE
+                map_tex_path = root_dir / MASTER_DOCUMENT / OUTPUT_DIR / OUTPUT_TEX
+
                 # Generate PNG map
                 generate_static_map_png(map_data, map_png_path, mapbox_token)
                 
@@ -393,10 +398,12 @@ def load_merged_map(outputFilepath):
         print(f"[MAP] Warning: Could not generate static map image: {e}")
 
 def main():
-    outputFilepath = merge_map_jsons()
-    load_merged_map(outputFilepath)
+    root_dir = Path(__file__).resolve().parent.parent
+    print(f"Root directory: {root_dir}")
+    outputFilepath = merge_map_jsons(root_dir)
+    load_merged_map(root_dir, outputFilepath)
 
-def merge_map_jsons():
+def merge_map_jsons(root_dir: Path) -> Path:
     parser = argparse.ArgumentParser(
         description="Merge GeoJSON map files into a single output file."
     )
@@ -408,10 +415,6 @@ def merge_map_jsons():
     )
 
     args = parser.parse_args()
-
-    root_dir = Path(__file__).resolve().parent.parent
-    print(f"Root directory: {root_dir}")
-
     pages_dir = f"pages_{args.stage}" if args.stage else "pages"
 
     # Keep "map" strictly in the path, but allow flexible substructure under it
@@ -457,10 +460,10 @@ def merge_map_jsons():
     if merged["features"] and min_x != float("inf"):
         merged["bbox"] = [min_x, min_y, max_x, max_y]
 
-    output_dir = root_dir / "masterDocument" / "output"
+    output_dir = root_dir / MASTER_DOCUMENT / OUTPUT_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    output_file = output_dir / "merged_map.json"
+    output_file = output_dir / INPUT_FILE
 
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(merged, f, ensure_ascii=False, indent=2)
