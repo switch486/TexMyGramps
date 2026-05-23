@@ -93,11 +93,13 @@
     \input{output/tree_headers.tex}
 }{}
 
-\IfFileExists{output/merged_map.png}{
+\IfFileExists{output/merged_map.tex}{
+    \input{output/merged_map.tex}
+}{\IfFileExists{output/merged_map.png}{
     \begin{center}
         \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{output/merged_map.png}
     \end{center}
-}{}
+}{}}
 
 
 \newpage

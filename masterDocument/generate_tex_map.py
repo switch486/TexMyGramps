@@ -287,24 +287,110 @@ def interpolate_color(value, min_value, max_value, start_rgb, end_rgb):
     return f"{r:02x}{g:02x}{b:02x}"
 
 
+def generate_tex_map_with_legend(map_data: dict, map_png_path: Path, output_tex_path: Path) -> Optional[Path]:
+    """Generate a LaTeX page with map and legend (gradient + border years).
+    
+    Args:
+        map_data: GeoJSON-like data with features and bbox
+        map_png_path: Path to the generated PNG map
+        output_tex_path: Path to save the LaTeX file
+    
+    Returns:
+        Path to generated LaTeX file or None on failure
+    """
+    
+    print("[MAP] Generating LaTeX map page with legend...")
+    
+    try:
+        # Extract date range from features
+        valid_dates = []
+        
+        for feature in map_data.get("features", []):
+            date_str = (feature.get("properties", {}).get("date", "") or "").strip()
+            parsed_date = parse_feature_date(date_str)
+            if parsed_date:
+                valid_dates.append(parsed_date)
+        
+        if not valid_dates:
+            min_date = None
+            max_date = None
+            min_year = "?"
+            max_year = "?"
+        else:
+            min_date = min(valid_dates)
+            max_date = max(valid_dates)
+            min_year = min_date.strftime("%Y")
+            max_year = max_date.strftime("%Y")
+        
+        print(f"[MAP] Date range: {min_year} - {max_year}")
+        
+        # Generate gradient boxes for legend (10 steps from black to red)
+        gradient_steps = 10
+        gradient_boxes = []
+        
+        for i in range(gradient_steps):
+            ratio = i / (gradient_steps - 1) if gradient_steps > 1 else 0
+            r = int(0 + ratio * (255 - 0))
+            g = int(0 + ratio * (0 - 0))
+            b = int(0 + ratio * (0 - 0))
+            color_hex = f"{r:02x}{g:02x}{b:02x}"
+            gradient_boxes.append(f"\\colorbox[HTML]{{{color_hex}}}{{\\phantom{{W}}}}")
+        
+        gradient_tex = " ".join(gradient_boxes)
+        
+        # Get relative path to map PNG (from masterDocument directory)
+        rel_map_path = map_png_path.name  # just the filename since it's in output/
+        
+        # Generate LaTeX content
+        tex_content = f"""% Auto-generated map page with legend
+\\newpage
+\\begin{{center}}
+Chronologiczna mapa zdarzeń zawartych w kronice.
+\\vspace{{1.5em}}
+    \\includegraphics[width=\\textwidth, height=0.90\\textheight, keepaspectratio]{{output/{rel_map_path}}}
+\\end{{center}}
+
+\\centerline{{ \\textbf{{{min_year}}}   \\large{{{gradient_tex}}}  \\textbf{{{max_year}}}}}
+
+\\newpage
+"""
+        
+        output_tex_path.parent.mkdir(parents=True, exist_ok=True)
+        output_tex_path.write_text(tex_content, encoding="utf-8")
+        
+        print(f"[MAP] LaTeX map page saved to {output_tex_path}")
+        return output_tex_path
+        
+    except Exception as e:
+        print(f"[MAP] ERROR: Failed to generate LaTeX map page: {e}")
+        traceback.print_exc()
+        return None
+
+
 def load_merged_map(outputFilepath):
     
-    # Try to generate static map image
-            try:
-                map_data = json.loads(outputFilepath.read_text(encoding="utf-8"))
-                if map_data:
-                    # Try to get Mapbox token from environment
-                    mapbox_token = os.environ.get("MAPBOX_TOKEN")
-                    if mapbox_token:
-                        print(f"[MAP] Found MAPBOX_TOKEN in environment (length: {len(mapbox_token)})")
+    # Try to generate static map image and LaTeX page
+    try:
+        map_data = json.loads(outputFilepath.read_text(encoding="utf-8"))
+        if map_data:
+            # Try to get Mapbox token from environment
+            mapbox_token = os.environ.get("MAPBOX_TOKEN")
+            if mapbox_token:
+                print(f"[MAP] Found MAPBOX_TOKEN in environment (length: {len(mapbox_token)})")
 
-                        root_dir = Path(__file__).resolve().parent.parent
-                        map_png_path = root_dir / "masterDocument" / "output" / "merged_map.png"
-                        generate_static_map_png(map_data, map_png_path, mapbox_token)
-                    else:
-                        print("[MAP] WARNING: MAPBOX_TOKEN not found in environment")
-            except Exception as e:
-                print(f"[MAP] Warning: Could not generate static map image: {e}")
+                root_dir = Path(__file__).resolve().parent.parent
+                map_png_path = root_dir / "masterDocument" / "output" / "merged_map.png"
+                map_tex_path = root_dir / "masterDocument" / "output" / "merged_map.tex"
+                
+                # Generate PNG map
+                generate_static_map_png(map_data, map_png_path, mapbox_token)
+                
+                # Generate LaTeX page with legend
+                generate_tex_map_with_legend(map_data, map_png_path, map_tex_path)
+            else:
+                print("[MAP] WARNING: MAPBOX_TOKEN not found in environment")
+    except Exception as e:
+        print(f"[MAP] Warning: Could not generate static map image: {e}")
 
 def main():
     outputFilepath = merge_map_jsons()

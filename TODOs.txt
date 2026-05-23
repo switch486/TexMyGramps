@@ -1,13 +1,5 @@
 PRIO:
 - toc phantom nodes for children?
-- fix map
--- scale so it is a good fit
--- with a fancy legend
--- sized for the whole page somehow
--- include year in the map points
--- paint the dots with the color based on the Year - some gradient
--- create a legend for the tex page with the color
--- sort the color list so that the pins will appear starting with the oldest
 - TODO - refactor token handling
 - TODO - refactor path processing
 - cleanup readme
