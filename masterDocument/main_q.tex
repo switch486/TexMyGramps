@@ -10,6 +10,19 @@
 \usepackage{xcolor}
 \usepackage{titlesec}
 \usepackage{setspace}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{} 
+\fancyhead[R]{\thepage}
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyhead[L]{} 
+    \fancyfoot[LE,RO]{\thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+}
+
 \newcommand{\birthsymbol}{\ensuremath{\star}}
 \newcommand{\deathsymbol}{\ensuremath{\dagger}}
 
@@ -22,6 +35,15 @@
   % #3 = birth date
   % #4 = death date
   \immediate\write\mytoc{#1|#2|#3|#4|\thepage}%
+}
+
+\newcommand{\InsertPage}[3]{%
+    \clearpage
+    \ifdefined#1
+        \fancyhead[L]{#1}
+    \fi
+    \subfile{#2}
+    \clearpage
 }
 
 \begin{document}
@@ -80,13 +102,12 @@
     Wydawnictwo Domowe}
 
 \end{titlepage}
-\newpage
 
-
-\chapter*{Spis treści}
-
-\IfFileExists{output/generated_tree.tex}{
+\IfFileExists{output/generated_tree.tex}{    
+    \clearpage
+    \fancyhead[L]{Spis Osób} 
     \input{output/generated_tree.tex}
+    \clearpage
 }{}
 
 \IfFileExists{output/tree_headers.tex}{
@@ -94,96 +115,38 @@
 }{}
 
 \IfFileExists{output/merged_map.tex}{
+    \clearpage
+    \fancyhead[L]{Chronologiczna mapa zdarzeń} 
     \input{output/merged_map.tex}
-}{\IfFileExists{output/merged_map.png}{
-    \begin{center}
-        \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{output/merged_map.png}
-    \end{center}
-}{}}
+    \clearpage
+}{}
 
+\InsertPage{\tokr}{../src/pages_q/pagetokr/output/page.tex}
 
-\newpage
-\ifdefined\tokr
-    \tokr
-\fi
-\subfile{../src/pages_q/pagetokr/output/page.tex}
+\InsertPage{\jjxx}{../src/pages_q/pagejjxx/output/page.tex}
 
-\newpage
-\ifdefined\jjxx
-    \jjxx
-\fi
-\subfile{../src/pages_q/pagejjxx/output/page.tex}
+\InsertPage{\kakr}{../src/pages_q/pagekakr/output/page.tex}
 
-\newpage
-\ifdefined\kakr
-    \kakr
-\fi
-\subfile{../src/pages_q/pagekakr/output/page.tex}
+\InsertPage{\maja}{../src/pages_q/pagemaja/output/page.tex}
 
-\newpage
-\ifdefined\maja
-    \maja
-\fi
-\subfile{../src/pages_q/pagemaja/output/page.tex}
+\InsertPage{\stjx}{../src/pages_q/pagestjx/output/page.tex}
 
-\newpage
-\ifdefined\stjx
-    \stjx
-\fi
-\subfile{../src/pages_q/pagestjx/output/page.tex}
+\InsertPage{\bobi}{../src/pages_q/pagebobi/output/page.tex}
 
-\newpage
-\ifdefined\bobi
-    \bobi
-\fi
-\subfile{../src/pages_q/pagebobi/output/page.tex}
+\InsertPage{\frkr}{../src/pages_q/pagefrkr/output/page.tex}
 
-\newpage
-\ifdefined\frkr
-    \frkr
-\fi
-\subfile{../src/pages_q/pagefrkr/output/page.tex}
+\InsertPage{\mado}{../src/pages_q/pagemado/output/page.tex}
 
-\newpage
-\ifdefined\mado
-    \mado
-\fi
-\subfile{../src/pages_q/pagemado/output/page.tex}
+\InsertPage{\jaja}{../src/pages_q/pagejaja/output/page.tex}
 
-\newpage
-\ifdefined\jaja
-    \jaja
-\fi
-\subfile{../src/pages_q/pagejaja/output/page.tex}
+\InsertPage{\kabo}{../src/pages_q/pagekabo/output/page.tex}
 
-\newpage
-\ifdefined\kabo
-    \kabo
-\fi
-\subfile{../src/pages_q/pagekabo/output/page.tex}
+\InsertPage{\bjxx}{../src/pages_q/pagebjxx/output/page.tex}
 
-\newpage
-\ifdefined\bjxx
-    \bjxx
-\fi
-\subfile{../src/pages_q/pagebjxx/output/page.tex}
+\InsertPage{\weoz}{../src/pages_q/pageweoz/output/page.tex}
 
-\newpage
-\ifdefined\weoz
-    \weoz
-\fi
-\subfile{../src/pages_q/pageweoz/output/page.tex}
+\InsertPage{\igbi}{../src/pages_q/pageigbi/output/page.tex}
 
-\newpage
-\ifdefined\igbi
-    \igbi
-\fi
-\subfile{../src/pages_q/pageigbi/output/page.tex}
-
-\newpage
-\ifdefined\jgrx
-    \jgrx
-\fi
-\subfile{../src/pages_q/pagejgrx/output/page.tex}
+\InsertPage{\jgrx}{../src/pages_q/pagejgrx/output/page.tex}
 
 \end{document}

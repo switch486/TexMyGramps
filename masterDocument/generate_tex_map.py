@@ -351,9 +351,7 @@ def generate_tex_map_with_legend(map_data: dict, map_png_path: Path, output_tex_
         tex_content = f"""% Auto-generated map page with legend
 \\newpage
 \\begin{{center}}
-\\centerline{{ \\textbf{{Chronologiczna mapa zdarzeń zawartych w kronice.}}}}
-
-    \\includegraphics[width=\\textwidth, height=0.90\\textheight, keepaspectratio]{{output/{rel_map_path}}}
+    \\includegraphics[width=\\textwidth, height=0.95\\textheight, keepaspectratio]{{output/{rel_map_path}}}
 \\end{{center}}
 
 \\centerline{{ \\textbf{{{min_year}}}   \\large{{{gradient_tex}}}  \\textbf{{{max_year}}}}}

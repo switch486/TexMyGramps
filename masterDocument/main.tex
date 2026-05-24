@@ -10,6 +10,19 @@
 \usepackage{xcolor}
 \usepackage{titlesec}
 \usepackage{setspace}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{} 
+\fancyhead[R]{\thepage}
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyhead[L]{} 
+    \fancyfoot[LE,RO]{\thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+}
+
 \newcommand{\birthsymbol}{\ensuremath{\star}}
 \newcommand{\deathsymbol}{\ensuremath{\dagger}}
 
@@ -22,6 +35,15 @@
   % #3 = birth date
   % #4 = death date
   \immediate\write\mytoc{#1|#2|#3|#4|\thepage}%
+}
+
+\newcommand{\InsertPage}[3]{%
+    \clearpage
+    \ifdefined#1
+        \fancyhead[L]{#1}
+    \fi
+    \subfile{#2}
+    \clearpage
 }
 
 \begin{document}
@@ -82,11 +104,11 @@
 \end{titlepage}
 \newpage
 
-
-\chapter*{Spis treści}
-
-\IfFileExists{output/generated_tree.tex}{
+\IfFileExists{output/generated_tree.tex}{    
+    \clearpage
+    \fancyhead[L]{Spis Osób} 
     \input{output/generated_tree.tex}
+    \clearpage
 }{}
 
 \IfFileExists{output/tree_headers.tex}{
@@ -94,48 +116,23 @@
 }{}
 
 \IfFileExists{output/merged_map.tex}{
+    \clearpage
+    \fancyhead[L]{Chronologiczna mapa zdarzeń} 
     \input{output/merged_map.tex}
-}{\IfFileExists{output/merged_map.png}{
-    \begin{center}
-        \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{output/merged_map.png}
-    \end{center}
-}{}}
+    \clearpage
+}{}
 
-\newpage
-\ifdefined\kast
-    \kast
-\fi
-\subfile{../src/pages/pagekast/output/page.tex}
+\InsertPage{\kast}{../src/pages/pagekast/output/page.tex}
 
-\newpage
-\ifdefined\anfr
-    \anfr
-\fi
-\subfile{../src/pages/pageanfr/output/page.tex}
+\InsertPage{\anfr}{../src/pages/pageanfr/output/page.tex}
 
-\newpage
-\ifdefined\jast
-    \jast
-\fi
-\subfile{../src/pages/pagejast/output/page.tex}
+\InsertPage{\jast}{../src/pages/pagejast/output/page.tex}
 
-\newpage
-\ifdefined\brst
-    \brst
-\fi
-\subfile{../src/pages/pagebrst/output/page.tex}
+\InsertPage{\brst}{../src/pages/pagebrst/output/page.tex}
 
-\newpage
-\ifdefined\zdfr
-    \zdfr
-\fi
-\subfile{../src/pages/pagezdfr/output/page.tex}
+\InsertPage{\zdfr}{../src/pages/pagezdfr/output/page.tex}
 
-\newpage
-\ifdefined\wfrx
-    \wfrx
-\fi
-\subfile{../src/pages/pagewbxx/output/page.tex}
+\InsertPage{\wfrx}{../src/pages/pagewbxx/output/page.tex}
 
 
 

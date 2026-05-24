@@ -607,7 +607,6 @@ def render_tex(
 \\providecommand{{\\recordchapter}}{{2}}
 
 \\begin{{document}}
-\\thispagestyle{{empty}}
 
 \\recordchapter{{{root}}}{{{leaf}}}{{{birth_date_formatted}}}{{{death_date_formatted}}}
 
