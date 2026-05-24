@@ -10,6 +10,9 @@ src/scripts/gramps_api.local.env
 
 # Ignore all dev related stuff specific for local pc
 devStartup*
+__pycache__/
+*.log
+*.aux
 
 # Ignore macOS specific files
 **/.DS_Store

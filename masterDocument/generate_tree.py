@@ -138,7 +138,7 @@ def generate_headers(root):
     
     def traverse(node):
         if node.page:
-            path_str = " $\\rightarrow$ ".join(escape_latex(name) for name in node.path_list)
+            path_str = " $\\leftarrow$ ".join(escape_latex(name) for name in node.path_list)
             macro_name = make_macro_name(node.name)
             headers[macro_name] = path_str
         for child in node.children.values():
@@ -154,9 +154,15 @@ def render_node(node):
     """
 
     label = escape_latex(node.name)
+    label = label.replace(" ", "\\\\")
 
     if node.page:
-        label = f"{label} \\\\ \\small{{{node.birth} -- {node.death} \\hyperlink{{page.{node.page}}}{{str.{node.page}}}}}"
+        label = (
+            label
+            + f"\\\\\\small{{{node.birth}}}"
+            + f"\\\\\\small{{{node.death}}}"
+            + f"\\\\\\hyperlink{{page.{node.page}}}{{str.{node.page}}}"
+        )
 
     if not node.children:
         return f"[{label}]"
