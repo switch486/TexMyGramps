@@ -1,6 +1,4 @@
 PRIO:
-- TOC multiple lines, so perhaps more can be added?
-- dates in TOC with empty placeholders for death and birth
 - REFACTOR - constant variables in central place?
 - toc phantom nodes for children?
 - TODO - refactor token handling

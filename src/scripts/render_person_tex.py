@@ -563,16 +563,15 @@ def render_tex(
     mother_full_name: str,
     path_to_file:str,
     descendant_full_name: str,
-    formatted_additional_page_details: str = "",
-    map_image_path: str = ""
+    formatted_additional_page_details: str = ""
 ) -> str:
     full_name_tex = latex_escape(full_name)
     descendant_full_name_tex = latex_escape(descendant_full_name)
     occupations_tex = latex_escape(occupations)
     birth_tex = latex_escape(format_event_line(birth_date, birth_location))
     death_tex = latex_escape(format_event_line(death_date, death_location))
-    birth_date_formatted = (f"\\birthsymbol {latex_escape(year)}" if (year := extract_year_from_date(birth_date)) else "")
-    death_date_formatted = (f"\\deathsymbol {latex_escape(year)}" if (year := extract_year_from_date(death_date)) else "")
+    birth_date_formatted = prepare_date_string("\\birthsymbol", birth_date)
+    death_date_formatted = prepare_date_string("\\deathsymbol", death_date)
 
     timeline_events = "\n".join(
         f"{a} & {b} & {c} & {d} & {e} & {f}\\\\"
@@ -580,19 +579,9 @@ def render_tex(
     )
 
     image_if_exists = f"\\includegraphics[width=\\linewidth,height=5.8cm,keepaspectratio]{{{path_to_file}}}" if path_to_file else ""
-    map_image_if_exists = f"\\includegraphics[width=\\linewidth,height=8cm,keepaspectratio]{{{map_image_path}}}" if map_image_path else ""
 
     leaf = full_name_tex
     root = descendant_full_name_tex
-
-    map_section = ""
-    if map_image_if_exists:
-        map_section = f"""\\newpage
-\\section*{{Mapa czasowa}}
-\\centering
-{map_image_if_exists}
-\\vspace{{1em}}
-"""
 
     return f"""% Auto-generated person page
 \\documentclass[10pt, a4paper]{{book}}
@@ -645,12 +634,17 @@ Matka: & {{{mother_full_name}}} \\\\
     {timeline_events}
 \\end{{tabular}}
 
-{map_section}
-
 {formatted_additional_page_details}
 
 \\end{{document}}
 """
+
+def prepare_date_string(symbol,birth_date):
+    date = extract_year_from_date(birth_date)
+    if date:
+        return f"{symbol} {latex_escape(date)}"
+    else :
+        return f"{symbol} \\_\\_\\_"
 
 def format_additional_page_details(details: list) -> str:
     if not isinstance(details, list) or not details:
@@ -715,7 +709,6 @@ def main() -> None:
     timeline_events = build_timeline_section(timeline_data)
     
     # Write map JSON and generate static image for timeline points (if any)
-    map_image_path = None
     try:
         map_json_path = write_timeline_map_json(page_dir, person, timeline_data)
         if map_json_path:
@@ -755,8 +748,7 @@ def main() -> None:
             mother_full_name,
             path_to_file,
             descendant_full_name,
-            formatted_additional_page_details,
-            map_image_path=str(map_image_path) if map_image_path else ""
+            formatted_additional_page_details
         ),
         encoding="utf-8",
     )
