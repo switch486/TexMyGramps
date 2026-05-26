@@ -29,12 +29,13 @@
 \newwrite\mytoc
 \immediate\openout\mytoc=mytoc.dat
 
-\newcommand{\recordchapter}[4]{%
-  % #1 = root name
-  % #2 = leaf name
-  % #3 = birth date
-  % #4 = death date
-  \immediate\write\mytoc{#1|#2|#3|#4|\thepage}%
+\newcommand{\recordchapter}[5]{%
+  % #1 = filename (without extension)
+  % #2 = root name
+  % #3 = leaf name
+  % #4 = birth date
+  % #5 = death date
+  \immediate\write\mytoc{#1|#2|#3|#4|#5|\thepage}%
 }
 
 \newcommand{\InsertPage}[2]{%
@@ -122,12 +123,18 @@
     \clearpage
 }{}
 
-\InsertPage{japu}{../src/pages_a/pagejapu/output/page.tex}
-\InsertPage{lupu}{../src/pages_a/pagelupu/output/page.tex}
+\InsertPage{pagejapu}{../src/pages_a/pagejapu/output/page.tex}
+\InsertPage{pagelupu}{../src/pages_a/pagelupu/output/page.tex}
 
-\InsertPage{sypu}{../src/pages_a/pagesypu/output/page.tex}
-\InsertPage{mapu}{../src/pages_a/pagemapu/output/page.tex}
-\InsertPage{igwi}{../src/pages_a/pageigwi/output/page.tex}
+\InsertPage{pagesypu}{../src/pages_a/pagesypu/output/page.tex}
+\InsertPage{pagemapu}{../src/pages_a/pagemapu/output/page.tex}
+\InsertPage{pageigwi}{../src/pages_a/pageigwi/output/page.tex}
+\InsertPage{pagestwi}{../src/pages_a/pagestwi/output/page.tex}
+
+\InsertPage{pagejpux}{../src/pages_a/pagejpux/output/page.tex}
+\InsertPage{pagejmpu}{../src/pages_a/pagejmpu/output/page.tex}
+
+
 
 
 \end{document}

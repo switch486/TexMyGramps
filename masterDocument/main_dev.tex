@@ -29,12 +29,13 @@
 \newwrite\mytoc
 \immediate\openout\mytoc=mytoc.dat
 
-\newcommand{\recordchapter}[4]{%
-  % #1 = root name
-  % #2 = leaf name
-  % #3 = birth date
-  % #4 = death date
-  \immediate\write\mytoc{#1|#2|#3|#4|\thepage}%
+\newcommand{\recordchapter}[5]{%
+  % #1 = filename (without extension)
+  % #2 = root name
+  % #3 = leaf name
+  % #4 = birth date
+  % #5 = death date
+  \immediate\write\mytoc{#1|#2|#3|#4|#5|\thepage}%
 }
 
 \newcommand{\InsertPage}[2]{%
@@ -123,7 +124,7 @@
     \clearpage
 }{}
 
-\InsertPage{frbx}{../src/pages_dev/pageXY/output/page.tex}
-\InsertPage{kako}{../src/pages_dev/pageJW/output/page.tex}
+\InsertPage{pagefrbx}{../src/pages_dev/pageXY/output/page.tex}
+\InsertPage{pagekako}{../src/pages_dev/pageJW/output/page.tex}
 
 \end{document}

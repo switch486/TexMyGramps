@@ -29,12 +29,13 @@
 \newwrite\mytoc
 \immediate\openout\mytoc=mytoc.dat
 
-\newcommand{\recordchapter}[4]{%
-  % #1 = root name
-  % #2 = leaf name
-  % #3 = birth date
-  % #4 = death date
-  \immediate\write\mytoc{#1|#2|#3|#4|\thepage}%
+\newcommand{\recordchapter}[5]{%
+  % #1 = filename (without extension)
+  % #2 = root name
+  % #3 = leaf name
+  % #4 = birth date
+  % #5 = death date
+  \immediate\write\mytoc{#1|#2|#3|#4|#5|\thepage}%
 }
 
 \newcommand{\InsertPage}[2]{%
@@ -122,17 +123,17 @@
     \clearpage
 }{}
 
-\InsertPage{kast}{../src/pages/pagekast/output/page.tex}
+\InsertPage{pagekast}{../src/pages/pagekast/output/page.tex}
 
-\InsertPage{anfr}{../src/pages/pageanfr/output/page.tex}
+\InsertPage{pageanfr}{../src/pages/pageanfr/output/page.tex}
 
-\InsertPage{jast}{../src/pages/pagejast/output/page.tex}
+\InsertPage{pagejast}{../src/pages/pagejast/output/page.tex}
 
-\InsertPage{brst}{../src/pages/pagebrst/output/page.tex}
+\InsertPage{pagebrst}{../src/pages/pagebrst/output/page.tex}
 
-\InsertPage{zdfr}{../src/pages/pagezdfr/output/page.tex}
+\InsertPage{pagezdfr}{../src/pages/pagezdfr/output/page.tex}
 
-\InsertPage{wfrx}{../src/pages/pagewbxx/output/page.tex}
+\InsertPage{pagewfrx}{../src/pages/pagewbxx/output/page.tex}
 
 
 

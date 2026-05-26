@@ -1,0 +1,19 @@
+{
+  "personGrampsID": "I0042",
+  "descendant": {
+    "personGrampsID": "I0014"
+  },
+  "detailPages": [
+    {
+      "mediaObjectID": "O0259",
+      "noteID": "N0094"
+    },
+    {
+      "mediaObjectID": "O0155",
+      "noteID": "N0014"
+    },
+    {
+      "mediaObjectID": "O0254"
+    }
+  ]
+}

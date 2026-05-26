@@ -537,6 +537,7 @@ def extract_year_from_date(date: str) -> str:
     return date.split(".")[0] if date else ""
 
 def render_tex(
+    page_name: str,
     full_name: str,
     occupations: str,
     birth_date: str,
@@ -582,7 +583,7 @@ def render_tex(
 
 \\begin{{document}}
 
-\\recordchapter{{{root}}}{{{leaf}}}{{{birth_date_formatted}}}{{{death_date_formatted}}}
+\\recordchapter{{{page_name}}}{{{root}}}{{{leaf}}}{{{birth_date_formatted}}}{{{death_date_formatted}}}
 
 \\begin{{tabular}}{{@{{}}p{{0.38\\textwidth}} p{{0.58\\textwidth}}}}
   \\fbox{{%
@@ -667,6 +668,7 @@ def main() -> None:
     parser.add_argument("--page-dir", required=True, help="Page directory containing output/data.json and optional assets/events")
     parser.add_argument("--data-file", help="Person JSON data file path")
     parser.add_argument("--output-file", help="Output TeX file path")
+    parser.add_argument("--page-name", help="Name of the page")
     args = parser.parse_args()
 
     page_dir = Path(args.page_dir).resolve()
@@ -722,6 +724,7 @@ def main() -> None:
 
     output_path.write_text(
         render_tex(
+            args.page_name,
             full_name,
             occupations,
             birth_date,

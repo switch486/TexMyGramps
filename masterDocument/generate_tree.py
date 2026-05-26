@@ -18,15 +18,15 @@ logger = logging.getLogger(__name__)
 def parse_line(line):
     """
     expected format:
-    parent|child|birth|death|page
+    key|parent|child|birth|death|page
     """
     parts = line.strip().split("|")
-    if len(parts) != 5:
+    if len(parts) != 6:
         logger.warning(f"Skipping malformed line: {line.strip()}")
         return None
 
-    parent, child, birth, death, page = parts
-    return parent.strip(), child.strip(), birth.strip(), death.strip(), page.strip()
+    key, parent, child, birth, death, page = parts
+    return key.strip(), parent.strip(), child.strip(), birth.strip(), death.strip(), page.strip()
 
 
 def escape_latex(s):
@@ -69,13 +69,14 @@ def build_tree(entries):
         return nodes[name]
 
     # build graph
-    for parent, child, birth, death, page in entries:
+    for key, parent, child, birth, death, page in entries:
         p = get_node(parent)
         c = get_node(child)
 
         p.children[child] = c
 
         # assign page to child (last write wins if duplicates exist)
+        c.key = key
         c.page = page
         c.birth = birth
         c.death = death
@@ -106,32 +107,6 @@ def set_paths(node, current_path):
         set_paths(child, node.path_list)
 
 
-def make_macro_name(full_name: str) -> str:
-    """Build a 4-letter macro name from the first given name and surname."""
-    if not isinstance(full_name, str):
-        return "aaab"
-
-    # remove any bracketed substrings starting with '(' or '['
-    cleaned = re.sub(r"\s*[\(\[].*$", "", full_name).strip()
-    parts = [p for p in cleaned.split() if p]
-
-    if len(parts) >= 2:
-        given = parts[0][:2]
-        surname = parts[-1][:2]
-    elif parts:
-        token = parts[0]
-        given = token[:2]
-        surname = token[2:4]
-    else:
-        given = "aa"
-        surname = "ab"
-
-    candidate = (given + surname).lower()
-    candidate = re.sub(r"[^a-z]", "", candidate)
-    candidate = candidate.ljust(4, "x")[:4]
-    return candidate
-
-
 def generate_headers(root):
     """Generate headers for each page showing the path from root."""
     headers = {}
@@ -139,8 +114,7 @@ def generate_headers(root):
     def traverse(node):
         if node.page:
             path_str = " $\\leftarrow$ ".join(escape_latex(name) for name in node.path_list)
-            macro_name = make_macro_name(node.name)
-            headers[macro_name] = path_str
+            headers[node.key] = path_str
         for child in node.children.values():
             traverse(child)
     

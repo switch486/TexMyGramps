@@ -29,12 +29,13 @@
 \newwrite\mytoc
 \immediate\openout\mytoc=mytoc.dat
 
-\newcommand{\recordchapter}[4]{%
-  % #1 = root name
-  % #2 = leaf name
-  % #3 = birth date
-  % #4 = death date
-  \immediate\write\mytoc{#1|#2|#3|#4|\thepage}%
+\newcommand{\recordchapter}[5]{%
+  % #1 = filename (without extension)
+  % #2 = root name
+  % #3 = leaf name
+  % #4 = birth date
+  % #5 = death date
+  \immediate\write\mytoc{#1|#2|#3|#4|#5|\thepage}%
 }
 
 \newcommand{\InsertPage}[2]{%
@@ -121,31 +122,31 @@
     \clearpage
 }{}
 
-\InsertPage{tokr}{../src/pages_q/pagetokr/output/page.tex}
+\InsertPage{pagetokr}{../src/pages_q/pagetokr/output/page.tex}
 
-\InsertPage{jjxx}{../src/pages_q/pagejjxx/output/page.tex}
+\InsertPage{pagejjxx}{../src/pages_q/pagejjxx/output/page.tex}
 
-\InsertPage{kakr}{../src/pages_q/pagekakr/output/page.tex}
+\InsertPage{pagekakr}{../src/pages_q/pagekakr/output/page.tex}
 
-\InsertPage{maja}{../src/pages_q/pagemaja/output/page.tex}
+\InsertPage{pagemaja}{../src/pages_q/pagemaja/output/page.tex}
 
-\InsertPage{stjx}{../src/pages_q/pagestjx/output/page.tex}
+\InsertPage{pagestjx}{../src/pages_q/pagestjx/output/page.tex}
 
-\InsertPage{bobi}{../src/pages_q/pagebobi/output/page.tex}
+\InsertPage{pagebobi}{../src/pages_q/pagebobi/output/page.tex}
 
-\InsertPage{frkr}{../src/pages_q/pagefrkr/output/page.tex}
+\InsertPage{pagefrkr}{../src/pages_q/pagefrkr/output/page.tex}
 
-\InsertPage{mado}{../src/pages_q/pagemado/output/page.tex}
+\InsertPage{pagemado}{../src/pages_q/pagemado/output/page.tex}
 
-\InsertPage{jaja}{../src/pages_q/pagejaja/output/page.tex}
+\InsertPage{pagejaja}{../src/pages_q/pagejaja/output/page.tex}
 
-\InsertPage{kabo}{../src/pages_q/pagekabo/output/page.tex}
+\InsertPage{pagekabo}{../src/pages_q/pagekabo/output/page.tex}
 
-\InsertPage{bjxx}{../src/pages_q/pagebjxx/output/page.tex}
+\InsertPage{pagebjxx}{../src/pages_q/pagebjxx/output/page.tex}
 
-\InsertPage{weoz}{../src/pages_q/pageweoz/output/page.tex}
+\InsertPage{pageweoz}{../src/pages_q/pageweoz/output/page.tex}
 
-\InsertPage{igbi}{../src/pages_q/pageigbi/output/page.tex}
+\InsertPage{pageigbi}{../src/pages_q/pageigbi/output/page.tex}
 
 \InsertPage{jgrx}{../src/pages_q/pagejgrx/output/page.tex}
 

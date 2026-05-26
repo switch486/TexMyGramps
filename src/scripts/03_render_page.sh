@@ -53,7 +53,7 @@ if ! command -v tectonic >/dev/null 2>&1; then
 fi
 
 GENERATED_TEX="$OUTPUT_DIR/page.tex"
-python3 "$ROOT_DIR/scripts/render_person_tex.py" --page-dir "$PAGE_DIR" --output-file "$GENERATED_TEX"
+python3 "$ROOT_DIR/scripts/render_person_tex.py" --page-dir "$PAGE_DIR" --output-file "$GENERATED_TEX" --page-name "$PAGE_NAME"
 
 if [ ! -f "$GENERATED_TEX" ]; then
   echo "ERROR: generated TeX not found: $GENERATED_TEX"
