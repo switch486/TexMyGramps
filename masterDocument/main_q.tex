@@ -37,10 +37,10 @@
   \immediate\write\mytoc{#1|#2|#3|#4|\thepage}%
 }
 
-\newcommand{\InsertPage}[3]{%
+\newcommand{\InsertPage}[2]{%
     \clearpage
-    \ifdefined#1
-        \fancyhead[L]{#1}
+    \ifcsname #1\endcsname
+        \fancyhead[L]{\csname #1\endcsname}
     \fi
     \subfile{#2}
     \clearpage
@@ -121,32 +121,32 @@
     \clearpage
 }{}
 
-\InsertPage{\tokr}{../src/pages_q/pagetokr/output/page.tex}
+\InsertPage{tokr}{../src/pages_q/pagetokr/output/page.tex}
 
-\InsertPage{\jjxx}{../src/pages_q/pagejjxx/output/page.tex}
+\InsertPage{jjxx}{../src/pages_q/pagejjxx/output/page.tex}
 
-\InsertPage{\kakr}{../src/pages_q/pagekakr/output/page.tex}
+\InsertPage{kakr}{../src/pages_q/pagekakr/output/page.tex}
 
-\InsertPage{\maja}{../src/pages_q/pagemaja/output/page.tex}
+\InsertPage{maja}{../src/pages_q/pagemaja/output/page.tex}
 
-\InsertPage{\stjx}{../src/pages_q/pagestjx/output/page.tex}
+\InsertPage{stjx}{../src/pages_q/pagestjx/output/page.tex}
 
-\InsertPage{\bobi}{../src/pages_q/pagebobi/output/page.tex}
+\InsertPage{bobi}{../src/pages_q/pagebobi/output/page.tex}
 
-\InsertPage{\frkr}{../src/pages_q/pagefrkr/output/page.tex}
+\InsertPage{frkr}{../src/pages_q/pagefrkr/output/page.tex}
 
-\InsertPage{\mado}{../src/pages_q/pagemado/output/page.tex}
+\InsertPage{mado}{../src/pages_q/pagemado/output/page.tex}
 
-\InsertPage{\jaja}{../src/pages_q/pagejaja/output/page.tex}
+\InsertPage{jaja}{../src/pages_q/pagejaja/output/page.tex}
 
-\InsertPage{\kabo}{../src/pages_q/pagekabo/output/page.tex}
+\InsertPage{kabo}{../src/pages_q/pagekabo/output/page.tex}
 
-\InsertPage{\bjxx}{../src/pages_q/pagebjxx/output/page.tex}
+\InsertPage{bjxx}{../src/pages_q/pagebjxx/output/page.tex}
 
-\InsertPage{\weoz}{../src/pages_q/pageweoz/output/page.tex}
+\InsertPage{weoz}{../src/pages_q/pageweoz/output/page.tex}
 
-\InsertPage{\igbi}{../src/pages_q/pageigbi/output/page.tex}
+\InsertPage{igbi}{../src/pages_q/pageigbi/output/page.tex}
 
-\InsertPage{\jgrx}{../src/pages_q/pagejgrx/output/page.tex}
+\InsertPage{jgrx}{../src/pages_q/pagejgrx/output/page.tex}
 
 \end{document}

@@ -260,6 +260,8 @@ def tr(event_type: str) -> str:
         "Sister": "Siostra",
         "Brother": "Brat",
         "Father": "Ojciec",
+        "Wife": "Żona",
+        "Husband": "Mąż",
 
         "days": "dni",
         "years": "lat",
@@ -423,26 +425,9 @@ def write_timeline_map_json(page_dir: Path, person: dict, timeline_data: dict) -
         print("[MAP] No features with coordinates found, returning None")
         return None
 
-    min_lat = min(lats)
-    max_lat = max(lats)
-    min_lon = min(lons)
-    max_lon = max(lons)
-
-    print(f"[MAP] Bounds: lat [{min_lat}, {max_lat}], lon [{min_lon}, {max_lon}]")
-
-    # Expand bbox slightly so markers aren't at the edge. Use 5% padding or a small absolute fallback.
-    lat_span = max_lat - min_lat
-    lon_span = max_lon - min_lon
-    pad_lat = lat_span * 0.05 if lat_span > 0 else 0.05
-    pad_lon = lon_span * 0.05 if lon_span > 0 else 0.05
-
-    bbox = [min_lon - pad_lon, min_lat - pad_lat, max_lon + pad_lon, max_lat + pad_lat]
-    print(f"[MAP] Padded bbox: {bbox}")
-
     out = {
         "type": "FeatureCollection",
-        "features": features,
-        "bbox": bbox,
+        "features": features
     }
 
     map_dir = page_dir / "assets" / "map"

@@ -74,7 +74,7 @@ def generate_static_map_png(
     output_path: Path,
     mapbox_token: str,
     width: int = 700,
-    height: int = 1000,
+    height: int = 900,
     zoom: int = None
 ) -> Optional[Path]:
     """Generate a static map image using Mapbox Static API.
@@ -214,7 +214,7 @@ def generate_static_map_png(
         overlays = ",".join(marker_strings)
 
         # Build map position
-        position = f"{center_lon},{center_lat},{zoom},0,0"
+        position = f"{center_lon},{center_lat},{zoom-1},0,0"
 
         # Build URL
         if overlays:
@@ -435,9 +435,6 @@ def merge_map_jsons(root_dir: Path) -> Path:
         "features": [],
     }
 
-    min_x = min_y = float("inf")
-    max_x = max_y = float("-inf")
-
     for file_path in files:
         try:
             with open(file_path, "r", encoding="utf-8") as f:
@@ -448,15 +445,34 @@ def merge_map_jsons(root_dir: Path) -> Path:
         if isinstance(data, dict) and "features" in data:
             merged["features"].extend(data.get("features", []))
 
-            bbox = data.get("bbox")
-            if isinstance(bbox, list) and len(bbox) == 4:
-                min_x = min(min_x, bbox[0])
-                min_y = min(min_y, bbox[1])
-                max_x = max(max_x, bbox[2])
-                max_y = max(max_y, bbox[3])
+    lats = []
+    lons = []
 
-    if merged["features"] and min_x != float("inf"):
-        merged["bbox"] = [min_x, min_y, max_x, max_y]
+    if merged["features"]:
+
+        for feature in merged["features"]:
+            coords = feature.get("geometry", {}).get("coordinates", [None, None])
+            if len(coords) >= 2:
+                lon, lat = coords[0], coords[1]
+                if isinstance(lat, (int, float)) and isinstance(lon, (int, float)):
+                    lats.append(lat)
+                    lons.append(lon)
+
+        min_lat = min(lats)
+        max_lat = max(lats)
+        min_lon = min(lons)
+        max_lon = max(lons)
+
+        print(f"[MAP] Bounds: lat [{min_lat}, {max_lat}], lon [{min_lon}, {max_lon}]")
+
+        # Expand bbox slightly so markers aren't at the edge. Use 5% padding or a small absolute fallback.
+        lat_span = max_lat - min_lat
+        lon_span = max_lon - min_lon
+        pad_lat = lat_span * 0.05 if lat_span > 0 else 0.05
+        pad_lon = lon_span * 0.05 if lon_span > 0 else 0.05
+
+        merged["bbox"] = [min_lon - pad_lon, min_lat - pad_lat, max_lon + pad_lon, max_lat + pad_lat]
+        print(f"[MAP] Padded bbox: {merged['bbox']}")
 
     output_dir = root_dir / MASTER_DOCUMENT / OUTPUT_DIR
     output_dir.mkdir(parents=True, exist_ok=True)

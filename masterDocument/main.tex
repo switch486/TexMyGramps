@@ -37,10 +37,10 @@
   \immediate\write\mytoc{#1|#2|#3|#4|\thepage}%
 }
 
-\newcommand{\InsertPage}[3]{%
+\newcommand{\InsertPage}[2]{%
     \clearpage
-    \ifdefined#1
-        \fancyhead[L]{#1}
+    \ifcsname #1\endcsname
+        \fancyhead[L]{\csname #1\endcsname}
     \fi
     \subfile{#2}
     \clearpage
@@ -122,17 +122,17 @@
     \clearpage
 }{}
 
-\InsertPage{\kast}{../src/pages/pagekast/output/page.tex}
+\InsertPage{kast}{../src/pages/pagekast/output/page.tex}
 
-\InsertPage{\anfr}{../src/pages/pageanfr/output/page.tex}
+\InsertPage{anfr}{../src/pages/pageanfr/output/page.tex}
 
-\InsertPage{\jast}{../src/pages/pagejast/output/page.tex}
+\InsertPage{jast}{../src/pages/pagejast/output/page.tex}
 
-\InsertPage{\brst}{../src/pages/pagebrst/output/page.tex}
+\InsertPage{brst}{../src/pages/pagebrst/output/page.tex}
 
-\InsertPage{\zdfr}{../src/pages/pagezdfr/output/page.tex}
+\InsertPage{zdfr}{../src/pages/pagezdfr/output/page.tex}
 
-\InsertPage{\wfrx}{../src/pages/pagewbxx/output/page.tex}
+\InsertPage{wfrx}{../src/pages/pagewbxx/output/page.tex}
 
 
 
