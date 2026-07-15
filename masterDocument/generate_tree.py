@@ -134,7 +134,7 @@ def render_node(node):
         label = (
             label
             + f"\\\\\\small{{{node.birth}}}"
-            + f"\\\\\\small{{{node.death}}}"
+            + f"  \\small{{{node.death}}}"
             + f"\\\\\\hyperlink{{page.{node.page}}}{{str.{node.page}}}"
         )
 
