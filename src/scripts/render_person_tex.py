@@ -568,6 +568,7 @@ def render_tex(
 
     leaf = full_name_tex
     root = descendant_full_name_tex
+    full_name_tex_newlines = r"\\[0.4em]".join(full_name_tex.split())
 
     return f"""% Auto-generated person page
 \\documentclass[10pt, a4paper]{{book}}
@@ -585,33 +586,37 @@ def render_tex(
 
 \\recordchapter{{{page_name}}}{{{root}}}{{{leaf}}}{{{birth_date_formatted}}}{{{death_date_formatted}}}
 
-\\begin{{tabular}}{{@{{}}p{{0.38\\textwidth}} p{{0.58\\textwidth}}}}
+\\noindent
+\\begin{{minipage}}[t]{{0.38\\textwidth}}
+  \\vspace{{0pt}}
   \\fbox{{%
     \\parbox[c][6cm][c]{{\\linewidth}}{{%
-      \\centering      
-        {{{image_if_exists}}}
+      \\centering
+      {{{image_if_exists}}}
 
-        \\hspace*{{8cm}}% keeps width
+      \\hspace*{{8cm}}%
     }}%
-  }} &
-  \\begin{{minipage}}[t]{{\\linewidth}}
-    \\vspace{{0pt}}
-    \\Huge \\textbf{{{full_name_tex}}}\\\\[0.3em]
-    \\small \\textit{{{occupations_tex}}}\\\\[0.3em]
+  }}%
+\\end{{minipage}}
+\\hfill
+\\begin{{minipage}}[t]{{0.58\\textwidth}}
+  \\vspace{{0pt}}
+  \\Huge \\textbf{{{full_name_tex_newlines}}}\\\\[0.15em]
+  \\small \\textit{{{occupations_tex}}}\\\\[0.15em]
 
-\\begin{{tabular}}{{@{{}}l l}}
-Ojciec: & {{{father_full_name}}} \\\\ 
-Matka: & {{{mother_full_name}}} \\\\
-\\end{{tabular}}
-  \\end{{minipage}} \\\\ 
-\\end{{tabular}}
+  \\begin{{tabular}}{{@{{}}l l}}
+  Ojciec: & {{{father_full_name}}} \\\\
+  Matka: & {{{mother_full_name}}} \\\\
+  \\end{{tabular}}
 
-\\noindent
-\\begin{{tabular}}{{@{{}}l l l}}
+  \\vspace{{1.5em}}
+
+  \\begin{{tabular}}{{@{{}}l l l}}
   \\birthsymbol & \\textbf{{Data Narodzin:}} & {birth_tex} \\\\ 
   \\deathsymbol & \\textbf{{Data Śmierci: }} & {death_tex} \\\\ 
+  \\end{{tabular}}
+\\end{{minipage}}
 
-\\end{{tabular}}
 \\vspace{{1.5em}}
 
 \\begin{{tabular}}{{@{{}}l l l l l l}}
