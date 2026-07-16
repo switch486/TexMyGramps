@@ -420,7 +420,6 @@ def main() -> None:
     parser.add_argument("--assets-dir", required=True, help="Directory to store downloaded assets and JSON files")
     args = parser.parse_args()
 
-    base_url = required_env("GRAMPS_API_BASE_URL")
     token = get_env("GRAMPS_API_TOKEN", "")
     timeout = int(get_env("GRAMPS_API_TIMEOUT", "30"))
     query_param = get_env("GRAMPS_API_PERSON_QUERY_PARAM", "gramps_id")

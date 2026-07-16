@@ -19,6 +19,9 @@ def main():
 
     run("mkdir -p ./output")
 
+    # preload source abbreviations from Gramps before building the master document
+    run("python3 generate_source_headers.py")
+
     # 0th pass - loop over the files and gather the map points for all persons, and generate the map images
     run(f"python generate_tex_map.py {stage}")
 

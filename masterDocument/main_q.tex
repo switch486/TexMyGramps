@@ -115,6 +115,10 @@
     \input{output/tree_headers.tex}
 }{}
 
+\IfFileExists{output/source_headers.tex}{
+    \input{output/source_headers.tex}
+}{}
+
 \IfFileExists{output/merged_map.tex}{
     \clearpage
     \fancyhead[L]{Chronologiczna mapa zdarzeń} 
