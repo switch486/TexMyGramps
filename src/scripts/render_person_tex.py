@@ -636,14 +636,47 @@ def format_additional_page_details(details: list) -> str:
     if not isinstance(details, list) or not details:
         return ""
     formatted_details = ""
-    
+
+    # Replace [KEY] occurrences with a TeX conditional that uses \source_<key> when defined.
+    bracket_re = re.compile(r"\[([^\]]+)\]")
+
+    def sanitize_key(key: str) -> str:
+        return re.sub(r"[^A-Za-z0-9]+", "_", (key or "").strip()).strip("_")
+
+    def replace_brackets(text: str) -> str:
+        if not text:
+            return ""
+        parts = []
+        last = 0
+        for m in bracket_re.finditer(text):
+            # escape and append text before the bracket
+            before = text[last:m.start()]
+            parts.append(latex_escape(before))
+
+            key_raw = m.group(1).strip()
+            sanitized = sanitize_key(key_raw)
+            print(f"--DICTIONARY QUERY: {sanitized}")
+            if sanitized:
+                macro = f"source{sanitized}"
+                # Use TeX conditional to check for definition at LaTeX time.
+                # If defined, expand \source_<key>, otherwise render the original [KEY]
+                parts.append(f"\\ifdefined\\{macro} \\{macro} \\else \\newline {latex_escape(key_raw)} \\fi")
+            else:
+                parts.append(latex_escape(m.group(0)))
+
+            last = m.end()
+        parts.append(latex_escape(text[last:]))
+        return "".join(parts)
+
     for detail in details:
         media_desc = detail.get("mediaDetails", {}).get("desc", "")
         note_desc = None
         if detail.get("noteDetails", {}):
             note_desc = detail.get("noteDetails", {}).get("text", "").get("string", "")
         picture_link = detail.get("pictureDetails_link", "")
-        
+
+        processed_media_desc = replace_brackets(media_desc)
+
         formatted_details += f"""\\newpage
         \\noindent
         \\begin{{minipage}}{{\\textwidth}}
@@ -651,7 +684,7 @@ def format_additional_page_details(details: list) -> str:
         \\includegraphics[width=\\textwidth]{{{picture_link}}}
 
         \\vspace{{0.5em}}
-        {latex_escape(media_desc)}
+        {processed_media_desc}
         \\end{{minipage}}
         """
         if note_desc:
@@ -659,7 +692,7 @@ def format_additional_page_details(details: list) -> str:
             \\fbox{{
             \\parbox{{\\linewidth}}{{{latex_escape_preserve_newline(note_desc)}}}}}
             """
-        
+
     return f"\\vspace{{1.5em}}\n{formatted_details}\n"
 
 

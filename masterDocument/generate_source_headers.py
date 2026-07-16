@@ -62,7 +62,7 @@ def sanitize_macro_name(value: str) -> str:
     sanitized = re.sub(r"[^A-Za-z0-9]+", "_", (value or "").strip()).strip("_")
     if not sanitized:
         sanitized = "source"
-    return f"source_{sanitized}"
+    return f"source{sanitized}"
 
 
 def normalize_source(source: dict) -> dict:

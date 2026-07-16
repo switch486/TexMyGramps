@@ -127,7 +127,7 @@ def render_node(node):
     Recursive forest rendering
     """
 
-    label = escape_latex(node.name)
+    label = " ".join(f"\\bfseries{{{word}}}" for word in escape_latex(node.name).split())
     label = label.replace(" ", "\\\\")
 
     if node.page:
