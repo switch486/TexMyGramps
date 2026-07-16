@@ -15,4 +15,4 @@ __pycache__/
 *.aux
 
 # Ignore macOS specific files
-**/.DS_Store
+.DS_Store

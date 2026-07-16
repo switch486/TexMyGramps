@@ -645,20 +645,21 @@ def format_additional_page_details(details: list) -> str:
         picture_link = detail.get("pictureDetails_link", "")
         
         formatted_details += f"""\\newpage
-        \\begin{{center}}
+        \\noindent
+        \\begin{{minipage}}{{\\textwidth}}
+        \\centering
         \\includegraphics[width=\\textwidth]{{{picture_link}}}
-        \\newline \\newline
+
         \\vspace{{0.5em}}
-        {{{latex_escape(media_desc)}}}
-        \\vspace{{0.5em}}
-        \\newline """
+        {latex_escape(media_desc)}
+        \\end{{minipage}}
+        """
         if note_desc:
             formatted_details += f"""
             \\fbox{{
             \\parbox{{\\linewidth}}{{{latex_escape_preserve_newline(note_desc)}}}}}
             """
-        formatted_details += f"  \\end{{center}} "
-
+        
     return f"\\vspace{{1.5em}}\n{formatted_details}\n"
 
 
