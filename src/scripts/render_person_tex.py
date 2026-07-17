@@ -605,13 +605,13 @@ def render_tex(
 \\noindent
 \\begin{{minipage}}[t]{{0.38\\textwidth}}
   \\vspace{{0pt}}
-  \\fbox{{%
+  
     \\parbox[c][6cm][c]{{\\linewidth}}{{%
       \\centering
       {{{image_if_exists}}}
 
       \\hspace*{{8cm}}%
-    }}%
+    
   }}%
 \\end{{minipage}}
 \\hfill

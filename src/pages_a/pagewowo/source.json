@@ -1,0 +1,15 @@
+{
+  "personGrampsID": "I0471",
+  "ignoredPlacesInMap": ["P0029"],
+  "descendant": {
+    "personGrampsID": "I0265"
+  },
+  "detailPages": [
+    {
+      "mediaObjectID": "O0271"
+    },
+    {
+      "mediaObjectID": "O0105"
+    }
+]
+}

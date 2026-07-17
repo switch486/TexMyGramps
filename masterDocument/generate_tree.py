@@ -154,13 +154,15 @@ def generate_forest(root):
     return "\n".join([
 """\\begin{forest}
 for tree={
+    font=\\footnotesize,
+    text width=2.35cm,
     grow=east,
     parent anchor=east,
     child anchor=west,
     anchor=east,
-    align=right,
+    align=left,
     l sep=15pt,
-    s sep=10pt,
+    s sep=2pt,
     edge path={
         \\noexpand\\path[\\forestoption{edge}]
         (!u.parent anchor) -- +(5pt,0pt) |- (.child anchor)\\forestoption{edge label};

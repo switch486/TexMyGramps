@@ -1,6 +1,5 @@
 PRIO:
 - wiecej fotek - groby i dokumenty
-- description under image shoud not appear on the next page
 - REFACTOR - constant variables in central place?
 - toc phantom nodes for children?
 - TODO - refactor token handling
