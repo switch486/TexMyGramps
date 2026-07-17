@@ -1,5 +1,6 @@
 {
   "personGrampsID": "I0265",
+  "ignoredPlacesInMap": ["P0029"],
   "descendant": {
     "personGrampsID": "I0015"
   },

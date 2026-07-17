@@ -28,6 +28,7 @@ this is a temporary - nonconfigurable solution for now.
 {
   "personGrampsID": "I0100",
   "personPicture_mediaObjectID": "O0189",
+  "ignoredPlacesInMap": ["P0016"]
   "descendant": {
     "personGrampsID": "I0061", 
     "personString": "John Doe"
@@ -57,6 +58,13 @@ this is a temporary - nonconfigurable solution for now.
     },
     "personPicture_mediaObjectID": {
       "type": "string"
+    },
+    "ignoredPlacesInMap": {
+      "type": "array",
+      "description": "Optional list of ignored place IDs for map rendering",
+      "items": {
+        "type": "string"
+      }
     },
     "descendant": {
       "type": "object",

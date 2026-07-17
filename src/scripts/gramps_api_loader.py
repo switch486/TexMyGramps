@@ -458,6 +458,7 @@ def main() -> None:
         mediaDetails = load_media_details(task.get("personPicture_mediaObjectID"), headers, timeout, assets_dir)
         person["titlePagePhoto_link"] = load_picture_details(extract_handle(mediaDetails), headers, timeout, assets_dir)
     person["additional_page_details"] = load_additional_page_details(timeout, headers, assets_dir, task)
+    person["ignoredPlacesInMap"] = task.get("ignoredPlacesInMap")
 
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)

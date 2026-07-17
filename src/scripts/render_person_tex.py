@@ -372,6 +372,9 @@ def write_timeline_map_json(page_dir: Path, person: dict, timeline_data: dict) -
         if not isinstance(event, dict):
             print(f"[MAP] Event {idx} is not a dict, skipping")
             continue
+        if placeContainedInIgnoreList(event, person):
+            print(f"[MAP] Event {idx} is not a dict, skipping")
+            continue
         place = event.get("place")
         lat = None
         lon = None
@@ -442,6 +445,19 @@ def write_timeline_map_json(page_dir: Path, person: dict, timeline_data: dict) -
     except OSError as e:
         print(f"[MAP] ERROR: failed to write map JSON: {e}")
         return None
+
+def placeContainedInIgnoreList(event: dict, person: dict) -> bool:
+    ignored_places = person.get("ignoredPlacesInMap") or []
+    
+    if not isinstance(ignored_places, list):
+        return False
+
+    # Check place's gramps_id if place object exists
+    place = event.get("place")
+    if isinstance(place, dict):
+        return place.get("gramps_id") in ignored_places
+
+    return False
 
 def normalize_date_string(date_text: str) -> str:
     if not isinstance(date_text, str):
