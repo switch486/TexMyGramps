@@ -162,7 +162,7 @@ for tree={
     anchor=east,
     align=left,
     l sep=15pt,
-    s sep=2pt,
+    s sep=0pt,
     edge path={
         \\noexpand\\path[\\forestoption{edge}]
         (!u.parent anchor) -- +(5pt,0pt) |- (.child anchor)\\forestoption{edge label};
