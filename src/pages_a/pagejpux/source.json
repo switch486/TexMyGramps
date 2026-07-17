@@ -3,9 +3,12 @@
   "descendant": {
     "personGrampsID": "I0014"
   },
-  "detailPages": [
+  "detailPages": [ 
     {
-      "mediaObjectID": "O0259",
+      "mediaObjectID": "O0259"
+    },
+    {
+      "mediaObjectID": "O0386",
       "noteID": "N0094"
     },
     {
