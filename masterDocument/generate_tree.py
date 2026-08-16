@@ -134,8 +134,9 @@ def render_node(node):
         label = (
             label
             + f"\\\\\\small{{{node.birth}}}"
+            # TODO- do not print death for missing date
             + f"  \\small{{{node.death}}}"
-            + f"\\\\\\hyperlink{{page.{node.page}}}{{str.{node.page}}}"
+            + f"\\hyperlink{{page.{node.page}}}{{  s.{node.page}}}"
         )
 
     if not node.children:
@@ -162,7 +163,7 @@ for tree={
     anchor=east,
     align=left,
     l sep=15pt,
-    s sep=0pt,
+    s sep=4pt,
     edge path={
         \\noexpand\\path[\\forestoption{edge}]
         (!u.parent anchor) -- +(5pt,0pt) |- (.child anchor)\\forestoption{edge label};
